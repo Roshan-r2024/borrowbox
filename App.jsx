@@ -1,16 +1,16 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import GetStarted from "./pages/GetStarted";
-import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
-import Home from "./pages/Home";
-import Browse from "./pages/Browse";
-import ListItem from "./pages/ListItem";
-import ItemDetails from "./pages/ItemDetails";
-import MyItems from "./pages/MyItems";
-import Profile from "./pages/Profile";
-import BorrowRequest from "./pages/BorrowRequest";
+import GetStarted from "./GetStarted";
+import Login from "./Login";
+import SignUp from "./SignUp";
+import Home from "./Home";
+import Browse from "./Browse";
+import ListItem from "./ListItem";
+import ItemDetails from "./ItemDetails";
+import MyItems from "./MyItems";
+import Profile from "./Profile";
+import BorrowRequest from "./BorrowRequest";
 
 function App() {
   return (
