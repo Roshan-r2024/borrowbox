@@ -35,6 +35,8 @@ function Browse() {
     return imageUrl.startsWith("http") ? imageUrl : `${API_URL}${imageUrl}`;
   };
 
+  const openDetails = (id) => navigate(`/item-details/${id}`);
+
   const filteredItems = items.filter((item) => {
     const text = `${item.title || ""} ${item.description || ""} ${item.category || ""}`.toLowerCase();
     const matchesSearch = text.includes(search.toLowerCase());
@@ -48,7 +50,10 @@ function Browse() {
         <div className="browse-nav-container">
           <div className="browse-brand" onClick={() => navigate("/home")}>
             <div className="browse-logo">◇</div>
-            <div><strong>Borrow Box</strong><span>Campus sharing</span></div>
+            <div>
+              <strong>Borrow Box</strong>
+              <span>Campus sharing</span>
+            </div>
           </div>
 
           <nav>
@@ -106,14 +111,30 @@ function Browse() {
         </div>
 
         {loading ? (
-          <div className="no-results"><h2>Loading items...</h2></div>
+          <div className="no-results">
+            <div className="loading-spinner"></div>
+            <h2>Loading items...</h2>
+          </div>
         ) : filteredItems.length > 0 ? (
           <section className="browse-grid">
             {filteredItems.map((item) => (
-              <article className="browse-card" key={item._id}>
+              <article
+                className="browse-card"
+                key={item._id}
+                onClick={() => openDetails(item._id)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") openDetails(item._id);
+                }}
+              >
                 <div className={`browse-image ${item.displayStyle || "square"}`}>
                   {item.imageUrl ? (
-                    <img className="browse-product-image" src={getImageUrl(item.imageUrl)} alt={item.title} />
+                    <img
+                      className="browse-product-image"
+                      src={getImageUrl(item.imageUrl)}
+                      alt={item.title}
+                    />
                   ) : (
                     <div className="browse-no-image">No Image</div>
                   )}
@@ -121,18 +142,39 @@ function Browse() {
                 </div>
 
                 <div className="browse-card-content">
-                  <span className="card-category">{item.category}</span>
+                  <div className="card-topline">
+                    <span className="card-category">{item.category}</span>
+                    <span className="card-type">RENT</span>
+                  </div>
+
                   <h2>{item.title}</h2>
 
+                  <p className="card-description">
+                    {item.description || "No description provided."}
+                  </p>
+
                   <div className="owner">
-                    <div className="owner-avatar">{(item.owner || "S").charAt(0).toUpperCase()}</div>
-                    <span>Listed by <strong>{item.owner || "Student"}</strong></span>
+                    <div className="owner-avatar">
+                      {(item.owner || "S").charAt(0).toUpperCase()}
+                    </div>
+                    <span>
+                      Owned by <strong>{item.owner || "Student"}</strong>
+                    </span>
                   </div>
 
                   <div className="card-footer">
-                    <div className="price"><strong>₹{item.price}</strong><span>/ day</span></div>
-                    <button className="borrow-btn" onClick={() => navigate(`/item-details/${item._id}`)}>
-                      View & Borrow
+                    <div className="price">
+                      <strong>₹{item.price}</strong>
+                      <span>/ day</span>
+                    </div>
+                    <button
+                      className="borrow-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openDetails(item._id);
+                      }}
+                    >
+                      Borrow →
                     </button>
                   </div>
                 </div>
