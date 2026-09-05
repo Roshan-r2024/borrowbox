@@ -9,15 +9,12 @@ const borrowRequestSchema = new mongoose.Schema(
     ownerEmail: { type: String, required: true, lowercase: true, trim: true },
     borrower: { type: String, required: true, trim: true },
     borrowerEmail: { type: String, required: true, lowercase: true, trim: true },
-    startDate: { type: String, required: true },
-    endDate: { type: String, required: true },
+    requestType: { type: String, enum: ["Borrow", "Purchase"], default: "Borrow" },
+    startDate: { type: String, default: "" },
+    endDate: { type: String, default: "" },
     message: { type: String, default: "", trim: true },
     urgency: { type: String, enum: ["Normal", "Urgent"], default: "Normal" },
-    status: {
-      type: String,
-      enum: ["Pending", "Approved", "Rejected", "Returned"],
-      default: "Pending",
-    },
+    status: { type: String, enum: ["Pending", "Approved", "Rejected", "Returned"], default: "Pending" },
   },
   { timestamps: true }
 );
