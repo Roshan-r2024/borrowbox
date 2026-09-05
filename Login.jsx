@@ -77,6 +77,7 @@ function Login() {
   return (
     <div className="auth-page">
       <Toast message={toast.message} type={toast.type} onClose={() => setToast({ message: "", type: "info" })} />
+
       <section className="auth-brand">
         <div className="brand-content">
           <div className="brand-logo">◇</div>
@@ -93,14 +94,8 @@ function Login() {
           <div className="login-heading">
             <span className="welcome-tag">Welcome back</span>
             <h2>Sign in to Borrow Box</h2>
-            <p>Enter your details to continue sharing with your campus community.</p>
+            <p>Enter your VIT email and password to continue sharing with your campus community.</p>
           </div>
-
-          <button type="button" className="google-button" onClick={() => setToast({ message: "Google login will be available soon.", type: "info" })} disabled={loading}>
-            <span className="google-g">G</span>Continue with Google
-          </button>
-
-          <div className="divider"><span>OR</span></div>
 
           <form onSubmit={handleLogin}>
             <div className="field">
