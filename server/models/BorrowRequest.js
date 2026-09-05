@@ -12,6 +12,7 @@ const borrowRequestSchema = new mongoose.Schema(
     startDate: { type: String, required: true },
     endDate: { type: String, required: true },
     message: { type: String, default: "", trim: true },
+    urgency: { type: String, enum: ["Normal", "Urgent"], default: "Normal" },
     status: {
       type: String,
       enum: ["Pending", "Approved", "Rejected", "Returned"],
