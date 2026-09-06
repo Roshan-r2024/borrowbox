@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Browse.css";
+import "./BrowseActions.css";
 
 const categories = ["All", "Books", "Electronics", "Notes", "Sports", "Others"];
 
@@ -44,12 +45,25 @@ function Browse() {
   const contactWhatsApp = (item) => {
     const phone = item.ownerPhone || item.phone || item.whatsapp || "";
     if (!phone) {
-      navigate(`/item-details/${item._id}`);
+      alert("This item owner has not added a WhatsApp number yet.");
       return;
     }
+
     const cleanPhone = String(phone).replace(/\D/g, "");
-    const message = encodeURIComponent(`Hi ${item.owner || ""}, I found your ${item.title} on Borrow Box. I need it urgently. Is it available?`);
-    window.open(`https://wa.me/${cleanPhone}?text=${message}`, "_blank", "noopener,noreferrer");
+    if (!cleanPhone) {
+      alert("The owner WhatsApp number is not valid.");
+      return;
+    }
+
+    const message = encodeURIComponent(
+      `Hi ${item.owner || ""}, I found your ${item.title} on Borrow Box. I need it urgently. Is it available?`
+    );
+
+    window.open(
+      `https://wa.me/${cleanPhone}?text=${message}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
   };
 
   return (
