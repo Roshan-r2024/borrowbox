@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-
 import GetStarted from "./GetStarted";
 import Login from "./Login";
 import SignUp from "./SignUp";
@@ -24,9 +23,10 @@ function App() {
         <Route path="/browse" element={<Browse />} />
         <Route path="/list-item" element={<ListItem />} />
         <Route path="/item-details/:id" element={<ItemDetails />} />
+        <Route path="/borrow-request/:id" element={<BorrowRequest />} />
         <Route path="/my-items" element={<MyItems />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/borrow-request" element={<BorrowRequest />} />
+        <Route path="/borrow-request" element={<Navigate to="/browse" replace />} />
         <Route path="*" element={<Navigate to="/get-started" replace />} />
       </Routes>
     </BrowserRouter>
