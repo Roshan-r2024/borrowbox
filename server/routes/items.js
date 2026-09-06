@@ -4,6 +4,7 @@ const path = require("path");
 const fs = require("fs");
 
 const Item = require("../models/Item");
+const User = require("../models/User");
 
 const router = express.Router();
 
@@ -48,6 +49,29 @@ const upload = multer({
   fileFilter,
 });
 
+/* =========================
+   OWNER PHONE HELPER
+========================= */
+
+async function addOwnerPhone(item) {
+  const plainItem = item?.toObject ? item.toObject() : item;
+  let ownerPhone = "";
+
+  if (plainItem?.ownerEmail) {
+    const user = await User.findOne({
+      email: String(plainItem.ownerEmail).toLowerCase(),
+    })
+      .select("phone")
+      .lean();
+
+    ownerPhone = user?.phone || "";
+  }
+
+  return {
+    ...plainItem,
+    ownerPhone,
+  };
+}
 
 /* =========================
    POST - CREATE ITEM
@@ -55,18 +79,15 @@ const upload = multer({
 
 router.post("/", (req, res) => {
   upload.single("image")(req, res, async (uploadError) => {
-
     if (uploadError) {
       console.error("UPLOAD ERROR:", uploadError.message);
 
       return res.status(400).json({
-        message:
-          uploadError.message || "Image upload failed.",
+        message: uploadError.message || "Image upload failed.",
       });
     }
 
     try {
-
       if (!req.file) {
         return res.status(400).json({
           message: "Please upload an item image.",
@@ -85,7 +106,6 @@ router.post("/", (req, res) => {
         ownerEmail,
       } = req.body;
 
-
       if (
         !title ||
         !category ||
@@ -99,102 +119,115 @@ router.post("/", (req, res) => {
         });
       }
 
-
-      const imageUrl =
-        `/uploads/${req.file.filename}`;
-
+      const imageUrl = `/uploads/${req.file.filename}`;
 
       const item = await Item.create({
-
         title: title.trim(),
-
         category,
-
         price: Number(price),
-
         description: description.trim(),
-
         condition,
-
         availability,
-
         owner: owner || "Student",
-
         ownerEmail: ownerEmail || "",
-
         imageUrl,
-
-        displayStyle:
-          displayStyle || "square",
-
+        displayStyle: displayStyle || "square",
         status: "Available",
       });
 
-
-      console.log(
-        "New item listed:",
-        item.title
-      );
-
+      console.log("New item listed:", item.title);
 
       return res.status(201).json({
-
-        message:
-          "Item listed successfully.",
-
+        message: "Item listed successfully.",
         item,
       });
-
     } catch (error) {
-
-      console.error(
-        "CREATE ITEM ERROR:",
-        error
-      );
+      console.error("CREATE ITEM ERROR:", error);
 
       return res.status(500).json({
-
-        message:
-          "Unable to list item.",
+        message: "Unable to list item.",
       });
     }
   });
 });
-
 
 /* =========================
    GET - ALL ITEMS
 ========================= */
 
 router.get("/", async (req, res) => {
-
   try {
+    const items = await Item.find()
+      .sort({ createdAt: -1 })
+      .lean();
 
-    const items =
-      await Item.find()
-        .sort({ createdAt: -1 });
+    const emails = [
+      ...new Set(
+        items
+          .map((item) => String(item.ownerEmail || "").toLowerCase())
+          .filter(Boolean)
+      ),
+    ];
 
+    const users = emails.length
+      ? await User.find({ email: { $in: emails } })
+          .select("email phone")
+          .lean()
+      : [];
 
-    return res.status(200).json({
-      items,
-    });
-
-  } catch (error) {
-
-    console.error(
-      "GET ITEMS ERROR:",
-      error
+    const phoneByEmail = new Map(
+      users.map((user) => [
+        String(user.email).toLowerCase(),
+        user.phone || "",
+      ])
     );
 
-    return res.status(500).json({
+    const itemsWithPhone = items.map((item) => ({
+      ...item,
+      ownerPhone:
+        phoneByEmail.get(
+          String(item.ownerEmail || "").toLowerCase()
+        ) || "",
+    }));
 
-      message:
-        "Unable to load items.",
+    return res.status(200).json({
+      items: itemsWithPhone,
+    });
+  } catch (error) {
+    console.error("GET ITEMS ERROR:", error);
+
+    return res.status(500).json({
+      message: "Unable to load items.",
     });
   }
 });
 
+/* =========================
+   GET - SINGLE ITEM
+========================= */
+
+router.get("/:id", async (req, res) => {
+  try {
+    const item = await Item.findById(req.params.id).lean();
+
+    if (!item) {
+      return res.status(404).json({
+        message: "Item not found.",
+      });
+    }
+
+    const itemWithPhone = await addOwnerPhone(item);
+
+    return res.status(200).json({
+      item: itemWithPhone,
+    });
+  } catch (error) {
+    console.error("GET SINGLE ITEM ERROR:", error);
+
+    return res.status(400).json({
+      message: "Invalid item ID or unable to load item.",
+    });
+  }
+});
 
 module.exports = router;
-
-
