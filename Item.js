@@ -1,0 +1,29 @@
+const mongoose = require("mongoose");
+
+const itemSchema = new mongoose.Schema(
+  {
+    title: { type: String, required: true, trim: true },
+    category: { type: String, required: true },
+    price: { type: Number, required: true, min: 0 },
+    listingType: {
+      type: String,
+      enum: ["rent", "sale"],
+      default: "rent",
+    },
+    description: { type: String, required: true, trim: true },
+    condition: { type: String, required: true },
+    availability: { type: String, required: true },
+    owner: { type: String, required: true },
+    ownerEmail: { type: String, default: "", trim: true },
+    imageUrl: { type: String, required: true },
+    displayStyle: {
+      type: String,
+      enum: ["square", "portrait", "landscape"],
+      default: "square",
+    },
+    status: { type: String, default: "Available" },
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model("Item", itemSchema);
