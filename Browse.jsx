@@ -18,9 +18,6 @@ function Browse() {
       const response = await fetch(`${API_URL}/api/items`);
       const data = await response.json().catch(() => ({}));
       const allItems = response.ok ? (Array.isArray(data) ? data : data.items || []) : [];
-
-      // Browse should contain only real user-listed items.
-      // Old/demo records without an owner email are ignored.
       setItems(allItems.filter((item) => item.ownerEmail && item.ownerEmail.trim()));
     } catch (error) {
       console.error("Error loading items:", error);
@@ -39,7 +36,11 @@ function Browse() {
     return imageUrl.startsWith("http") ? imageUrl : `${API_URL}${imageUrl}`;
   };
 
-  const openDetails = (id) => navigate(`/item-details/${id}`);
+  // Product selection -> dedicated item details page.
+  const openDetails = (id) => {
+    if (!id) return;
+    navigate(`/item-details/${id}`);
+  };
 
   const filteredItems = items.filter((item) => {
     const text = `${item.title || ""} ${item.description || ""} ${item.category || ""}`.toLowerCase();
@@ -98,7 +99,15 @@ function Browse() {
         ) : filteredItems.length > 0 ? (
           <section className="browse-grid">
             {filteredItems.map((item) => (
-              <article className="browse-card" key={item._id} onClick={() => openDetails(item._id)} role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") openDetails(item._id); }}>
+              <article
+                className="browse-card"
+                key={item._id}
+                onClick={() => openDetails(item._id)}
+                role="button"
+                tabIndex={0}
+                aria-label={`View ${item.title}`}
+                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openDetails(item._id); } }}
+              >
                 <div className={`browse-image ${item.displayStyle || "square"}`}>
                   {item.imageUrl ? <img className="browse-product-image" src={getImageUrl(item.imageUrl)} alt={item.title} /> : <div className="browse-no-image">No Image</div>}
                   <span className="available">{item.status || "Available"}</span>
@@ -113,7 +122,7 @@ function Browse() {
                   <div className="owner"><div className="owner-avatar">{(item.owner || "S").charAt(0).toUpperCase()}</div><span>Owned by <strong>{item.owner || "Student"}</strong></span></div>
                   <div className="card-footer">
                     <div className="price"><strong>₹{item.price}</strong><span>{item.listingType === "sale" ? "total" : "/ day"}</span></div>
-                    <button className="borrow-btn" onClick={(e) => { e.stopPropagation(); openDetails(item._id); }}>View →</button>
+                    <button className="borrow-btn" onClick={(e) => { e.stopPropagation(); openDetails(item._id); }}>View Details →</button>
                   </div>
                 </div>
               </article>
