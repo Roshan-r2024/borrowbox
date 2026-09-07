@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import "./HomeProducts.css";
 import "./HomeCategoryEnhancements.css";
+import "./HomePortalUsers.css";
 
 const API_URL = "http://localhost:5000";
 const categories = [
@@ -11,32 +12,20 @@ const categories = [
 ];
 
 function Home() {
-  const navigate = useNavigate();
-  const [items, setItems] = useState([]);
+  const navigate = useNavigate(); const [items, setItems] = useState([]);
   const [portalStats, setPortalStats] = useState({ liveUsers: 0, registeredUsers: 0 });
-  let user = null;
-  try { user = JSON.parse(localStorage.getItem("borrowBoxUser") || "null"); } catch {}
+  let user = null; try { user = JSON.parse(localStorage.getItem("borrowBoxUser") || "null"); } catch {}
   const userName = user?.nickname || user?.name || user?.username || user?.email?.split("@")[0] || "Student";
-
-  useEffect(() => {
-    fetch(`${API_URL}/api/items`).then(r => r.json()).then(d => setItems(d.items || [])).catch(console.error);
-  }, []);
-
+  useEffect(() => { fetch(`${API_URL}/api/items`).then(r => r.json()).then(d => setItems(d.items || [])).catch(console.error); }, []);
   useEffect(() => {
     if (!user?.email) return;
     const updatePresence = () => fetch(`${API_URL}/api/auth/presence`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: user.email }) }).catch(() => {});
-    updatePresence();
-    const timer = setInterval(updatePresence, 30000);
-    return () => clearInterval(timer);
+    updatePresence(); const timer = setInterval(updatePresence, 30000); return () => clearInterval(timer);
   }, [user?.email]);
-
   useEffect(() => {
     const loadStats = () => fetch(`${API_URL}/api/auth/stats`).then(r => r.json()).then(d => setPortalStats({ liveUsers: d.liveUsers || 0, registeredUsers: d.registeredUsers || 0 })).catch(() => {});
-    loadStats();
-    const timer = setInterval(loadStats, 30000);
-    return () => clearInterval(timer);
+    loadStats(); const timer = setInterval(loadStats, 30000); return () => clearInterval(timer);
   }, []);
-
   const img = u => !u ? "" : u.startsWith("http") ? u : `${API_URL}${u}`;
   const available = items.filter(i => i.status === "Available");
   const logout = () => { localStorage.removeItem("borrowBoxUser"); navigate("/login", { replace: true }); };
