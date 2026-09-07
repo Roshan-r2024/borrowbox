@@ -8,15 +8,21 @@ const borrowRequestSchema = new mongoose.Schema(
     requestType: { type: String, enum: ["Borrow", "Purchase"], default: "Borrow" },
     borrower: { type: String, required: true },
     borrowerEmail: { type: String, required: true, lowercase: true, trim: true },
+    borrowerPhone: { type: String, default: "", trim: true },
     owner: { type: String, required: true },
     ownerEmail: { type: String, default: "", lowercase: true, trim: true },
     startDate: { type: Date },
     endDate: { type: Date },
     message: { type: String, default: "", trim: true },
+    landmark: { type: String, default: "", trim: true },
+    location: {
+      latitude: { type: Number },
+      longitude: { type: Number },
+    },
     urgency: { type: String, enum: ["Normal", "Urgent"], default: "Normal" },
     status: { type: String, enum: ["Pending", "Approved", "Rejected", "Returned"], default: "Pending" },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("BorrowRequest", borrowRequestSchema);
+module.exports = mongoose.models.BorrowRequest || mongoose.model("BorrowRequest", borrowRequestSchema);
