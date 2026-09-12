@@ -7,51 +7,295 @@ import "./HomePortalUsers.css";
 
 const API_URL = "http://localhost:5000";
 const categories = [
-  { name: "All", icon: "⌂" }, { name: "Books", icon: "📚" }, { name: "Electronics", icon: "💻" },
-  { name: "Notes", icon: "📝" }, { name: "Sports", icon: "⚽" }, { name: "Others", icon: "＋" },
+  { name: "All", icon: "⌂" },
+  { name: "Books", icon: "📚" },
+  { name: "Electronics", icon: "💻" },
+  { name: "Notes", icon: "📝" },
+  { name: "Sports", icon: "⚽" },
+  { name: "Others", icon: "＋" },
 ];
-const brightHomeStyle = `
-.home-page{background:#f7f8fc!important;color:#202124!important}
-.home-page .navbar{background:rgba(255,255,255,.97)!important;border-bottom:1px solid #e3e6f2!important;box-shadow:0 6px 22px rgba(65,70,140,.08)!important}
-.home-page .brand-logo{background:linear-gradient(135deg,#5b5fef,#7a63f5)!important;box-shadow:0 9px 22px rgba(91,95,239,.25)!important}
-.home-page .brand-text h2{color:#202124!important}.home-page .brand-text span{color:#7b8495!important}
-.home-page .nav-link{color:#687085!important}.home-page .nav-link:hover,.home-page .nav-link.active{color:#5b5fef!important;background:#eef0ff!important}
-.home-page .list-top-btn{background:linear-gradient(135deg,#5b5fef,#7a63f5)!important;box-shadow:0 8px 18px rgba(91,95,239,.22)!important}
-.home-page .profile-avatar{background:linear-gradient(135deg,#00bfa6,#35d6c1)!important;color:#fff!important}
-.home-page .hero-section{border-radius:0 0 28px 28px;padding-left:32px;padding-right:32px;background:linear-gradient(135deg,#f2f3ff 0%,#edfffb 55%,#fff8e9 100%)!important}
-.home-page .welcome-text{color:#5b5fef!important}.home-page .hero-left h1{color:#202124!important}.home-page .hero-left h1 span{background:linear-gradient(90deg,#5b5fef,#00bfa6,#ff8a65)!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;color:transparent!important}
-.home-page .hero-description{color:#667085!important}.home-page .search-wrapper{border:2px solid #dfe2ff!important;background:#fff!important;box-shadow:0 12px 30px rgba(91,95,239,.10)!important}.home-page .search-wrapper:focus-within{border-color:#5b5fef!important;box-shadow:0 0 0 4px rgba(91,95,239,.12)!important}.home-page .search-icon{color:#5b5fef!important}
-.home-page .home-category-heading span{color:#5b5fef!important}.home-page .home-category-heading button{color:#00a98f!important}
-.home-page .home-category-pill{border-width:1px!important;font-weight:750!important;box-shadow:0 4px 12px rgba(54,62,130,.05)!important}.home-page .home-category-pill:nth-child(1){background:#eef0ff!important;color:#474bd1!important;border-color:#cfd3ff!important}.home-page .home-category-pill:nth-child(2){background:#f0efff!important;color:#5b4fd8!important;border-color:#d8d1ff!important}.home-page .home-category-pill:nth-child(3){background:#e8fbf7!important;color:#008f7c!important;border-color:#bdece2!important}.home-page .home-category-pill:nth-child(4){background:#fff7df!important;color:#a66a00!important;border-color:#f2dda0!important}.home-page .home-category-pill:nth-child(5){background:#fff0f0!important;color:#c44747!important;border-color:#ffd0d0!important}.home-page .home-category-pill:nth-child(6){background:#edf7ff!important;color:#2876b8!important;border-color:#c8e5ff!important}
-.home-page .home-awareness{background:#fff4f4!important;border-color:#ffcaca!important;border-left-color:#ef4444!important;box-shadow:0 8px 22px rgba(239,68,68,.08)!important}.home-page .home-awareness-icon{background:#ef4444!important}
-.home-page .quick-section{background:#f7f8fc!important}.home-page .section-heading h2,.home-page .category-header h2{color:#202124!important}.home-page .section-heading p,.home-page .category-header p{color:#778096!important}
-.home-page .action-card{background:#fff!important;border:2px solid #e7e9f3!important;box-shadow:0 10px 26px rgba(54,62,130,.07)!important}.home-page .action-card:first-child{background:linear-gradient(135deg,#fff,#f2f3ff)!important;border-color:#d9dcff!important}.home-page .action-card:nth-child(2){background:linear-gradient(135deg,#fff,#edfffb)!important;border-color:#c9eee7!important}.home-page .action-card:hover{transform:translateY(-5px)!important;box-shadow:0 18px 35px rgba(91,95,239,.13)!important}.home-page .action-icon{background:#eef0ff!important}.home-page .box-icon{background:#e8fbf7!important}.home-page .action-content h3{color:#202124!important}.home-page .action-content p{color:#667085!important}.home-page .action-content button{background:linear-gradient(135deg,#5b5fef,#7a63f5)!important;box-shadow:0 8px 18px rgba(91,95,239,.2)!important}
-.home-page .home-products-section{background:#f7f8fc!important}.home-page .home-products-label{color:#5b5fef!important}.home-page .home-products-heading h2{color:#202124!important}.home-page .home-products-heading p{color:#778096!important}.home-page .home-product-card{background:#fff!important;border:1px solid #e3e6f0!important;box-shadow:0 10px 25px rgba(54,62,130,.07)!important}.home-page .home-product-card:hover{border-color:#cdd0ff!important;box-shadow:0 18px 35px rgba(91,95,239,.14)!important}.home-page .home-product-image{background:linear-gradient(135deg,#f1f2ff,#effcf9)!important}.home-page .home-product-image b{background:#5b5fef!important}.home-page .home-product-body h3{color:#202124!important}.home-page .home-product-body>strong{color:#5b5fef!important}
-.home-page .bottom-cta{background:linear-gradient(135deg,#5b5fef,#00bfa6)!important;color:#fff!important;box-shadow:0 16px 35px rgba(91,95,239,.18)!important}.home-page .bottom-cta h2,.home-page .bottom-cta p{color:#fff!important}.home-page .bottom-cta button{background:#fff!important;color:#4d51d5!important}
-.home-page .home-footer{background:#fff!important;border-top:1px solid #e3e6f0!important}.home-page .footer-content button{color:#5b5fef!important}
-@media(max-width:650px){.home-page .hero-section{padding-left:0;padding-right:0;background:linear-gradient(160deg,#f2f3ff,#edfffb)!important}.home-page .action-card{border-width:1px!important}.home-page .bottom-cta{border-radius:18px}}
-`;
+
 function Home() {
-  const navigate = useNavigate(); const [items, setItems] = useState([]);
+  const navigate = useNavigate();
+  const [items, setItems] = useState([]);
   const [portalStats, setPortalStats] = useState({ liveUsers: 0, registeredUsers: 0 });
-  let user = null; try { user = JSON.parse(localStorage.getItem("borrowBoxUser") || "null"); } catch {}
-  const userName = user?.nickname || user?.name || user?.username || user?.email?.split("@")[0] || "Student";
-  useEffect(() => { fetch(`${API_URL}/api/items`).then(r => r.json()).then(d => setItems(d.items || [])).catch(console.error); }, []);
-  useEffect(() => { if (!user?.email) return; const updatePresence = () => fetch(`${API_URL}/api/auth/presence`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: user.email }) }).catch(() => {}); updatePresence(); const timer = setInterval(updatePresence, 30000); return () => clearInterval(timer); }, [user?.email]);
-  useEffect(() => { const loadStats = () => fetch(`${API_URL}/api/auth/stats`).then(r => r.json()).then(d => setPortalStats({ liveUsers: d.liveUsers || 0, registeredUsers: d.registeredUsers || 0 })).catch(() => {}); loadStats(); const timer = setInterval(loadStats, 30000); return () => clearInterval(timer); }, []);
-  const img = u => !u ? "" : u.startsWith("http") ? u : `${API_URL}${u}`; const available = items.filter(i => i.status === "Available");
-  const logout = () => { localStorage.removeItem("borrowBoxUser"); localStorage.removeItem("borrowBoxEmail"); navigate("/login", { replace: true }); };
-  const browseCategory = category => navigate(category === "All" ? "/browse" : `/browse?category=${encodeURIComponent(category)}`);
-  return <div className="home-page">
-    <style>{brightHomeStyle}</style>
-    <header className="navbar"><div className="nav-container"><div className="brand" onClick={() => navigate("/home")}><div className="brand-logo">◇</div><div className="brand-text"><h2>Borrow Box</h2><span>Campus sharing</span></div></div><nav className="nav-links"><button className="nav-link active" onClick={() => navigate("/home")}>Home</button><button className="nav-link" onClick={() => navigate("/browse")}>Browse</button><button className="nav-link" onClick={() => navigate("/my-items")}>My Items</button></nav><div className="nav-actions"><div className="portal-users" title="Borrow Box portal activity"><span className="portal-user-icon">♙</span><span><strong>{portalStats.liveUsers}</strong> live <i>•</i> {portalStats.registeredUsers} registered</span></div><button className="list-top-btn" onClick={() => navigate("/list-item")}>+ List an Item</button><button className="profile-btn" onClick={() => navigate("/profile")}>{user?.profilePicture ? <img className="home-profile-avatar" src={img(user.profilePicture)} alt="Profile"/> : <span className="profile-avatar">{userName.charAt(0).toUpperCase()}</span>}<span>Profile</span><span className="profile-arrow">⌄</span></button></div></div></header>
-    <main className="home-main">
-      <section className="hero-section"><div className="hero-left"><p className="welcome-text">Welcome back 👋</p><h1>Borrow what you need.<br/><span>Lend what you have.</span></h1><p className="hero-description">A simple way for students to share, borrow and lend useful items within the campus community.</p></div><div className="hero-search-area"><div className="search-wrapper"><div className="search-icon">⌕</div><input placeholder="Search books, electronics, notes..." onKeyDown={e => { if (e.key === "Enter") navigate("/browse"); }}/></div><div className="home-category-strip"><div className="home-category-heading"><span>QUICK CATEGORIES</span><button onClick={() => navigate("/browse")}>View all →</button></div><div className="home-category-list">{categories.map(c => <button key={c.name} className="home-category-pill" onClick={() => browseCategory(c.name)}><span>{c.icon}</span>{c.name}</button>)}</div></div></div></section>
-      <section className="home-awareness"><span className="home-awareness-icon">⚠</span><div><strong>SAFETY AWARENESS</strong><p><b>No drugs or controlled substances can be sold, bought, rented or listed on Borrow Box.</b> Any prohibited listing will be removed.</p></div></section>
-      <section className="quick-section"><div className="section-heading center-heading"><h2>What do you want to do?</h2><p>Choose an option to get started.</p></div><div className="action-grid"><div className="action-card"><div className="action-icon books-icon">📚</div><div className="action-content"><h3>Find something you need</h3><p>Discover useful items available from students on your campus.</p><button onClick={() => navigate("/browse")}>Browse Items <span>→</span></button></div></div><div className="action-card"><div className="action-icon box-icon">📦</div><div className="action-content"><h3>Share something you own</h3><p>List your unused books, electronics or other items for fellow students.</p><button onClick={() => navigate("/list-item")}>List an Item <span>→</span></button></div></div></div></section>
-      <section className="home-products-section"><div className="home-products-heading"><div><span className="home-products-label">LATEST LISTINGS</span><h2>Available on Campus</h2><p>Products listed by students in Borrow Box.</p></div><button onClick={() => navigate("/browse")}>View all →</button></div>{available.length ? <div className="home-products-grid">{available.slice(0, 6).map(item => <article className="home-product-card" key={item._id} onClick={() => navigate(`/item-details/${item._id}`)}><div className="home-product-image">{item.imageUrl ? <img src={img(item.imageUrl)} alt={item.title}/> : <span>No Image</span>}<b>{item.listingType === "sale" ? "FOR SALE" : "FOR RENT"}</b></div><div className="home-product-body"><small>{item.category}</small><h3>{item.title}</h3><div className="home-product-owner">{item.ownerProfilePicture ? <img src={img(item.ownerProfilePicture)} alt=""/> : <span>{(item.owner || "S").charAt(0).toUpperCase()}</span>}<label>{item.owner || "Student"}</label></div><strong>₹{item.price}<em>{item.listingType === "sale" ? " permanent" : " / day"}</em></strong></div></article>)}</div> : <div className="home-empty-products"><p>No items listed yet.</p><button onClick={() => navigate("/list-item")}>List the first item →</button></div>}</section>
-      <section className="bottom-cta"><div><h2>Have something others might need?</h2><p>Share it with students on your campus.</p></div><button onClick={() => navigate("/list-item")}>+ List an Item</button></section>
-    </main><footer className="home-footer"><div className="footer-content"><div><strong>Borrow Box</strong><span>Campus sharing made simple.</span></div><button onClick={logout}>Logout</button></div></footer>
-  </div>;
+
+  let user = null;
+  try {
+    user = JSON.parse(localStorage.getItem("borrowBoxUser") || "null");
+  } catch {}
+
+  const userName =
+    user?.nickname ||
+    user?.name ||
+    user?.username ||
+    user?.email?.split("@")[0] ||
+    "Student";
+
+  useEffect(() => {
+    fetch(`${API_URL}/api/items`)
+      .then((r) => r.json())
+      .then((d) => setItems(d.items || []))
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    if (!user?.email) return;
+
+    const updatePresence = () =>
+      fetch(`${API_URL}/api/auth/presence`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: user.email }),
+      }).catch(() => {});
+
+    updatePresence();
+    const timer = setInterval(updatePresence, 30000);
+    return () => clearInterval(timer);
+  }, [user?.email]);
+
+  useEffect(() => {
+    const loadStats = () =>
+      fetch(`${API_URL}/api/auth/stats`)
+        .then((r) => r.json())
+        .then((d) =>
+          setPortalStats({
+            liveUsers: d.liveUsers || 0,
+            registeredUsers: d.registeredUsers || 0,
+          })
+        )
+        .catch(() => {});
+
+    loadStats();
+    const timer = setInterval(loadStats, 30000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const img = (u) => (!u ? "" : u.startsWith("http") ? u : `${API_URL}${u}`);
+  const available = items.filter((i) => i.status === "Available");
+
+  const logout = () => {
+    localStorage.removeItem("borrowBoxUser");
+    localStorage.removeItem("borrowBoxEmail");
+    navigate("/login", { replace: true });
+  };
+
+  const browseCategory = (category) =>
+    navigate(category === "All" ? "/browse" : `/browse?category=${encodeURIComponent(category)}`);
+
+  return (
+    <div className="home-page">
+      <header className="navbar">
+        <div className="nav-container">
+          <div className="brand" onClick={() => navigate("/home")}>
+            <div className="brand-logo">◇</div>
+            <div className="brand-text">
+              <h2>Borrow Box</h2>
+              <span>Campus sharing</span>
+            </div>
+          </div>
+
+          <nav className="nav-links">
+            <button className="nav-link active" onClick={() => navigate("/home")}>Home</button>
+            <button className="nav-link" onClick={() => navigate("/browse")}>Browse</button>
+            <button className="nav-link" onClick={() => navigate("/my-items")}>My Items</button>
+          </nav>
+
+          <div className="nav-actions">
+            <div className="portal-users" title="Borrow Box portal activity">
+              <span className="portal-user-icon">♙</span>
+              <span>
+                <strong>{portalStats.liveUsers}</strong> live <i>•</i> {portalStats.registeredUsers} registered
+              </span>
+            </div>
+            <button className="list-top-btn" onClick={() => navigate("/list-item")}>+ List an Item</button>
+            <button className="profile-btn" onClick={() => navigate("/profile")}>
+              {user?.profilePicture ? (
+                <img className="home-profile-avatar" src={img(user.profilePicture)} alt="Profile" />
+              ) : (
+                <span className="profile-avatar">{userName.charAt(0).toUpperCase()}</span>
+              )}
+              <span>Profile</span>
+              <span className="profile-arrow">⌄</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main className="home-main">
+        <section className="hero-section">
+          <div className="hero-left">
+            <p className="welcome-text">Welcome back 👋</p>
+            <h1>
+              Borrow what you need.
+              <br />
+              <span>Lend what you have.</span>
+            </h1>
+            <p className="hero-description">
+              A simple way for students to share, borrow and lend useful items within the campus community.
+            </p>
+          </div>
+
+          <div className="hero-search-area">
+            <div className="search-wrapper">
+              <div className="search-icon">⌕</div>
+              <input
+                placeholder="Search books, electronics, notes..."
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") navigate("/browse");
+                }}
+              />
+            </div>
+
+            <div className="home-category-strip">
+              <div className="home-category-heading">
+                <span>QUICK CATEGORIES</span>
+                <button onClick={() => navigate("/browse")}>View all →</button>
+              </div>
+              <div className="home-category-list">
+                {categories.map((c) => (
+                  <button key={c.name} className="home-category-pill" onClick={() => browseCategory(c.name)}>
+                    <span>{c.icon}</span>
+                    {c.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="home-awareness">
+          <span className="home-awareness-icon">⚠</span>
+          <div>
+            <strong>SAFETY AWARENESS</strong>
+            <p>
+              <b>No drugs or controlled substances can be sold, bought, rented or listed on Borrow Box.</b> Any prohibited listing will be removed.
+            </p>
+          </div>
+        </section>
+
+        <section className="quick-section">
+          <div className="section-heading center-heading">
+            <h2>What do you want to do?</h2>
+            <p>Choose an option to get started.</p>
+          </div>
+
+          <div className="action-grid">
+            <div className="action-card">
+              <div className="action-icon books-icon">📚</div>
+              <div className="action-content">
+                <h3>Find something you need</h3>
+                <p>Discover useful items available from students on your campus.</p>
+                <button onClick={() => navigate("/browse")}>Browse Items <span>→</span></button>
+              </div>
+            </div>
+
+            <div className="action-card">
+              <div className="action-icon box-icon">📦</div>
+              <div className="action-content">
+                <h3>Share something you own</h3>
+                <p>List your unused books, electronics or other items for fellow students.</p>
+                <button onClick={() => navigate("/list-item")}>List an Item <span>→</span></button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="home-products-section">
+          <div className="home-products-heading">
+            <div>
+              <span className="home-products-label">LATEST LISTINGS</span>
+              <h2>Available on Campus</h2>
+              <p>Products listed by students in Borrow Box.</p>
+            </div>
+            <button onClick={() => navigate("/browse")}>View all →</button>
+          </div>
+
+          {available.length ? (
+            <div className="home-products-grid">
+              {available.slice(0, 6).map((item) => (
+                <article
+                  className="home-product-card"
+                  key={item._id}
+                  onClick={() => navigate(`/item-details/${item._id}`)}
+                >
+                  <div className="home-product-image">
+                    {item.imageUrl ? (
+                      <img src={img(item.imageUrl)} alt={item.title} />
+                    ) : (
+                      <span>No Image</span>
+                    )}
+                    <b>{item.listingType === "sale" ? "FOR SALE" : "FOR RENT"}</b>
+                  </div>
+
+                  <div className="home-product-body">
+                    <div className="home-product-rating-row">
+                      <div className="home-product-stars" aria-label="New campus listing">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                      </div>
+                      <span className="home-product-rating-badge">New listing</span>
+                    </div>
+
+                    <small>{item.category}</small>
+                    <h3>{item.title}</h3>
+
+                    <div className="home-product-owner">
+                      {item.ownerProfilePicture ? (
+                        <img src={img(item.ownerProfilePicture)} alt="" />
+                      ) : (
+                        <span>{(item.owner || "S").charAt(0).toUpperCase()}</span>
+                      )}
+                      <label>{item.owner || "Student"}</label>
+                    </div>
+
+                    <div className="home-product-price-row">
+                      <strong>
+                        ₹{item.price}
+                        <em>{item.listingType === "sale" ? " permanent" : " / day"}</em>
+                      </strong>
+                      <button
+                        type="button"
+                        className="home-product-order-btn"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`/item-details/${item._id}`);
+                        }}
+                      >
+                        {item.listingType === "sale" ? "Buy" : "Borrow"} →
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="home-empty-products">
+              <p>No items listed yet.</p>
+              <button onClick={() => navigate("/list-item")}>List the first item →</button>
+            </div>
+          )}
+        </section>
+
+        <section className="bottom-cta">
+          <div>
+            <h2>Have something others might need?</h2>
+            <p>Share it with students on your campus.</p>
+          </div>
+          <button onClick={() => navigate("/list-item")}>+ List an Item</button>
+        </section>
+      </main>
+
+      <footer className="home-footer">
+        <div className="footer-content">
+          <div>
+            <strong>Borrow Box</strong>
+            <span>Campus sharing made simple.</span>
+          </div>
+          <button onClick={logout}>Logout</button>
+        </div>
+      </footer>
+    </div>
+  );
 }
+
 export default Home;
