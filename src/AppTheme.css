@@ -1,0 +1,5 @@
+:root { --bb-blue: #3368A0; --bb-sky: #66A3BF; --bb-mint: #C8DFDB; --bb-cream: #F2EFE7; --bb-white: #ffffff; }
+body { background: var(--bb-cream); color: var(--bb-blue); }
+input, textarea, select { border-color: var(--bb-mint); }
+input:focus, textarea:focus, select:focus { outline: 2px solid var(--bb-sky); }
+::selection { background: var(--bb-mint); color: var(--bb-blue); }
