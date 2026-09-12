@@ -19,6 +19,7 @@ function Home() {
   const navigate = useNavigate();
   const [items, setItems] = useState([]);
   const [portalStats, setPortalStats] = useState({ liveUsers: 0, registeredUsers: 0 });
+  const [pendingCount, setPendingCount] = useState(0);
 
   let user = null;
   try {
@@ -71,6 +72,18 @@ function Home() {
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    if (!user?.email) return;
+
+    fetch(`${API_URL}/api/borrow-requests/owner/${encodeURIComponent(user.email)}`)
+      .then((r) => r.json())
+      .then((d) => {
+        const requests = Array.isArray(d) ? d : d.requests || [];
+        setPendingCount(requests.filter((request) => request.status === "Pending").length);
+      })
+      .catch(() => setPendingCount(0));
+  }, [user?.email]);
+
   const img = (u) => (!u ? "" : u.startsWith("http") ? u : `${API_URL}${u}`);
   const available = items.filter((i) => i.status === "Available");
 
@@ -98,7 +111,18 @@ function Home() {
           <nav className="nav-links">
             <button className="nav-link active" onClick={() => navigate("/home")}>Home</button>
             <button className="nav-link" onClick={() => navigate("/browse")}>Browse</button>
-            <button className="nav-link" onClick={() => navigate("/my-items")}>My Items</button>
+            <button
+              className="nav-link nav-link-with-indicator"
+              onClick={() => navigate("/my-items")}
+              aria-label={pendingCount ? `My Items, ${pendingCount} pending request${pendingCount === 1 ? "" : "s"}` : "My Items"}
+            >
+              My Items
+              {pendingCount > 0 && (
+                <span className="nav-count-badge" aria-hidden="true">
+                  {pendingCount > 99 ? "99+" : pendingCount}
+                </span>
+              )}
+            </button>
           </nav>
 
           <div className="nav-actions">
