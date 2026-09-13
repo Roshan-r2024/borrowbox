@@ -35,16 +35,9 @@ function NavigationHelper() {
   return <button className="global-home-back" onClick={() => navigate("/home", { replace: true })} aria-label="Back to Home">← Home</button>;
 }
 
-function HomeAwareness() {
-  const location = useLocation();
-  if (location.pathname !== "/home") return null;
-  return <div className="home-awareness"><span className="home-awareness-icon">⚠</span><div><strong>SAFETY AWARENESS</strong><p><b>No drugs or controlled substances can be sold, bought, rented or listed on Borrow Box.</b> Any prohibited listing will be removed.</p></div></div>;
-}
-
 function App() {
   return <BrowserRouter>
     <NavigationHelper />
-    <HomeAwareness />
     <Routes>
       <Route path="/" element={<Navigate to={isLoggedIn() ? "/home" : "/get-started"} replace />} />
       <Route path="/get-started" element={isLoggedIn() ? <Navigate to="/home" replace /> : <GetStarted />} />
