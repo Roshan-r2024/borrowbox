@@ -6,6 +6,7 @@ import "./index.css";
 import "./App.css";
 import "./pages/HomeBrightTheme.css";
 import "./AppTheme.css";
+import "./BorrowBoxLayout.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
