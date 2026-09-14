@@ -9,6 +9,8 @@ const borrowRequestRoutes = require("./routes/borrowRequests");
 const chatRoutes = require("./routes/chats");
 const reminderRoutes = require("./routes/reminders");
 const notificationRoutes = require("./routes/notifications");
+const Item = require("./models/Item");
+const demoItems = require("./demoItems");
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -22,5 +24,11 @@ app.use("/uploads",express.static(path.join(__dirname,"uploads")));
 app.use("/api/auth",authRoutes);
 app.use("/api/items",itemRoutes);
 const PORT=process.env.PORT||5000;
-async function startServer(){try{if(!process.env.MONGO_URI)throw new Error("MONGO_URI is missing in server/.env");await mongoose.connect(process.env.MONGO_URI,{serverSelectionTimeoutMS:10000,connectTimeoutMS:10000});console.log("MongoDB connected successfully ✅");app.listen(PORT,()=>console.log(`Borrow Box server running on port ${PORT} 🚀`))}catch(error){console.error("MongoDB connection failed ❌");console.error(error.message);process.exit(1)}}
+async function seedDemoItems(){
+  const count=await Item.countDocuments();
+  if(count>0)return;
+  await Item.insertMany(demoItems);
+  console.log(`Borrow Box demo dataset inserted: ${demoItems.length} items 📦`);
+}
+async function startServer(){try{if(!process.env.MONGO_URI)throw new Error("MONGO_URI is missing in server/.env");await mongoose.connect(process.env.MONGO_URI,{serverSelectionTimeoutMS:10000,connectTimeoutMS:10000});console.log("MongoDB connected successfully ✅");await seedDemoItems();app.listen(PORT,()=>console.log(`Borrow Box server running on port ${PORT} 🚀`))}catch(error){console.error("MongoDB connection failed ❌");console.error(error.message);process.exit(1)}}
 startServer();
