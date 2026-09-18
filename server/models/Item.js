@@ -9,6 +9,7 @@ const itemSchema = new mongoose.Schema(
     description: { type: String, required: true, trim: true },
     condition: { type: String, required: true },
     availability: { type: String, required: true },
+    urgent: { type: Boolean, default: false },
     owner: { type: String, required: true },
     ownerEmail: { type: String, default: "" },
     imageUrl: { type: String, required: true },
