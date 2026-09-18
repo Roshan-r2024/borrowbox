@@ -721,3 +721,41 @@
 .browse-page{background:#fff;color:#17324D}.browse-header h1{color:#17324D}.browse-label,.filter-title,.card-category{color:#66829A}.browse-header p,.card-description,.owner{color:#66829A}.browse-search-box,.category-buttons button,.browse-card,.no-results{background:#fff;border-color:#C8DFDB}.browse-search-box input{color:#17324D}.browse-search-box button{background:#EBF5FF;color:#1A56DB}.category-buttons button{color:#17324D}.category-buttons button:hover{border-color:#66A3BF;background:#EBF5FF;color:#1A56DB}.category-buttons button.selected{background:#1A56DB;border-color:#1A56DB;color:#EBF5FF}.browse-result span{color:#66829A}.browse-card{box-shadow:0 6px 20px rgba(26,86,219,.06)}.browse-card:hover{box-shadow:0 12px 30px rgba(26,86,219,.12)}.browse-image{background:#EBF5FF;border-bottom:1px solid #C8DFDB}.browse-card:nth-child(3n+2) .browse-image{background:#C8DFDB}.browse-card:nth-child(3n+3) .browse-image{background:#EBF5FF}.available{background:#fff;color:#17324D;border-color:#66A3BF}.browse-no-image{color:#66829A}.browse-card h2{color:#17324D}.owner-avatar{background:#1A56DB;color:#EBF5FF}.owner strong{color:#17324D}.card-footer{border-color:#C8DFDB}.price strong{color:#17324D}.price span{color:#66829A}.borrow-btn{background:#1A56DB;color:#EBF5FF}.borrow-btn:hover{background:#1649B8}.no-results h2{color:#17324D}.no-results p{color:#66829A}.no-results button{background:#1A56DB;color:#EBF5FF}.loading-spinner{border-color:#C8DFDB;border-top-color:#1A56DB}
 html.dark .browse-page{background:#0F172A!important;color:#E5EDF7!important}.browse-page .browse-container{background:#0F172A!important}.browse-page .browse-header h1{color:#EBF5FF!important}.browse-page .browse-label,.browse-page .browse-header p,.browse-page .filter-title,.browse-page .browse-result span,.browse-page .card-category,.browse-page .card-description,.browse-page .owner{color:#9EB8CA!important}.browse-page .browse-search-box,.browse-page .category-buttons button,.browse-page .browse-card,.browse-page .no-results{background:#172033!important;border-color:#34527A!important}.browse-page .browse-search-box input,.browse-page .browse-card h2,.browse-page .owner strong,.browse-page .price strong,.browse-page .no-results h2{color:#EBF5FF!important}.browse-page .browse-search-box button{background:#1D3553!important;color:#9EC5FF!important}.browse-page .category-buttons button{color:#E5EDF7!important}.browse-page .category-buttons button.selected{background:#1A56DB!important;color:#EBF5FF!important;border-color:#1A56DB!important}.browse-page .browse-card{box-shadow:0 8px 24px rgba(0,0,0,.16)}.browse-page .browse-image{background:#16304E!important;border-color:#34527A!important}.browse-page .browse-card:nth-child(3n+2) .browse-image{background:#173A3A!important}.browse-page .available{background:#29435E!important;color:#EBF5FF!important;border-color:#52708C!important}.browse-page .owner-avatar{background:#1A56DB!important;color:#EBF5FF!important}.browse-page .card-footer{border-color:#34527A!important}.browse-page .price span{color:#9EB8CA!important}.browse-page .borrow-btn{background:#1A56DB!important;color:#EBF5FF!important}.browse-page .no-results p{color:#9EB8CA!important}
 .browse-page{font-size:16px}.browse-page .card-category,.browse-page .browse-label,.browse-page .filter-title{font-size:12px!important}.browse-page .browse-card h2{font-size:20px!important}.browse-page .card-description{font-size:14px!important;line-height:1.55}.browse-page .owner{font-size:12px!important}.browse-page .price strong{font-size:18px!important}.browse-page .price span{font-size:12px!important}.browse-page .available{font-size:11px!important}.browse-page .borrow-btn{font-size:13px!important}
+
+/* FINAL LIGHT THEME — Browse must be bright across the entire viewport */
+html:not(.dark),html:not(.dark) body,html:not(.dark) #root{background:#FFFFFF!important;color:#17324D!important}
+html:not(.dark) .browse-page{min-height:100vh!important;width:100%!important;background:#FFFFFF!important;color:#17324D!important}
+html:not(.dark) .browse-container{background:#FFFFFF!important;color:#17324D!important}
+html:not(.dark) .browse-header h1{color:#17324D!important}
+html:not(.dark) .browse-header p{color:#66829A!important}
+html:not(.dark) .browse-search-box{background:#FFFFFF!important;border-color:#66A3BF!important}
+html:not(.dark) .browse-search-box input{background:#FFFFFF!important;color:#17324D!important}
+html:not(.dark) .browse-search-box input::placeholder{color:#66829A!important}
+html:not(.dark) .browse-filters,.listing-filter-row{color:#17324D!important}
+html:not(.dark) .filter-title,.html:not(.dark) .listing-filter-row>span{color:#17324D!important}
+html:not(.dark) .category-buttons button{background:#FFFFFF!important;color:#17324D!important;border-color:#C8DFDB!important}
+html:not(.dark) .category-buttons button.selected,.listing-filter-row button.selected{background:#1A56DB!important;color:#EBF5FF!important;border-color:#1A56DB!important}
+html:not(.dark) .listing-filter-row button{background:#FFFFFF!important;color:#17324D!important;border-color:#C8DFDB!important}
+html:not(.dark) .browse-result strong{color:#17324D!important}
+html:not(.dark) .browse-result span{color:#66829A!important}
+html:not(.dark) .browse-card{background:#FFFFFF!important;color:#17324D!important;border-color:#C8DFDB!important}
+html:not(.dark) .browse-card-content{background:#FFFFFF!important;color:#17324D!important}
+html:not(.dark) .browse-card h2{color:#17324D!important}
+html:not(.dark) .browse-card .card-description{color:#66829A!important}
+html:not(.dark) .browse-card .owner,html:not(.dark) .browse-card .owner span{color:#66829A!important}
+html:not(.dark) .browse-card .owner strong{color:#17324D!important}
+html:not(.dark) .browse-card .price strong{color:#17324D!important}
+html:not(.dark) .browse-card .price span{color:#66829A!important}
+html:not(.dark) .browse-card .card-footer{border-color:#C8DFDB!important}
+html:not(.dark) .browse-card .details-btn{background:#EBF5FF!important;color:#1A56DB!important;border-color:#C8DFDB!important}
+html:not(.dark) .browse-card .borrow-btn{background:#1A56DB!important;color:#EBF5FF!important}
+html:not(.dark) .no-results{background:#FFFFFF!important;color:#17324D!important;border-color:#66A3BF!important}
+html:not(.dark) .no-results h2{color:#17324D!important}
+html:not(.dark) .no-results p{color:#66829A!important}
+
+/* FINAL DARK THEME — no white page margins/surfaces */
+html.dark,html.dark body,html.dark #root{background:#0F172A!important;color:#E5EDF7!important}
+html.dark .browse-page,html.dark .browse-container{background:#0F172A!important;color:#E5EDF7!important}
+html.dark .browse-header h1{color:#EBF5FF!important}
+html.dark .browse-header p{color:#9EB8CA!important}
+html.dark .browse-card{background:#172033!important;color:#E5EDF7!important;border-color:#34527A!important}
