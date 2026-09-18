@@ -50,3 +50,8 @@ html.dark .modal-field small,html.dark .password-note{color:#9EB8CA!important}
 html.dark .chat-message.incoming{background:#26364C!important;color:#E5EDF7!important}
 html.dark .chat-message.outgoing{background:#1A56DB!important;color:#EBF5FF!important}
 @media(max-width:760px){.bb-global-navbar + *{padding-top:64px}}
+
+
+/* Main pages sit below the shared fixed navbar */
+.home-page,.browse-page,.myitems-page,.chat-page,.profile-page{padding-top:70px!important}
+@media(max-width:760px){.home-page,.browse-page,.myitems-page,.chat-page,.profile-page{padding-top:64px!important}}
