@@ -26,29 +26,41 @@ app.use("/api/items", itemRoutes);
 const PORT = process.env.PORT || 5000;
 
 async function seedDemoItems() {
-  let inserted = 0;
-  for (const item of demoItems) {
-    const exists = await Item.exists({ title: item.title, ownerEmail: item.ownerEmail });
-    if (!exists) {
-      await Item.create(item);
-      inserted += 1;
-    }
+  try {
+    const operations = demoItems.map((item) => ({
+      updateOne: {
+        filter: { title: item.title, ownerEmail: item.ownerEmail },
+        update: { $setOnInsert: item },
+        upsert: true,
+      },
+    }));
+    if (!operations.length) return;
+    const result = await Item.bulkWrite(operations, { ordered: false });
+    const inserted = result.upsertedCount || 0;
+    if (inserted) console.log(`Borrow Box demo dataset inserted: ${inserted} items 📦`);
+    else console.log("Borrow Box demo dataset already available ✅");
+  } catch (error) {
+    console.error("Demo dataset seed failed:", error.message);
   }
-  if (inserted) console.log(`Borrow Box demo dataset inserted: ${inserted} items 📦`);
-  else console.log("Borrow Box demo dataset already available ✅");
 }
 
-async function startServer() {
+async function connectDatabase() {
   try {
     if (!process.env.MONGO_URI) throw new Error("MONGO_URI is missing in server/.env");
-    await mongoose.connect(process.env.MONGO_URI, { serverSelectionTimeoutMS: 10000, connectTimeoutMS: 10000 });
+    await mongoose.connect(process.env.MONGO_URI, {
+      serverSelectionTimeoutMS: 10000,
+      connectTimeoutMS: 10000,
+      socketTimeoutMS: 10000,
+    });
     console.log("MongoDB connected successfully ✅");
     await seedDemoItems();
-    app.listen(PORT, () => console.log(`Borrow Box server running on port ${PORT} 🚀`));
   } catch (error) {
     console.error("MongoDB connection failed ❌");
     console.error(error.message);
-    process.exit(1);
   }
 }
-startServer();
+
+// Start HTTP immediately. The previous flow waited for MongoDB + demo seeding
+// before opening port 5000, which could make the browser appear to hang.
+app.listen(PORT, () => console.log(`Borrow Box server running on port ${PORT} 🚀`));
+connectDatabase();
