@@ -55,3 +55,22 @@ html.dark .chat-message.outgoing{background:#1A56DB!important;color:#EBF5FF!impo
 /* Main pages sit below the shared fixed navbar */
 .home-page,.browse-page,.myitems-page,.chat-page,.profile-page{padding-top:70px!important}
 @media(max-width:760px){.home-page,.browse-page,.myitems-page,.chat-page,.profile-page{padding-top:64px!important}}
+
+
+/* Remove mixed white blocks in dark mode on all main pages */
+html.dark .home-main,html.dark .quick-section,html.dark .home-products-section,html.dark .bottom-cta,html.dark .home-footer{background:#0F172A!important;color:#E5EDF7!important}
+html.dark .home-page .action-grid,html.dark .home-page .home-products-grid{background:transparent!important}
+html.dark .home-page .home-products-heading h2,html.dark .home-page .home-products-heading p,html.dark .home-page .home-products-label{color:#EBF5FF!important}
+html.dark .home-page .home-products-heading button{background:#172033!important;color:#9EC5FF!important;border-color:#34527A!important}
+html.dark .home-page .home-product-card{background:#172033!important;border:1px solid #34527A!important}
+html.dark .home-page .home-product-card h3,html.dark .home-page .home-product-card strong{color:#EBF5FF!important}
+html.dark .home-page .home-product-card small,html.dark .home-page .home-product-card label{color:#9EB8CA!important}
+html.dark .home-page .home-product-price-row{border-color:#34527A!important}
+html.dark .home-page .bottom-cta{background:#172033!important;border-color:#34527A!important}
+html.dark .home-page .bottom-cta h2{color:#EBF5FF!important}
+html.dark .home-page .bottom-cta p{color:#9EB8CA!important}
+html.dark .home-page .home-footer{border-color:#34527A!important}
+html.dark .home-page .quick-section .action-card{color:#E5EDF7!important;border-color:#34527A!important}
+html.dark .home-page .quick-section .action-card h3{color:#EBF5FF!important}
+html.dark .home-page .quick-section .action-card p{color:#9EB8CA!important}
+html.dark .campus-carousel,html.dark .campus-carousel *{color:#EBF5FF}
