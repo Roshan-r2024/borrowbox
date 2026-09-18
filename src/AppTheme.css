@@ -27,3 +27,26 @@ html.dark .btn-primary{background:#1A56DB!important;color:#EBF5FF!important;bord
 html.dark .btn-success{background:#2F8F83!important;color:#EBF5FF!important}
 html.dark .alert{background:#172033!important;color:#E5EDF7!important;border-color:#34527A!important}
 html.dark .list-group-item{background:#172033!important;color:#E5EDF7!important;border-color:#34527A!important}
+
+
+/* Shared main navigation + full-page theme coverage */
+.bb-global-navbar + *{padding-top:70px}
+.home-page>.navbar,.browse-page>.browse-navbar,.myitems-page>.myitems-header,.chat-page>.chat-topbar,.profile-page>.profile-header{display:none!important}
+html.dark .home-page,html.dark .browse-page,html.dark .myitems-page,html.dark .chat-page,html.dark .profile-page{background:#0F172A!important;color:#E5EDF7!important;min-height:100vh}
+html.dark .browse-container,html.dark .myitems-container,html.dark .profile-main,html.dark .chat-page{background:#0F172A!important;color:#E5EDF7!important}
+html.dark .browse-header h1,html.dark .myitems-heading h1,html.dark .profile-heading h1,html.dark .chat-page h1,html.dark .chat-page h2,html.dark .chat-page h3{color:#EBF5FF!important}
+html.dark .browse-header p,html.dark .myitems-heading p,html.dark .profile-heading p,html.dark .chat-page p,html.dark .chat-page small{color:#9EB8CA!important}
+html.dark .browse-search,html.dark .browse-filters,html.dark .listing-filter-row,html.dark .browse-result,html.dark .myitems-tabs,html.dark .myitems-list,html.dark .profile-card,html.dark .chat-sidebar,html.dark .chat-window,html.dark .chat-conversation-list,html.dark .chat-composer{background:#172033!important;color:#E5EDF7!important;border-color:#34527A!important}
+html.dark .browse-card,html.dark .myitems-card,html.dark .request-card,html.dark .borrowed-card,html.dark .profile-detail,html.dark .chat-list-item{background:#172033!important;color:#E5EDF7!important;border-color:#34527A!important}
+html.dark .browse-card h2,html.dark .myitems-card h2,html.dark .myitems-card h3,html.dark .profile-card h2,html.dark .profile-card strong,html.dark .chat-list-item strong{color:#EBF5FF!important}
+html.dark .browse-card p,html.dark .myitems-card p,html.dark .profile-card p,html.dark .chat-list-item span{color:#9EB8CA!important}
+html.dark .browse-card input,html.dark input,html.dark textarea,html.dark select{background:#172033!important;color:#EBF5FF!important;border-color:#34527A!important}
+html.dark .browse-card button,html.dark .myitems-card button,html.dark .profile-card button{color:#EBF5FF}
+html.dark .myitems-page .myitems-empty,html.dark .no-results{background:#172033!important;color:#E5EDF7!important}
+html.dark .profile-modal-overlay{background:rgba(2,6,23,.82)!important}
+html.dark .profile-modal{background:#172033!important;color:#E5EDF7!important;border-color:#34527A!important}
+html.dark .modal-header h2,html.dark .profile-modal label{color:#EBF5FF!important}
+html.dark .modal-field small,html.dark .password-note{color:#9EB8CA!important}
+html.dark .chat-message.incoming{background:#26364C!important;color:#E5EDF7!important}
+html.dark .chat-message.outgoing{background:#1A56DB!important;color:#EBF5FF!important}
+@media(max-width:760px){.bb-global-navbar + *{padding-top:64px}}
