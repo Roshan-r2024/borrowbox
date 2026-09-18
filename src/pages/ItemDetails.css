@@ -715,3 +715,35 @@ html.dark .details-price span,html.dark .details-description p,html.dark .detail
 html.dark .details-image{background:#172033!important;border-color:#34527A!important}
 html.dark .borrow-request-box{background:#172033!important;border-color:#34527A!important}
 html.dark .date-field input,html.dark .message-field textarea{background:#172033!important;color:#EBF5FF!important;border-color:#34527A!important}
+
+/* Product details UI polish */
+html:not(.dark) .item-details-page{background:#FFFFFF!important}
+html:not(.dark) .details-navbar{background:#1A56DB!important}
+html:not(.dark) .details-nav-container{min-height:70px}
+html:not(.dark) .details-logo{border-color:#EBF5FF!important;background:rgba(235,245,255,.10)}
+html:not(.dark) .details-brand strong,html:not(.dark) .details-brand span{color:#EBF5FF!important}
+html:not(.dark) .back-browse,html:not(.dark) .share-product-button{background:#EBF5FF!important;color:#1A56DB!important;border:1px solid #EBF5FF!important;font-weight:750}
+.details-header-actions{display:flex;gap:10px;align-items:center}
+.share-product-button{padding:10px 14px;border-radius:9px;cursor:pointer;font-size:12px}
+.details-image{position:relative;box-shadow:0 10px 30px rgba(26,86,219,.08)}
+.details-listing-badge{position:absolute;left:16px;top:16px;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.4px;background:#1A56DB;color:#EBF5FF}
+.details-listing-badge.sale{background:#C8DFDB;color:#17324D}
+.details-listing-badge.rent{background:#1A56DB;color:#EBF5FF}
+.details-status{font-weight:750}
+.seller-contact-safe{margin-top:20px;padding:14px 16px;border:1px solid #C8DFDB;border-radius:13px;background:#EBF5FF;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.seller-contact-safe>div:first-child{display:flex;align-items:center;gap:10px}
+.seller-contact-safe>div:first-child>span{display:flex;flex-direction:column;gap:3px}
+.seller-contact-safe small{color:#66829A;font-size:11px}
+.seller-contact-actions{display:flex;gap:8px;align-items:center}
+.seller-contact-actions button{border-radius:9px;padding:10px 13px;font-size:12px;font-weight:750;cursor:pointer;display:flex;align-items:center;gap:7px}
+.seller-contact-actions button:first-child{border:1px solid #1A56DB;background:#1A56DB;color:#EBF5FF}
+.details-whatsapp-btn{border:1px solid #66A3BF;background:#FFFFFF;color:#1A56DB}
+.seller-contact-actions button:hover{transform:translateY(-1px)}
+.borrow-request-box{box-shadow:0 8px 24px rgba(26,86,219,.06)}
+.send-request-btn{font-size:14px!important;font-weight:800!important;min-height:48px}
+html.dark .seller-contact-safe{background:#1D3553!important;border-color:#34527A!important}
+html.dark .seller-contact-safe small{color:#9EB8CA!important}
+html.dark .details-whatsapp-btn{background:#172033!important;color:#EBF5FF!important;border-color:#52708C!important}
+html.dark .details-listing-badge.sale{background:#29435E!important;color:#EBF5FF!important}
+html.dark .borrow-request-box{box-shadow:none}
+@media(max-width:700px){.details-header-actions{gap:6px}.details-header-actions .share-product-button{font-size:0;width:40px;height:40px;padding:8px;display:grid;place-items:center}.back-browse{font-size:11px!important}.seller-contact-safe{align-items:stretch;flex-direction:column}.seller-contact-actions{width:100%}.seller-contact-actions button{flex:1;justify-content:center}}
