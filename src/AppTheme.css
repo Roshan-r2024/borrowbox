@@ -91,3 +91,132 @@ h4{font-size:17px}
 .theme-toggle-btn{font-size:21px!important}
 .global-home-back{font-size:14px!important}
 html.dark .navbar .nav-link,html.dark .browse-navbar nav a{color:#EBF5FF!important}
+
+
+/* FINAL readability + strict theme consistency */
+html,body{font-size:16px}
+body{line-height:1.5}
+button,input,textarea,select{font-size:15px!important;line-height:1.35}
+p{font-size:15px}
+small{font-size:13px!important}
+label{font-size:14px}
+h1{line-height:1.12}
+h2{line-height:1.2}
+h3{line-height:1.25}
+
+/* Navigation */
+.navbar .nav-link,.browse-navbar .browse-nav-link,.browse-navbar nav a{font-size:15px!important;font-weight:750!important}
+.navbar .brand-text h2,.browse-navbar .browse-brand strong{font-size:19px!important}
+.navbar .brand-text span,.browse-navbar .browse-brand span{font-size:12px!important}
+
+/* Browse cards */
+.browse-page .browse-header h1{font-size:38px!important}
+.browse-page .browse-header p{font-size:16px!important}
+.browse-page .card-category{font-size:13px!important}
+.browse-page .browse-card h2{font-size:22px!important}
+.browse-page .card-description{font-size:15px!important;line-height:1.6!important}
+.browse-page .owner{font-size:13px!important}
+.browse-page .price strong{font-size:21px!important}
+.browse-page .price span{font-size:13px!important}
+.browse-page .borrow-btn{font-size:14px!important;padding:11px 18px!important}
+
+/* My Items */
+.myitems-page .myitems-heading h1{font-size:40px!important}
+.myitems-page .myitems-heading p{font-size:16px!important}
+.myitems-page .myitems-tabs button{font-size:15px!important}
+.myitems-page .myitem-main h2,.myitems-page .request-card h2{font-size:22px!important}
+.myitems-page .myitem-main p{font-size:15px!important}
+.myitems-page .request-info strong{font-size:15px!important}
+.myitems-page .request-info small,.myitems-page .request-location{font-size:13px!important}
+.myitems-page .request-actions button,.myitems-page .myitem-more{font-size:14px!important}
+
+/* Profile */
+.profile-page .profile-heading h1{font-size:40px!important}
+.profile-page .profile-heading p{font-size:16px!important}
+.profile-page .profile-name h2{font-size:26px!important}
+.profile-page .profile-name p{font-size:15px!important}
+.profile-page .detail-label{font-size:13px!important}
+.profile-page .profile-detail>strong,.profile-page .email-detail strong{font-size:16px!important}
+.profile-page .profile-detail small{font-size:13px!important}
+.profile-page .profile-edit-button,.profile-page .profile-action-button,.profile-page .profile-logout-button{font-size:14px!important}
+
+/* Item details */
+.item-details-page .details-category{font-size:13px!important}
+.item-details-page .details-info h1{font-size:38px!important}
+.item-details-page .details-price strong{font-size:25px!important}
+.item-details-page .details-price span{font-size:14px!important}
+.item-details-page .details-description h3,.item-details-page .borrow-request-heading h2{font-size:22px!important}
+.item-details-page .details-description p,.item-details-page .borrow-request-heading p{font-size:15px!important}
+.item-details-page .details-owner span{font-size:13px!important}
+.item-details-page .details-owner strong{font-size:15px!important}
+.item-details-page .date-field label,.item-details-page .message-field label{font-size:14px!important}
+
+/* Chat */
+.chat-page .chat-sidebar-head h1{font-size:28px!important}
+.chat-page .chat-conversation-body strong{font-size:15px!important}
+.chat-page .chat-conversation-body small,.chat-page .chat-conversation-body em{font-size:12px!important}
+.chat-page .chat-person-copy strong{font-size:17px!important}
+.chat-page .chat-person-copy span{font-size:12px!important}
+.chat-page .chat-product-strip span{font-size:10px!important}
+.chat-page .chat-product-strip strong{font-size:14px!important}
+.chat-page .chat-bubble{font-size:15px!important}
+.chat-page .chat-bubble-wrap>span,.chat-page .chat-bubble-wrap time{font-size:11px!important}
+.chat-page .chat-welcome h2{font-size:22px!important}
+.chat-page .chat-welcome p{font-size:14px!important}
+
+/* List item */
+.list-page .list-title h1,.list-item-page .list-title h1{font-size:38px!important}
+.list-page .list-title p,.list-item-page .list-title p{font-size:16px!important}
+.list-page .section-heading h2,.list-item-page .section-heading h2{font-size:21px!important}
+.list-page .section-desc,.list-item-page .section-desc{font-size:14px!important}
+.list-page .input-group>label,.list-item-page .input-group>label{font-size:14px!important}
+.list-page .input-group input,.list-page .input-group select,.list-page .input-group textarea,.list-item-page .input-group input,.list-item-page .input-group select,.list-item-page .input-group textarea{font-size:15px!important}
+
+/* LIGHT MODE: explicitly keep every major page bright/readable */
+html:not(.dark) .profile-page,
+html:not(.dark) .browse-page,
+html:not(.dark) .myitems-page,
+html:not(.dark) .item-details-page,
+html:not(.dark) .chat-page,
+html:not(.dark) .list-page,
+html:not(.dark) .list-item-page{background:#FFFFFF!important;color:#17324D!important}
+html:not(.dark) .profile-page .profile-card,
+html:not(.dark) .browse-page .browse-card,
+html:not(.dark) .myitems-page .myitem-card,
+html:not(.dark) .myitems-page .request-card,
+html:not(.dark) .item-details-page .borrow-request-box,
+html:not(.dark) .chat-page .chat-layout{background:#FFFFFF!important;color:#17324D!important}
+html:not(.dark) .profile-page .profile-top{background:#EBF5FF!important}
+html:not(.dark) .profile-page .profile-heading h1,
+html:not(.dark) .browse-page .browse-header h1,
+html:not(.dark) .myitems-page .myitems-heading h1,
+html:not(.dark) .item-details-page .details-info h1{color:#17324D!important}
+
+/* DARK MODE: no white/cream surfaces on the main pages */
+html.dark .profile-page,
+html.dark .browse-page,
+html.dark .myitems-page,
+html.dark .item-details-page,
+html.dark .chat-page,
+html.dark .list-page,
+html.dark .list-item-page{background:#0F172A!important;color:#E5EDF7!important}
+html.dark .profile-page .profile-card,
+html.dark .browse-page .browse-card,
+html.dark .myitems-page .myitem-card,
+html.dark .myitems-page .request-card,
+html.dark .item-details-page .borrow-request-box,
+html.dark .chat-page .chat-layout,
+html.dark .chat-page .chat-sidebar,
+html.dark .chat-page .chat-main{background:#172033!important;color:#E5EDF7!important}
+html.dark .profile-page .profile-top{background:#1D3553!important}
+html.dark .profile-page h1,html.dark .profile-page h2,
+html.dark .browse-page h1,html.dark .browse-page h2,
+html.dark .myitems-page h1,html.dark .myitems-page h2,
+html.dark .item-details-page h1,html.dark .item-details-page h2,
+html.dark .chat-page h1,html.dark .chat-page h2{color:#EBF5FF!important}
+html.dark .profile-page p,html.dark .browse-page p,
+html.dark .myitems-page p,html.dark .item-details-page p,
+html.dark .chat-page p{color:#9EB8CA!important}
+
+/* Remove the old cream tone everywhere */
+html,body,#root,.profile-page,.browse-page,.myitems-page,.item-details-page,.chat-page,.list-page,.list-item-page{--old-cream:#FFFFFF}
