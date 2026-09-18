@@ -67,3 +67,16 @@
 
 .urgent-contact-row{display:flex;align-items:center;gap:8px;width:100%;margin-top:10px}.urgent-label{font-size:11px;font-weight:800;color:#1A56DB;white-space:nowrap}.urgent-message-btn,.urgent-whatsapp-btn{flex:1;font-family:inherit;font-weight:700;font-size:12px;line-height:1;border-radius:9px;cursor:pointer;padding:11px 14px}.urgent-whatsapp-btn{border:1px solid #66A3BF;background:#EBF5FF;color:#1A56DB}.urgent-whatsapp-btn:hover{background:#1A56DB;color:#EBF5FF}.urgent-message-btn{border:1px solid #1A56DB;background:#1A56DB;color:#EBF5FF}.urgent-message-btn:hover{background:#1649B8}.urgency-section{border:1px solid #C8DFDB}.urgent-toggle{display:flex;gap:12px;align-items:center;padding:14px 16px;border:1px solid #C8DFDB;border-radius:12px;background:#EBF5FF;color:#17324D;cursor:pointer}.urgent-toggle input{width:18px;height:18px;accent-color:#1A56DB}.urgent-toggle span{display:flex;flex-direction:column;gap:3px}.urgent-toggle small{color:#66829A}@media(max-width:600px){.urgent-contact-row{flex-wrap:wrap}.urgent-label{width:100%}.urgent-message-btn,.urgent-whatsapp-btn{min-width:120px}}
 html.dark .urgent-label{color:#9EC5FF}.dark .urgent-toggle{background:#172033;color:#E5EDF7;border-color:#34527A}.dark .urgent-toggle small{color:#9EB8CA}.dark .urgent-whatsapp-btn{background:#172D45;color:#EBF5FF;border-color:#52708C}.dark .urgent-message-btn{background:#1A56DB;color:#EBF5FF}
+/* Product card action polish */
+.browse-actions{width:100%;gap:8px}
+.details-btn,.borrow-btn{min-height:42px!important;padding:10px 14px!important;font-size:12px!important;font-weight:800!important}
+.details-btn{flex:1;background:#FFFFFF!important;color:#1A56DB!important;border:1px solid #66A3BF!important}
+.details-btn:hover{background:#EBF5FF!important;border-color:#1A56DB!important}
+.borrow-btn{flex:1;background:#1A56DB!important;color:#EBF5FF!important;border:1px solid #1A56DB!important}
+.borrow-btn:hover{background:#1649B8!important}
+.borrow-btn:disabled{background:#9EB8CA!important;border-color:#9EB8CA!important;color:#FFFFFF!important}
+.urgent-contact-row{padding:9px;background:#EBF5FF;border:1px solid #C8DFDB;border-radius:11px}
+.urgent-label{padding:5px 4px}
+html.dark .details-btn{background:#172033!important;color:#9EC5FF!important;border-color:#52708C!important}
+html.dark .details-btn:hover{background:#1D3553!important}
+html.dark .urgent-contact-row{background:#172033!important;border-color:#34527A!important}
