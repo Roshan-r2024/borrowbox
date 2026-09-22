@@ -9,7 +9,7 @@ const router = express.Router();
 
 const userSchema = new mongoose.Schema(
   {
-    nickname: { type: String, required: true, trim: true },
+    nickname: { type: String, required: false, trim: true, default: "" },
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
     password: { type: String, required: true },
     phone: { type: String, required: true, trim: true },
@@ -45,7 +45,7 @@ const upload = multer({
 
 const publicUser = (user) => ({
   id: user._id,
-  nickname: user.nickname,
+  nickname: user.nickname || "",
   email: user.email,
   phone: user.phone || "",
   gender: user.gender || "",
@@ -54,6 +54,14 @@ const publicUser = (user) => ({
   state: user.state || "",
   profilePicture: user.profilePicture || "",
 });
+
+const isStrongPassword = (password) =>
+  typeof password === "string" &&
+  password.length >= 8 &&
+  /[A-Z]/.test(password) &&
+  /[a-z]/.test(password) &&
+  /\d/.test(password) &&
+  /[^A-Za-z0-9]/.test(password);
 
 // SIGN UP
 router.post("/signup", async (req, res) => {
@@ -68,9 +76,14 @@ router.post("/signup", async (req, res) => {
     const cleanState = String(state || "").trim();
 
     if (!cleanName || !cleanEmail || !password || !cleanPhone || !cleanGender || !cleanAddress || !cleanPincode || !cleanState) {
-      return res.status(400).json({ message: "Name, phone, email, gender, address, pincode, state and password are required." });
+      return res.status(400).json({ message: "Full name, email, phone, gender, address, pincode, state and password are required." });
     }
-    if (password.length < 6) return res.status(400).json({ message: "Password must be at least 6 characters." });
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(cleanEmail)) {
+      return res.status(400).json({ message: "Please enter a valid email address." });
+    }
+    if (!isStrongPassword(password)) {
+      return res.status(400).json({ message: "Password must be 8+ characters and include uppercase, lowercase, number and special character." });
+    }
     if (!/^[0-9]{10}$/.test(cleanPhone)) return res.status(400).json({ message: "Phone number must contain exactly 10 digits." });
     if (!/^\d{6}$/.test(cleanPincode)) return res.status(400).json({ message: "Pincode must contain exactly 6 digits." });
     const existingUser = await User.findOne({ email: cleanEmail });
@@ -184,7 +197,7 @@ router.put("/change-password", async (req, res) => {
   try {
     const { email, currentPassword, newPassword } = req.body;
     if (!email || !currentPassword || !newPassword) return res.status(400).json({ message: "All password fields are required." });
-    if (newPassword.length < 6) return res.status(400).json({ message: "New password must be at least 6 characters." });
+    if (!isStrongPassword(newPassword)) return res.status(400).json({ message: "New password must be 8+ characters and include uppercase, lowercase, number and special character." });
     const user = await User.findOne({ email: email.trim().toLowerCase() });
     if (!user) return res.status(404).json({ message: "User not found." });
     if (!(await bcrypt.compare(currentPassword, user.password))) return res.status(401).json({ message: "Current password is incorrect." });
@@ -193,7 +206,7 @@ router.put("/change-password", async (req, res) => {
     return res.json({ message: "Password changed successfully." });
   } catch (error) {
     console.error("Change password error:", error);
-    return res.status(500).json({ message: "Unable to change password." });
+    return res.status(500).json({ message: "Unable to update password." });
   }
 });
 
