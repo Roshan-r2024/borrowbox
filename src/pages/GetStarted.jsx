@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import heroImage from "../assets/hero.png";
 import "./GetStarted.css";
 
 function GetStarted() {
@@ -102,8 +103,8 @@ function GetStarted() {
           <div className="gs-hero-visual">
             <div className="gs-visual-glow" />
             <img
-              src="/borrow-box-hero.svg"
-              alt="Borrow Box sharing and borrowing illustration"
+              src={heroImage}
+              alt="Borrow Box — borrow, rent, buy, sell and share items"
               className="gs-hero-image"
             />
             <div className="gs-floating-card gs-float-one">
