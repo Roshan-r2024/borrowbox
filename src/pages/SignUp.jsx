@@ -16,11 +16,31 @@ const initialForm = {
   confirmPassword: "",
 };
 
+const getPasswordChecks = (password) => ({
+  length: password.length >= 8,
+  upper: /[A-Z]/.test(password),
+  lower: /[a-z]/.test(password),
+  number: /\d/.test(password),
+  special: /[^A-Za-z0-9]/.test(password),
+});
+
+const getPasswordStrength = (password) => {
+  const checks = getPasswordChecks(password);
+  const score = Object.values(checks).filter(Boolean).length;
+  if (!password) return { label: "", score: 0 };
+  if (score <= 2) return { label: "Weak", score };
+  if (score <= 4) return { label: "Medium", score };
+  return { label: "Strong", score };
+};
+
 function SignUp() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialForm);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const passwordChecks = getPasswordChecks(formData.password);
+  const passwordStrength = getPasswordStrength(formData.password);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,11 +48,18 @@ function SignUp() {
     if (message) setMessage("");
   };
 
-  // Also capture browser/password-manager autofill and direct input changes.
   const handleInput = (e) => {
     const { name, value } = e.target;
     setFormData((previous) => ({ ...previous, [name]: value }));
     if (message) setMessage("");
+  };
+
+  const suggestStrongPassword = () => {
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%&*";
+    const random = (length) => Array.from({ length }, () => chars[Math.floor(Math.random() * chars.length)]).join("");
+    const password = `Borrow@${random(10)}9`;
+    setFormData((previous) => ({ ...previous, password, confirmPassword: password }));
+    setMessage("");
   };
 
   const handleSubmit = async (e) => {
@@ -51,7 +78,11 @@ function SignUp() {
     const confirmPassword = formData.confirmPassword;
 
     if (!name || !phone || !email || !gender || !address || !pincode || !state || !password || !confirmPassword) {
-      setMessage("Please fill all fields.");
+      setMessage("Please fill all required fields.");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      setMessage("Please enter a valid email address.");
       return;
     }
     if (!/^[0-9]{10}$/.test(phone)) {
@@ -62,8 +93,10 @@ function SignUp() {
       setMessage("Pincode must contain exactly 6 digits.");
       return;
     }
-    if (password.length < 6) {
-      setMessage("Password must be at least 6 characters.");
+
+    const checks = getPasswordChecks(password);
+    if (!Object.values(checks).every(Boolean)) {
+      setMessage("Please use a strong password: 8+ characters with uppercase, lowercase, number and special character.");
       return;
     }
     if (password !== confirmPassword) {
@@ -123,20 +156,20 @@ function SignUp() {
         <h1>Create Account</h1>
         <p className="signup-subtitle">Create your Borrow Box account and start sharing.</p>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} noValidate>
           <div className="signup-grid">
             <div className="signup-field signup-field-full">
-              <label htmlFor="name">Full Name</label>
+              <label htmlFor="name">Full Name <span className="required-mark">*</span></label>
               <input id="name" type="text" name="name" placeholder="Enter your full name" value={formData.name} onChange={handleChange} onInput={handleInput} disabled={loading} autoComplete="name" />
             </div>
 
             <div className="signup-field">
-              <label htmlFor="phone">Phone Number</label>
+              <label htmlFor="phone">Phone Number <span className="required-mark">*</span></label>
               <input id="phone" type="tel" name="phone" inputMode="numeric" maxLength="10" placeholder="10-digit phone number" value={formData.phone} onChange={handleChange} onInput={handleInput} disabled={loading} autoComplete="tel" />
             </div>
 
             <div className="signup-field">
-              <label htmlFor="gender">Gender</label>
+              <label htmlFor="gender">Gender <span className="required-mark">*</span></label>
               <select id="gender" name="gender" value={formData.gender} onChange={handleChange} onInput={handleInput} disabled={loading}>
                 <option value="">Select gender</option>
                 <option value="Male">Male</option>
@@ -147,32 +180,50 @@ function SignUp() {
             </div>
 
             <div className="signup-field signup-field-full">
-              <label htmlFor="email">Email ID</label>
-              <input id="email" type="email" name="email" placeholder="Enter your email address" value={formData.email} onChange={handleChange} onInput={handleInput} disabled={loading} autoComplete="email" />
+              <label htmlFor="email">Email ID <span className="required-mark">*</span></label>
+              <input id="email" type="email" name="email" placeholder="Enter a valid email address" value={formData.email} onChange={handleChange} onInput={handleInput} disabled={loading} autoComplete="email" />
+              <p className="field-hint">Any valid email address can be used. No nickname is required.</p>
             </div>
 
             <div className="signup-field signup-field-full">
-              <label htmlFor="address">Address</label>
+              <label htmlFor="address">Address <span className="required-mark">*</span></label>
               <textarea id="address" name="address" rows="3" placeholder="Enter your complete address" value={formData.address} onChange={handleChange} onInput={handleInput} disabled={loading} autoComplete="street-address" />
             </div>
 
             <div className="signup-field">
-              <label htmlFor="pincode">Pincode</label>
+              <label htmlFor="pincode">Pincode <span className="required-mark">*</span></label>
               <input id="pincode" type="text" name="pincode" inputMode="numeric" maxLength="6" placeholder="6-digit pincode" value={formData.pincode} onChange={handleChange} onInput={handleInput} disabled={loading} autoComplete="postal-code" />
             </div>
 
             <div className="signup-field">
-              <label htmlFor="state">State</label>
+              <label htmlFor="state">State <span className="required-mark">*</span></label>
               <input id="state" type="text" name="state" placeholder="Enter your state" value={formData.state} onChange={handleChange} onInput={handleInput} disabled={loading} autoComplete="address-level1" />
             </div>
 
-            <div className="signup-field">
-              <label htmlFor="password">Create Password</label>
-              <input id="password" type="password" name="password" placeholder="Create a password" value={formData.password} onChange={handleChange} onInput={handleInput} disabled={loading} autoComplete="new-password" />
+            <div className="signup-field signup-field-full">
+              <label htmlFor="password">Create Password <span className="required-mark">*</span></label>
+              <div className="password-input-wrap">
+                <input id="password" type="password" name="password" placeholder="Create a strong password" value={formData.password} onChange={handleChange} onInput={handleInput} disabled={loading} autoComplete="new-password" />
+                <button type="button" className="suggest-password" onClick={suggestStrongPassword} disabled={loading}>Suggest strong password</button>
+              </div>
+              {formData.password && (
+                <div className="password-strength">
+                  <div className={`strength-label ${passwordStrength.label.toLowerCase()}`}>
+                    Password strength: <strong>{passwordStrength.label}</strong>
+                  </div>
+                  <div className="strength-rules">
+                    <span className={passwordChecks.length ? "valid" : ""}>✓ 8+ characters</span>
+                    <span className={passwordChecks.upper ? "valid" : ""}>✓ Uppercase</span>
+                    <span className={passwordChecks.lower ? "valid" : ""}>✓ Lowercase</span>
+                    <span className={passwordChecks.number ? "valid" : ""}>✓ Number</span>
+                    <span className={passwordChecks.special ? "valid" : ""}>✓ Special character</span>
+                  </div>
+                </div>
+              )}
             </div>
 
-            <div className="signup-field">
-              <label htmlFor="confirmPassword">Confirm Password</label>
+            <div className="signup-field signup-field-full">
+              <label htmlFor="confirmPassword">Confirm Password <span className="required-mark">*</span></label>
               <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Re-enter your password" value={formData.confirmPassword} onChange={handleChange} onInput={handleInput} disabled={loading} autoComplete="new-password" />
             </div>
           </div>
