@@ -25,6 +25,14 @@ function SignUp() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((previous) => ({ ...previous, [name]: value }));
+    if (message) setMessage("");
+  };
+
+  // Also capture browser/password-manager autofill and direct input changes.
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setFormData((previous) => ({ ...previous, [name]: value }));
+    if (message) setMessage("");
   };
 
   const handleSubmit = async (e) => {
@@ -119,17 +127,17 @@ function SignUp() {
           <div className="signup-grid">
             <div className="signup-field signup-field-full">
               <label htmlFor="name">Full Name</label>
-              <input id="name" type="text" name="name" placeholder="Enter your full name" value={formData.name} onChange={handleChange} disabled={loading} autoComplete="name" />
+              <input id="name" type="text" name="name" placeholder="Enter your full name" value={formData.name} onChange={handleChange} onInput={handleInput} disabled={loading} autoComplete="name" />
             </div>
 
             <div className="signup-field">
               <label htmlFor="phone">Phone Number</label>
-              <input id="phone" type="tel" name="phone" inputMode="numeric" maxLength="10" placeholder="10-digit phone number" value={formData.phone} onChange={handleChange} disabled={loading} autoComplete="tel" />
+              <input id="phone" type="tel" name="phone" inputMode="numeric" maxLength="10" placeholder="10-digit phone number" value={formData.phone} onChange={handleChange} onInput={handleInput} disabled={loading} autoComplete="tel" />
             </div>
 
             <div className="signup-field">
               <label htmlFor="gender">Gender</label>
-              <select id="gender" name="gender" value={formData.gender} onChange={handleChange} disabled={loading}>
+              <select id="gender" name="gender" value={formData.gender} onChange={handleChange} onInput={handleInput} disabled={loading}>
                 <option value="">Select gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -140,32 +148,32 @@ function SignUp() {
 
             <div className="signup-field signup-field-full">
               <label htmlFor="email">Email ID</label>
-              <input id="email" type="email" name="email" placeholder="Enter your email address" value={formData.email} onChange={handleChange} disabled={loading} autoComplete="email" />
+              <input id="email" type="email" name="email" placeholder="Enter your email address" value={formData.email} onChange={handleChange} onInput={handleInput} disabled={loading} autoComplete="email" />
             </div>
 
             <div className="signup-field signup-field-full">
               <label htmlFor="address">Address</label>
-              <textarea id="address" name="address" rows="3" placeholder="Enter your complete address" value={formData.address} onChange={handleChange} disabled={loading} autoComplete="street-address" />
+              <textarea id="address" name="address" rows="3" placeholder="Enter your complete address" value={formData.address} onChange={handleChange} onInput={handleInput} disabled={loading} autoComplete="street-address" />
             </div>
 
             <div className="signup-field">
               <label htmlFor="pincode">Pincode</label>
-              <input id="pincode" type="text" name="pincode" inputMode="numeric" maxLength="6" placeholder="6-digit pincode" value={formData.pincode} onChange={handleChange} disabled={loading} autoComplete="postal-code" />
+              <input id="pincode" type="text" name="pincode" inputMode="numeric" maxLength="6" placeholder="6-digit pincode" value={formData.pincode} onChange={handleChange} onInput={handleInput} disabled={loading} autoComplete="postal-code" />
             </div>
 
             <div className="signup-field">
               <label htmlFor="state">State</label>
-              <input id="state" type="text" name="state" placeholder="Enter your state" value={formData.state} onChange={handleChange} disabled={loading} autoComplete="address-level1" />
+              <input id="state" type="text" name="state" placeholder="Enter your state" value={formData.state} onChange={handleChange} onInput={handleInput} disabled={loading} autoComplete="address-level1" />
             </div>
 
             <div className="signup-field">
               <label htmlFor="password">Create Password</label>
-              <input id="password" type="password" name="password" placeholder="Create a password" value={formData.password} onChange={handleChange} disabled={loading} autoComplete="new-password" />
+              <input id="password" type="password" name="password" placeholder="Create a password" value={formData.password} onChange={handleChange} onInput={handleInput} disabled={loading} autoComplete="new-password" />
             </div>
 
             <div className="signup-field">
               <label htmlFor="confirmPassword">Confirm Password</label>
-              <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Re-enter your password" value={formData.confirmPassword} onChange={handleChange} disabled={loading} autoComplete="new-password" />
+              <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Re-enter your password" value={formData.confirmPassword} onChange={handleChange} onInput={handleInput} disabled={loading} autoComplete="new-password" />
             </div>
           </div>
 
