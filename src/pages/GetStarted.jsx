@@ -7,142 +7,63 @@ function GetStarted() {
 
   return (
     <div className="get-started-page">
-
-      {/* ================= NAVBAR ================= */}
       <header className="gs-navbar">
-
-        <div
-          className="gs-brand"
-          onClick={() => navigate("/get-started")}
-        >
+        <div className="gs-brand" onClick={() => navigate("/get-started")}>
           <div className="gs-logo">◇</div>
-
           <div>
             <h2>Borrow Box</h2>
-            <span>Campus sharing</span>
+            <span>Share. Borrow. Rent. Sell.</span>
           </div>
         </div>
-
-        <button
-          className="gs-login-top"
-          onClick={() => navigate("/login")}
-        >
-          Log in
-        </button>
-
+        <button className="gs-login-top" onClick={() => navigate("/login")}>Log in</button>
       </header>
 
-
-      {/* ================= MAIN ================= */}
       <main className="gs-main">
-
-        {/* ================= HERO ================= */}
         <section className="gs-hero">
-
-          <div className="gs-badge">
-            VIT CAMPUS SHARING PLATFORM
-          </div>
-
+          <div className="gs-badge">OPEN FOR EVERYONE</div>
           <h1>
             Borrow what you need.
             <br />
-            <span>Lend what you have.</span>
+            <span>Lend, rent or sell what you have.</span>
           </h1>
-
           <p>
-            Borrow Box makes it easy for students to share,
-            borrow and lend useful items within the campus
-            community.
+            Borrow Box is a community marketplace where anyone can discover useful items,
+            borrow or rent them for a period, or sell items they no longer need.
           </p>
-
           <div className="gs-buttons">
-
-            <button
-              className="gs-primary"
-              onClick={() => navigate("/login")}
-            >
-              Get Started
-              <span>→</span>
+            <button className="gs-primary" onClick={() => navigate("/login")}>
+              Get Started <span>→</span>
             </button>
-
-            <button
-              className="gs-secondary"
-              onClick={() => navigate("/signup")}
-            >
+            <button className="gs-secondary" onClick={() => navigate("/signup")}>
               Create an Account
             </button>
-
           </div>
-
         </section>
 
-
-        {/* ================= FEATURES ================= */}
         <section className="gs-features">
-
           <div className="gs-feature">
-
-            <div className="gs-feature-icon">
-              🔍
-            </div>
-
+            <div className="gs-feature-icon">🔍</div>
             <h3>Find what you need</h3>
-
-            <p>
-              Browse useful items shared by students
-              around your campus.
-            </p>
-
+            <p>Discover useful items listed by people in the Borrow Box community.</p>
           </div>
-
-
           <div className="gs-feature">
-
-            <div className="gs-feature-icon">
-              📦
-            </div>
-
-            <h3>List your items</h3>
-
-            <p>
-              Share books, electronics and other
-              useful items with fellow students.
-            </p>
-
+            <div className="gs-feature-icon">🔄</div>
+            <h3>Borrow or Rent</h3>
+            <p>Request an item for borrowing or choose a rental period when available.</p>
           </div>
-
-
           <div className="gs-feature">
-
-            <div className="gs-feature-icon">
-              🤝
-            </div>
-
-            <h3>Share with students</h3>
-
-            <p>
-              Connect with students and make borrowing
-              simple and convenient.
-            </p>
-
+            <div className="gs-feature-icon">💰</div>
+            <h3>Sell or List Items</h3>
+            <p>List items for permanent sale or make them available to rent or borrow.</p>
           </div>
-
         </section>
-
       </main>
 
-
-      {/* ================= FOOTER ================= */}
       <footer className="gs-footer">
-
         <span>Borrow Box</span>
-
         <span>•</span>
-
-        <span>Campus sharing made simple.</span>
-
+        <span>Community sharing made simple.</span>
       </footer>
-
     </div>
   );
 }
