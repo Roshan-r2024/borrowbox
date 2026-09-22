@@ -12,7 +12,11 @@ const userSchema = new mongoose.Schema(
     nickname: { type: String, required: true, trim: true },
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
     password: { type: String, required: true },
-    phone: { type: String, default: "", trim: true },
+    phone: { type: String, required: true, trim: true },
+    gender: { type: String, required: true, trim: true },
+    address: { type: String, required: true, trim: true },
+    pincode: { type: String, required: true, trim: true },
+    state: { type: String, required: true, trim: true },
     profilePicture: { type: String, default: "" },
     lastSeen: { type: Date, default: null },
   },
@@ -44,22 +48,45 @@ const publicUser = (user) => ({
   nickname: user.nickname,
   email: user.email,
   phone: user.phone || "",
+  gender: user.gender || "",
+  address: user.address || "",
+  pincode: user.pincode || "",
+  state: user.state || "",
   profilePicture: user.profilePicture || "",
 });
 
 // SIGN UP
 router.post("/signup", async (req, res) => {
   try {
-    const { nickname, email, password, phone = "" } = req.body;
-    if (!nickname || !email || !password) return res.status(400).json({ message: "Nickname, email and password are required." });
-    const cleanEmail = email.trim().toLowerCase();
-    if (!cleanEmail.endsWith("@vitstudent.ac.in")) return res.status(400).json({ message: "Please use your VIT student email." });
+    const { name, nickname, email, password, phone, gender, address, pincode, state } = req.body;
+    const cleanName = String(name || nickname || "").trim();
+    const cleanEmail = String(email || "").trim().toLowerCase();
+    const cleanPhone = String(phone || "").trim();
+    const cleanGender = String(gender || "").trim();
+    const cleanAddress = String(address || "").trim();
+    const cleanPincode = String(pincode || "").trim();
+    const cleanState = String(state || "").trim();
+
+    if (!cleanName || !cleanEmail || !password || !cleanPhone || !cleanGender || !cleanAddress || !cleanPincode || !cleanState) {
+      return res.status(400).json({ message: "Name, phone, email, gender, address, pincode, state and password are required." });
+    }
     if (password.length < 6) return res.status(400).json({ message: "Password must be at least 6 characters." });
-    if (phone && !/^[0-9]{10}$/.test(String(phone).trim())) return res.status(400).json({ message: "Phone number must contain exactly 10 digits." });
+    if (!/^[0-9]{10}$/.test(cleanPhone)) return res.status(400).json({ message: "Phone number must contain exactly 10 digits." });
+    if (!/^\d{6}$/.test(cleanPincode)) return res.status(400).json({ message: "Pincode must contain exactly 6 digits." });
     const existingUser = await User.findOne({ email: cleanEmail });
     if (existingUser) return res.status(409).json({ message: "An account with this email already exists." });
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({ nickname: nickname.trim(), email: cleanEmail, password: hashedPassword, phone: String(phone).trim(), lastSeen: null });
+    const user = await User.create({
+      nickname: cleanName,
+      email: cleanEmail,
+      password: hashedPassword,
+      phone: cleanPhone,
+      gender: cleanGender,
+      address: cleanAddress,
+      pincode: cleanPincode,
+      state: cleanState,
+      lastSeen: null,
+    });
     return res.status(201).json({ message: "Account created successfully.", user: publicUser(user) });
   } catch (error) {
     console.error("Signup error:", error);
