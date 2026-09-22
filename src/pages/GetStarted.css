@@ -536,3 +536,136 @@ body {
     padding: 9px 15px;
   }
 }
+
+/* =================================
+   DARK THEME
+================================= */
+html.dark body {
+  background: #0b1220;
+  color: #e8eef7;
+}
+
+html.dark .get-started-page {
+  background: #0b1220;
+  color: #e8eef7;
+}
+
+html.dark .gs-navbar {
+  background: #111a2b;
+  border-bottom-color: #263650;
+}
+
+html.dark .gs-logo {
+  background: #f4f7fb;
+  color: #111827;
+  box-shadow: 0 8px 24px rgba(0,0,0,.28);
+}
+
+html.dark .gs-brand h2 {
+  color: #f4f7fb;
+}
+
+html.dark .gs-brand span {
+  color: #9aabc0;
+}
+
+html.dark .gs-login-top {
+  background: #172238;
+  color: #f4f7fb;
+  border-color: #3a4c68;
+}
+
+html.dark .gs-login-top:hover {
+  background: #f4f7fb;
+  color: #111827;
+}
+
+html.dark .gs-badge {
+  background: #162238;
+  border-color: #30435f;
+  color: #9fc4ff;
+}
+
+html.dark .gs-hero h1 {
+  color: #f4f7fb;
+}
+
+html.dark .gs-hero h1 span {
+  color: #9fc4ff;
+}
+
+html.dark .gs-hero p {
+  color: #a9b8ca;
+}
+
+html.dark .gs-primary {
+  background: #f4f7fb;
+  color: #111827;
+}
+
+html.dark .gs-primary:hover {
+  background: #dfe8f3;
+}
+
+html.dark .gs-secondary {
+  background: #172238;
+  color: #f4f7fb;
+  border-color: #3a4c68;
+}
+
+html.dark .gs-secondary:hover {
+  background: #202e46;
+}
+
+html.dark .gs-feature {
+  background: #111a2b;
+  border-color: #293a55;
+}
+
+html.dark .gs-feature:hover {
+  border-color: #4b6284;
+  box-shadow: 0 14px 34px rgba(0,0,0,.22);
+}
+
+html.dark .gs-feature-icon {
+  background: #1a2740;
+}
+
+html.dark .gs-feature h3 {
+  color: #f4f7fb;
+}
+
+html.dark .gs-feature p {
+  color: #9aabc0;
+}
+
+html.dark .gs-footer {
+  background: #0f1829;
+  border-top-color: #263650;
+  color: #8798ad;
+}
+
+html.dark .gs-footer span:first-child {
+  color: #e8eef7;
+}
+
+/* =================================
+   ACCESSIBILITY / STATES
+================================= */
+.gs-primary:focus-visible,
+.gs-secondary:focus-visible,
+.gs-login-top:focus-visible,
+.gs-brand:focus-visible {
+  outline: 3px solid rgba(74, 144, 226, .35);
+  outline-offset: 3px;
+}
+
+@media (max-width: 700px) {
+  .gs-hero {
+    min-height: auto;
+  }
+
+  .gs-feature {
+    min-height: 155px;
+  }
+}
