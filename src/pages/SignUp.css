@@ -83,6 +83,11 @@
   font-weight: 650;
 }
 
+.required-mark {
+  color: #d92d20;
+  margin-left: 2px;
+}
+
 .signup-box input,
 .signup-box select,
 .signup-box textarea {
@@ -112,6 +117,71 @@
 .signup-box textarea:focus {
   border-color: #111111;
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+}
+
+.field-hint {
+  margin: 6px 2px 0;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #7b8798;
+}
+
+.password-input-wrap {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.password-input-wrap input {
+  flex: 1;
+  min-width: 0;
+}
+
+.suggest-password {
+  flex: 0 0 auto;
+  border: 1px solid #d9dee8;
+  border-radius: 10px;
+  background: #f5f7fa;
+  color: #202938;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.suggest-password:hover:not(:disabled) {
+  background: #e9edf3;
+}
+
+.password-strength {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f7f9fc;
+  border: 1px solid #e4e9f2;
+}
+
+.strength-label {
+  font-size: 12px;
+  color: #687386;
+}
+
+.strength-label.weak strong { color: #c62828; }
+.strength-label.medium strong { color: #a36a00; }
+.strength-label.strong strong { color: #16794b; }
+
+.strength-rules {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 12px;
+  margin-top: 7px;
+  font-size: 11px;
+  color: #9aa1ad;
+}
+
+.strength-rules span.valid {
+  color: #16794b;
+  font-weight: 650;
 }
 
 .signup-submit {
@@ -195,6 +265,8 @@
   .signup-grid { grid-template-columns: 1fr; }
   .signup-field-full { grid-column: auto; }
   .signup-box h1 { font-size: 26px; }
+  .password-input-wrap { flex-direction: column; }
+  .suggest-password { min-height: 42px; }
 }
 
 @media (max-width: 400px) {
@@ -202,10 +274,7 @@
   .signup-subtitle { font-size: 13px; }
 }
 
-
-/* =========================================
-   THEME-SAFE FORM CONTROLS
-========================================= */
+/* THEME-SAFE FORM CONTROLS */
 .signup-page,
 .signup-box,
 .signup-box input,
@@ -266,6 +335,16 @@ html.dark .signup-message { background:#182235; border-color:#3a4d69; color:#dbe
 html.dark .signup-submit { background:#f8fafc; color:#111827; }
 html.dark .signup-submit:hover:not(:disabled) { background:#ffffff; }
 html.dark .logo-symbol { background:#f8fafc; color:#111827; }
+html.dark .field-hint { color:#8fa0b8; }
+html.dark .suggest-password { background:#1d2a3e; border-color:#3a4d69; color:#f3f7ff; }
+html.dark .suggest-password:hover:not(:disabled) { background:#26364d; }
+html.dark .password-strength { background:#182235; border-color:#3a4d69; }
+html.dark .strength-label { color:#aebbd0; }
+html.dark .strength-rules { color:#8fa0b8; }
+html.dark .strength-rules span.valid { color:#6ee7b7; }
+html.dark .strength-label.weak strong { color:#ff7b7b; }
+html.dark .strength-label.medium strong { color:#f5c36b; }
+html.dark .strength-label.strong strong { color:#6ee7b7; }
 
 html.dark .auth-page { background:#0b1220; color:#f8fafc; }
 html.dark .auth-brand { background:#111827; border-color:#26364d; }
