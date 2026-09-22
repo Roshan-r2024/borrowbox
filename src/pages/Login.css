@@ -565,3 +565,106 @@
     max-width: 100%;
   }
 }
+
+/* =========================================
+   THEME-SAFE FORM CONTROLS
+========================================= */
+.signup-page,
+.signup-box,
+.signup-box input,
+.signup-box select,
+.signup-box textarea,
+.login-container,
+.auth-form-section,
+.input-wrapper input {
+  color-scheme: light;
+}
+
+.signup-box input,
+.signup-box select,
+.signup-box textarea {
+  color: #111827;
+  background: #ffffff;
+  -webkit-text-fill-color: #111827;
+}
+.signup-box input::placeholder,
+.signup-box textarea::placeholder { color: #7b8798; opacity: 1; }
+.signup-box select option { color: #111827; background: #ffffff; }
+
+html.dark .signup-page {
+  background: linear-gradient(135deg, #0b1220 0%, #111827 55%, #0f172a 100%);
+  color: #f8fafc;
+}
+html.dark .signup-box {
+  background: #111827;
+  border-color: #26364d;
+  box-shadow: 0 20px 55px rgba(0,0,0,.35);
+}
+html.dark .signup-logo,
+html.dark .signup-box h1,
+html.dark .signup-box label,
+html.dark .login-link { color: #f8fafc; }
+html.dark .signup-subtitle,
+html.dark .login-text { color: #aebbd0; }
+html.dark .signup-box input,
+html.dark .signup-box select,
+html.dark .signup-box textarea {
+  background: #182235;
+  border-color: #3a4d69;
+  color: #f8fafc;
+  -webkit-text-fill-color: #f8fafc;
+  caret-color: #ffffff;
+  color-scheme: dark;
+}
+html.dark .signup-box input::placeholder,
+html.dark .signup-box textarea::placeholder { color: #8fa0b8; }
+html.dark .signup-box select option { color: #f8fafc; background: #182235; }
+html.dark .signup-box input:focus,
+html.dark .signup-box select:focus,
+html.dark .signup-box textarea:focus {
+  border-color: #8fb7ff;
+  box-shadow: 0 0 0 3px rgba(143,183,255,.16);
+}
+html.dark .signup-message { background:#182235; border-color:#3a4d69; color:#dbe7f7; }
+html.dark .signup-submit { background:#f8fafc; color:#111827; }
+html.dark .signup-submit:hover:not(:disabled) { background:#ffffff; }
+html.dark .logo-symbol { background:#f8fafc; color:#111827; }
+
+html.dark .auth-page { background:#0b1220; color:#f8fafc; }
+html.dark .auth-brand { background:#111827; border-color:#26364d; }
+html.dark .auth-brand::after { border-color:#26364d; }
+html.dark .brand-content h1,
+html.dark .login-heading h2,
+html.dark .mobile-logo,
+html.dark .feature strong { color:#f8fafc; }
+html.dark .brand-content h1 span { color:#b7c3d4; }
+html.dark .brand-content > p,
+html.dark .login-heading p,
+html.dark .feature small,
+html.dark .brand-footer,
+html.dark .signup-text,
+html.dark .security-note { color:#9eabc0; }
+html.dark .feature-icon { background:#182235; border-color:#3a4d69; }
+html.dark .auth-form-section { background:#0b1220; }
+html.dark .welcome-tag,
+html.dark .password-label button,
+html.dark .show-password { color:#b8c5d7; }
+html.dark .field label { color:#edf3fb; }
+html.dark .input-wrapper input {
+  background:#182235;
+  border-color:#3a4d69;
+  color:#f8fafc;
+  -webkit-text-fill-color:#f8fafc;
+  caret-color:#ffffff;
+  color-scheme:dark;
+}
+html.dark .input-wrapper input::placeholder { color:#8fa0b8; opacity:1; }
+html.dark .input-wrapper input:focus { border-color:#8fb7ff; box-shadow:0 0 0 3px rgba(143,183,255,.16); }
+html.dark .input-icon { color:#a9b8cc; }
+html.dark .password-label button:hover,
+html.dark .show-password:hover,
+html.dark .signup-text button { color:#ffffff; }
+html.dark .login-message { background:#182235; border-color:#3a4d69; color:#dbe7f7; }
+html.dark .signin-button { background:#f8fafc; color:#111827; }
+html.dark .signin-button:hover { background:#ffffff; }
+html.dark .mobile-logo .brand-logo { background:#f8fafc; color:#111827; }
