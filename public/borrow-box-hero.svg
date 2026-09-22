@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 620" role="img">
+<defs>
+  <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#2bd6a2"/><stop offset="1" stop-color="#078566"/></linearGradient>
+  <linearGradient id="s" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e9faf5"/><stop offset="1" stop-color="#c9f0e5"/></linearGradient>
+</defs>
+<circle cx="385" cy="290" r="230" fill="url(#s)" opacity=".72"/>
+<path d="M180 500c34-118 105-175 205-175s171 57 205 175" fill="#fff" opacity=".85"/>
+<rect x="283" y="105" width="194" height="370" rx="30" fill="#102a43"/>
+<rect x="294" y="116" width="172" height="348" rx="22" fill="#f7fffd"/>
+<rect x="337" y="129" width="86" height="8" rx="4" fill="#c5d9d6"/>
+<path d="M379 190l43 25v50l-43 25-43-25v-50z" fill="url(#g)"/>
+<path d="M379 190v50l43 25m-86-50 43 25 43-25" fill="none" stroke="#fff" stroke-width="3"/>
+<text x="380" y="320" text-anchor="middle" font-family="Arial,sans-serif" font-size="25" font-weight="800" fill="#102a43">Borrow Box</text>
+<text x="380" y="345" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="#627d98">Share today. Use tomorrow.</text>
+<rect x="325" y="372" width="110" height="34" rx="17" fill="#10a77b"/><text x="380" y="394" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#fff">Explore items</text>
+<circle cx="178" cy="276" r="63" fill="#ffd6a0"/>
+<path d="M121 263c12-57 91-66 112-7-22-17-46-22-70-10-12 6-25 12-42 17z" fill="#18344e"/>
+<path d="M130 331c17-39 42-54 73-54 32 0 56 15 75 54" fill="#19a982"/>
+<path d="M164 331l-18 81h91l-17-81z" fill="#0f6d5b"/>
+<circle cx="582" cy="282" r="63" fill="#f3c49d"/>
+<path d="M526 269c3-54 78-78 111-25-27-10-54-8-77 9-10 7-20 12-34 16z" fill="#26394f"/>
+<path d="M523 334c19-38 43-54 74-54 32 0 56 16 75 54" fill="#f0b43d"/>
+<path d="M553 334l-18 78h91l-15-78z" fill="#e59d28"/>
+<rect x="82" y="435" width="128" height="77" rx="12" fill="#fff" stroke="#cce5df" stroke-width="3"/>
+<path d="M105 460h83M105 481h61" stroke="#9db5b2" stroke-width="8" stroke-linecap="round"/>
+<rect x="550" y="438" width="128" height="77" rx="12" fill="#fff" stroke="#cce5df" stroke-width="3"/>
+<path d="M573 463h83M573 484h60" stroke="#9db5b2" stroke-width="8" stroke-linecap="round"/>
+<path d="M90 150l25-20 25 20-25 20z" fill="#10a77b" opacity=".8"/><path d="M630 145l22-18 22 18-22 18z" fill="#10a77b" opacity=".65"/>
+</svg>
