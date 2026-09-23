@@ -421,3 +421,14 @@ html.dark .logo-symbol{background:var(--bb-gradient);color:#fff}
 .password-input-wrap .show-password:hover{text-decoration:underline}
 .password-input-wrap .suggest-password{position:absolute;right:8px;top:50%;transform:translateY(-50%);z-index:3}
 @media(max-width:560px){.password-input-wrap input{padding-right:120px!important}.password-input-wrap .show-password{right:82px}.password-input-wrap .suggest-password{right:6px;font-size:10px;padding:6px 4px}}
+
+
+/* Password fields share one Show/Hide control */
+.password-input-wrap{padding-right:0}
+.password-input-wrap input{padding-right:190px!important}
+.password-input-wrap .show-password{right:150px}
+.confirm-password-wrap{position:relative;width:100%}
+.confirm-password-wrap input{padding-right:78px!important}
+.confirm-password-field{margin-top:0}
+.confirm-password-wrap::after{content:"";position:absolute;right:14px;top:50%;width:7px;height:7px;border-right:2px solid var(--bb-primary);border-bottom:2px solid var(--bb-primary);transform:translateY(-65%) rotate(45deg);opacity:.75;pointer-events:none}
+@media(max-width:560px){.password-input-wrap input{padding-right:125px!important}.password-input-wrap .show-password{right:87px}.confirm-password-wrap input{padding-right:70px!important}}
