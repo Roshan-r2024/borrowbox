@@ -220,3 +220,109 @@ html.dark .chat-page p{color:#9EB8CA!important}
 
 /* Remove the old cream tone everywhere */
 html,body,#root,.profile-page,.browse-page,.myitems-page,.item-details-page,.chat-page,.list-page,.list-item-page{--old-cream:#FFFFFF}
+
+
+/* =========================================================
+   GET STARTED MASTER THEME — GLOBAL BORROW BOX PALETTE
+   Every page uses the same visual language as Get Started.
+========================================================= */
+:root{
+  --bb-primary:#10A77B;
+  --bb-primary-hover:#078B66;
+  --bb-secondary:#18C997;
+  --bb-bg:#F8FBFF;
+  --bb-surface:#FFFFFF;
+  --bb-surface-soft:#EEF8F6;
+  --bb-text:#102A43;
+  --bb-muted:#627D98;
+  --bb-border:#DCE9E6;
+  --bb-accent:#C8DFDB;
+  --bb-shadow:0 18px 50px rgba(16,42,67,.08);
+  --bb-gradient:linear-gradient(145deg,#18C997,#087D62);
+}
+html.dark{
+  --bb-primary:#36D39F;
+  --bb-primary-hover:#22BD8A;
+  --bb-secondary:#18C997;
+  --bb-bg:#08111F;
+  --bb-surface:#101B2D;
+  --bb-surface-soft:#0D2D2A;
+  --bb-text:#EEF7F5;
+  --bb-muted:#9DB1C5;
+  --bb-border:#243850;
+  --bb-accent:#246B5C;
+  --bb-shadow:0 20px 55px rgba(0,0,0,.28);
+  --bb-gradient:linear-gradient(145deg,#36D39F,#087D62);
+}
+html,body,#root{background:var(--bb-bg)!important;color:var(--bb-text)}
+body{transition:background-color .25s ease,color .25s ease}
+a{color:var(--bb-primary)}
+
+/* Shared surfaces */
+.card,.panel,.section,.form-card,.modal,.dialog,.profile-card,.item-card,.product-card,.request-card,.chat-card,.chat-window,
+.browse-card,.myitems-card,.myitem-card,.profile-detail,.chat-layout,.chat-sidebar,.chat-main,.borrow-request-box,
+.list-card,.form-section,.listing-card{background:var(--bb-surface)!important;color:var(--bb-text);border-color:var(--bb-border)!important;box-shadow:var(--bb-shadow)}
+
+/* Shared headings / muted copy */
+h1,h2,h3,h4,h5,h6{color:var(--bb-text)}
+p,small,.muted,.text-muted{color:var(--bb-muted)}
+
+/* Inputs */
+input,textarea,select,.form-control,.form-select{background:var(--bb-surface)!important;color:var(--bb-text)!important;border-color:var(--bb-border)!important}
+input::placeholder,textarea::placeholder{color:var(--bb-muted)!important}
+input:focus,textarea:focus,select:focus,.form-control:focus,.form-select:focus{border-color:var(--bb-primary)!important;outline:none;box-shadow:0 0 0 3px rgba(16,167,123,.13)!important}
+html.dark input:focus,html.dark textarea:focus,html.dark select:focus{box-shadow:0 0 0 3px rgba(54,211,159,.15)!important}
+
+/* Primary actions */
+button[type="submit"],.btn-primary,.primary-btn,.borrow-btn,.list-item-btn,.signup-submit,.signin-button,
+.gs-primary{background:var(--bb-primary)!important;color:#fff!important;border-color:var(--bb-primary)!important}
+button[type="submit"]:hover,.btn-primary:hover,.primary-btn:hover,.borrow-btn:hover,.list-item-btn:hover,.signup-submit:hover,.signin-button:hover{background:var(--bb-primary-hover)!important;border-color:var(--bb-primary-hover)!important}
+
+/* Common secondary actions */
+.btn-secondary,.secondary-btn,.gs-secondary{background:var(--bb-surface)!important;color:var(--bb-text)!important;border-color:var(--bb-border)!important}
+.btn-secondary:hover,.secondary-btn:hover,.gs-secondary:hover{border-color:var(--bb-primary)!important;color:var(--bb-primary)!important}
+
+/* Auth pages */
+.auth-page,.signup-page{background:var(--bb-bg)!important;color:var(--bb-text)!important}
+.auth-brand{background:var(--bb-surface)!important;border-color:var(--bb-border)!important}
+.brand-content h1,.login-heading h2,.signup-box h1,.signup-logo,.mobile-logo{color:var(--bb-text)!important}
+.brand-content h1 span,.login-heading p,.signup-subtitle,.login-text,.signup-text,.security-note,.brand-footer{color:var(--bb-muted)!important}
+.welcome-tag{color:var(--bb-primary)!important}
+.feature-icon,.logo-symbol{background:var(--bb-surface-soft)!important;color:var(--bb-primary)!important;border-color:var(--bb-border)!important}
+.signup-box,.login-container{background:var(--bb-surface)!important;border-color:var(--bb-border)!important;box-shadow:var(--bb-shadow)!important}
+
+/* Navigation */
+.navbar,.browse-navbar{background:rgba(255,255,255,.92)!important;border-color:var(--bb-border)!important}
+.navbar .nav-link,.browse-navbar nav a{color:var(--bb-muted)!important}
+.navbar .nav-link:hover,.navbar .nav-link.active,.browse-navbar nav a:hover,.browse-navbar nav a.active{color:var(--bb-primary)!important}
+.navbar .nav-link.active,.browse-navbar nav a.active{background:var(--bb-surface-soft)!important}
+.navbar .list-top-btn,.browse-navbar .browse-list-btn{background:var(--bb-primary)!important;color:#fff!important}
+html.dark .navbar,html.dark .browse-navbar{background:#0D1929!important;border-color:var(--bb-border)!important}
+html.dark .navbar .nav-link,html.dark .browse-navbar nav a{color:var(--bb-muted)!important}
+html.dark .navbar .nav-link.active,html.dark .browse-navbar nav a.active{background:var(--bb-surface-soft)!important;color:var(--bb-primary)!important}
+
+/* Home / marketplace accents */
+.home-page,.browse-page,.myitems-page,.profile-page,.chat-page,.item-details-page,.list-page,.list-item-page{background:var(--bb-bg)!important;color:var(--bb-text)!important}
+.home-page .action-card,.home-page .home-category-pill{border-color:var(--bb-border)!important}
+.home-page .action-card:first-child{background:var(--bb-surface-soft)!important}
+.home-page .action-card:nth-child(2){background:#E8FAF4!important}
+html.dark .home-page .action-card:first-child{background:#0D2D2A!important}
+html.dark .home-page .action-card:nth-child(2){background:#10352F!important}
+
+/* Dark mode: eliminate old blue/white mixed surfaces */
+html.dark .card,html.dark .panel,html.dark .section,html.dark .form-card,html.dark .modal,html.dark .dialog,
+html.dark .profile-card,html.dark .item-card,html.dark .product-card,html.dark .request-card,html.dark .chat-card,
+html.dark .chat-window,html.dark .browse-card,html.dark .myitems-card,html.dark .myitem-card,html.dark .profile-detail,
+html.dark .chat-layout,html.dark .chat-sidebar,html.dark .chat-main,html.dark .borrow-request-box,html.dark .signup-box,
+html.dark .login-container{background:var(--bb-surface)!important;color:var(--bb-text)!important;border-color:var(--bb-border)!important}
+html.dark .home-page .home-product-card{background:var(--bb-surface)!important;border-color:var(--bb-border)!important}
+html.dark .home-page .home-product-image{background:var(--bb-surface-soft)!important}
+html.dark .home-page .home-footer,html.dark .home-page .bottom-cta{background:var(--bb-surface)!important;border-color:var(--bb-border)!important}
+html.dark .chat-message.outgoing{background:var(--bb-primary)!important;color:#fff!important}
+html.dark .chat-message.incoming{background:#183047!important;color:var(--bb-text)!important}
+
+/* Theme toggle follows the Get Started green */
+.theme-toggle-btn{background:var(--bb-primary)!important;color:#fff!important;border-color:var(--bb-primary)!important;box-shadow:0 8px 22px rgba(16,167,123,.22)!important}
+.theme-toggle-btn:hover{background:var(--bb-primary-hover)!important;border-color:var(--bb-primary-hover)!important}
+.global-home-back{background:var(--bb-surface)!important;color:var(--bb-primary)!important;border-color:var(--bb-border)!important}
+html.dark .global-home-back{background:var(--bb-surface)!important;color:var(--bb-primary)!important;border-color:var(--bb-border)!important}
