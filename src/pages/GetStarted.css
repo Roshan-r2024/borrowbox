@@ -224,3 +224,53 @@ html.dark .gs-hero-visual:after{background:radial-gradient(circle,#0d2d2a 0%,#10
     width:100%;
   }
 }
+
+/* Final Get Started navbar row alignment */
+.gs-navbar{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  column-gap:32px;
+}
+.gs-brand{
+  justify-self:start;
+  align-items:center;
+  height:48px;
+}
+.gs-nav-links{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:32px;
+  margin:0;
+  height:100%;
+}
+.gs-nav-links a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:44px;
+  padding:0 4px;
+  white-space:nowrap;
+  line-height:1;
+}
+.gs-nav-actions{
+  justify-self:end;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:10px;
+  margin:0;
+  height:100%;
+}
+.gs-login-top,.gs-signup-top{
+  flex:0 0 auto;
+}
+@media(max-width:900px){
+  .gs-navbar{grid-template-columns:auto 1fr;column-gap:16px}
+  .gs-nav-actions{grid-column:2;grid-row:1}
+}
+@media(max-width:620px){
+  .gs-navbar{display:flex;align-items:center;gap:12px}
+  .gs-nav-actions{margin-left:auto;height:auto}
+}
