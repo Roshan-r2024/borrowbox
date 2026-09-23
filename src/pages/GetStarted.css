@@ -274,3 +274,102 @@ html.dark .gs-hero-visual:after{background:radial-gradient(circle,#0d2d2a 0%,#10
   .gs-navbar{display:flex;align-items:center;gap:12px}
   .gs-nav-actions{margin-left:auto;height:auto}
 }
+
+/* Final Get Started typography scale */
+.gs-navbar{
+  font-size:15px;
+}
+.gs-nav-links a{
+  font-size:15px;
+}
+.gs-login-top,.gs-signup-top{
+  font-size:16px;
+}
+.gs-brand-copy strong{
+  font-size:20px;
+}
+.gs-brand-copy small{
+  font-size:12px;
+}
+.gs-hero h1{
+  font-size:clamp(32px,4vw,48px);
+  line-height:1.08;
+  letter-spacing:-2px;
+}
+.gs-hero-content>p{
+  font-size:17px;
+  line-height:1.7;
+}
+.gs-badge{
+  font-size:12px;
+}
+.gs-primary,.gs-secondary{
+  font-size:16px;
+}
+.gs-trust-row{
+  font-size:13px;
+}
+.gs-floating-card strong{
+  font-size:14px;
+}
+.gs-floating-card small{
+  font-size:12px;
+}
+.gs-section-heading>span,.gs-purpose>div>span{
+  font-size:12px;
+}
+.gs-section-heading h2,.gs-purpose h2{
+  font-size:30px;
+  line-height:1.2;
+}
+.gs-section-heading p{
+  font-size:16px;
+  line-height:1.6;
+}
+.gs-feature h3,.gs-step h3{
+  font-size:21px;
+  line-height:1.3;
+}
+.gs-feature p,.gs-step p{
+  font-size:16px;
+  line-height:1.65;
+}
+.gs-step>b{
+  font-size:13px;
+}
+.gs-purpose p{
+  font-size:16px;
+  line-height:1.65;
+}
+.gs-footer{
+  font-size:13px;
+}
+@media(max-width:620px){
+  .gs-nav-links a{
+    font-size:14px;
+  }
+  .gs-brand-copy strong{
+    font-size:18px;
+  }
+  .gs-hero h1{
+    font-size:36px;
+    line-height:1.1;
+    letter-spacing:-1.2px;
+  }
+  .gs-hero-content>p{
+    font-size:16px;
+    line-height:1.65;
+  }
+  .gs-section-heading h2,.gs-purpose h2{
+    font-size:27px;
+  }
+  .gs-section-heading p,.gs-feature p,.gs-step p,.gs-purpose p{
+    font-size:16px;
+  }
+  .gs-feature h3,.gs-step h3{
+    font-size:20px;
+  }
+  .gs-primary,.gs-secondary{
+    font-size:16px;
+  }
+}
