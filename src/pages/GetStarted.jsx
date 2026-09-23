@@ -93,14 +93,13 @@ function GetStarted() {
 
           <div className="gs-hero-visual">
             <div className="gs-visual-glow" />
-            <picture className="gs-project-illustration">
-              <source srcSet={dark ? darkHero : lightHero} type="image/svg+xml" />
+            <div className="gs-project-illustration">
               <img
                 src={dark ? darkHero : lightHero}
                 alt="Borrow Box project illustration showing borrowing, renting, buying, selling and sharing"
                 className="gs-hero-image"
               />
-            </picture>
+            </div>
             <div className="gs-floating-card gs-float-one">
               <span>📦</span>
               <div><strong>Borrow</strong><small>When you need it</small></div>
