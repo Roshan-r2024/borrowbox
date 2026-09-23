@@ -804,3 +804,36 @@ html.dark .mobile-logo .brand-logo{background:var(--bb-gradient);color:#fff}
   .login-container .signin-button{min-height:54px;margin-top:6px}
   .login-container .signup-text{margin-top:20px}
 }
+
+
+/* Final Borrow Box login project image */
+.login-project-image{
+  width:100%;
+  max-width:500px;
+  margin:34px 0 6px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  padding:18px;
+  border:1px solid var(--bb-border);
+  border-radius:24px;
+  background:var(--bb-surface-soft);
+  box-shadow:0 16px 40px rgba(37,99,235,.10);
+  overflow:hidden;
+}
+.login-project-image img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:235px;
+  object-fit:contain;
+  object-position:center;
+}
+@media(max-width:1100px) and (min-width:901px){
+  .auth-brand{padding:42px}
+  .login-project-image{max-width:100%;margin-top:28px;padding:14px}
+  .login-project-image img{max-height:190px}
+}
+@media(max-width:900px){
+  .login-project-image{display:none}
+}
