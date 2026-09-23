@@ -154,3 +154,73 @@ html.dark .gs-hero-visual:after{background:radial-gradient(circle,#0d2d2a 0%,#10
     height:40px;
   }
 }
+
+/* Precise Get Started hero text + button alignment */
+.gs-hero{
+  align-items:center;
+}
+.gs-hero-content{
+  width:100%;
+  max-width:620px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+}
+.gs-badge{
+  align-self:flex-start;
+}
+.gs-hero h1{
+  width:100%;
+  margin-left:0;
+  margin-right:0;
+}
+.gs-hero-content>p{
+  width:100%;
+  max-width:590px;
+  margin-left:0;
+  margin-right:0;
+}
+.gs-buttons{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  margin-left:0;
+  margin-right:0;
+}
+.gs-trust-row{
+  width:100%;
+  justify-content:flex-start;
+  align-items:center;
+  margin-left:0;
+  margin-right:0;
+}
+.gs-primary,.gs-secondary{
+  min-width:180px;
+  text-align:center;
+}
+@media(max-width:900px){
+  .gs-hero-content{
+    align-items:center;
+    max-width:700px;
+  }
+  .gs-badge,.gs-hero h1,.gs-hero-content>p{
+    align-self:center;
+    text-align:center;
+  }
+  .gs-hero-content>p{
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .gs-buttons,.gs-trust-row{
+    justify-content:center;
+    align-items:center;
+  }
+}
+@media(max-width:620px){
+  .gs-primary,.gs-secondary{
+    min-width:0;
+    width:100%;
+  }
+}
