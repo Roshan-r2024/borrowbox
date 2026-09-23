@@ -6,3 +6,15 @@
 .bb-global-theme{width:44px;height:44px;border:1px solid rgba(255,255,255,.8);border-radius:50%;background:rgba(255,255,255,.12);color:#fff;display:grid;place-items:center;cursor:pointer;flex:0 0 auto;padding:0;font-size:20px;line-height:1}.bb-global-theme:hover{background:rgba(255,255,255,.22)}.bb-global-theme:focus-visible{outline:2px solid #fff;outline-offset:3px}
 @media(max-width:760px){.bb-global-navbar{height:64px}.bb-global-nav-inner{padding:0 8px;gap:4px}.bb-global-brand{min-width:auto;padding:5px}.bb-global-brand-copy{display:none}.bb-global-logo{width:36px;height:36px}.bb-global-links{gap:1px}.bb-global-links button{padding:9px 7px;min-width:43px;font-size:0;gap:0}.bb-global-links button svg{width:18px;height:18px}.bb-global-theme{width:40px;height:40px;font-size:18px}}
 @media(max-width:420px){.bb-global-links button{min-width:39px;padding:8px 5px}.bb-global-theme{width:38px;height:38px;font-size:17px}.bb-global-logo{width:34px;height:34px}}
+
+
+/* Final blue navigation theme */
+.bb-global-navbar{
+  background:var(--bb-primary,#2563EB)!important;
+  border-bottom-color:var(--bb-primary-hover,#1D4ED8)!important;
+  box-shadow:0 4px 16px rgba(37,99,235,.22);
+}
+.bb-global-links button.active{
+  color:var(--bb-primary,#2563EB)!important;
+}
+.bb-global-links button.active svg{color:var(--bb-primary,#2563EB)!important}
