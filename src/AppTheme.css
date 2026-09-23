@@ -326,3 +326,115 @@ html.dark .chat-message.incoming{background:#183047!important;color:var(--bb-tex
 .theme-toggle-btn:hover{background:var(--bb-primary-hover)!important;border-color:var(--bb-primary-hover)!important}
 .global-home-back{background:var(--bb-surface)!important;color:var(--bb-primary)!important;border-color:var(--bb-border)!important}
 html.dark .global-home-back{background:var(--bb-surface)!important;color:var(--bb-primary)!important;border-color:var(--bb-border)!important}
+
+
+/* =========================================================
+   FINAL BORROW BOX BLUE THEME
+   Applied globally after all previous theme rules.
+========================================================= */
+:root{
+  --bb-primary:#2563EB;
+  --bb-primary-hover:#1D4ED8;
+  --bb-secondary:#3B82F6;
+  --bb-bg:#F5F9FF;
+  --bb-surface:#FFFFFF;
+  --bb-surface-soft:#EFF6FF;
+  --bb-text:#0F172A;
+  --bb-muted:#64748B;
+  --bb-border:#DBEAFE;
+  --bb-accent:#BFDBFE;
+  --bb-shadow:0 18px 50px rgba(37,99,235,.10);
+  --bb-gradient:linear-gradient(145deg,#3B82F6,#1D4ED8);
+}
+html.dark{
+  --bb-primary:#60A5FA;
+  --bb-primary-hover:#3B82F6;
+  --bb-secondary:#60A5FA;
+  --bb-bg:#08111F;
+  --bb-surface:#111C2E;
+  --bb-surface-soft:#132746;
+  --bb-text:#EFF6FF;
+  --bb-muted:#94A3B8;
+  --bb-border:#263B59;
+  --bb-accent:#315B8A;
+  --bb-shadow:0 20px 55px rgba(0,0,0,.30);
+  --bb-gradient:linear-gradient(145deg,#60A5FA,#2563EB);
+}
+html,body,#root{background:var(--bb-bg)!important;color:var(--bb-text)!important}
+a{color:var(--bb-primary)!important}
+h1,h2,h3,h4,h5,h6{color:var(--bb-text)!important}
+p,small,.muted,.text-muted{color:var(--bb-muted)}
+input,textarea,select,.form-control,.form-select{
+  background:var(--bb-surface)!important;
+  color:var(--bb-text)!important;
+  border-color:var(--bb-border)!important;
+}
+input:focus,textarea:focus,select:focus,.form-control:focus,.form-select:focus{
+  border-color:var(--bb-primary)!important;
+  box-shadow:0 0 0 3px rgba(37,99,235,.14)!important;
+}
+html.dark input:focus,html.dark textarea:focus,html.dark select:focus{
+  box-shadow:0 0 0 3px rgba(96,165,250,.16)!important;
+}
+button[type="submit"],.btn-primary,.primary-btn,.borrow-btn,.list-item-btn,
+.signup-submit,.signin-button,.gs-primary{
+  background:var(--bb-primary)!important;
+  border-color:var(--bb-primary)!important;
+  color:#fff!important;
+}
+button[type="submit"]:hover,.btn-primary:hover,.primary-btn:hover,.borrow-btn:hover,
+.list-item-btn:hover,.signup-submit:hover,.signin-button:hover,.gs-primary:hover{
+  background:var(--bb-primary-hover)!important;
+  border-color:var(--bb-primary-hover)!important;
+}
+.btn-secondary,.secondary-btn,.gs-secondary{
+  background:var(--bb-surface)!important;
+  color:var(--bb-text)!important;
+  border-color:var(--bb-border)!important;
+}
+.btn-secondary:hover,.secondary-btn:hover,.gs-secondary:hover{
+  border-color:var(--bb-primary)!important;
+  color:var(--bb-primary)!important;
+}
+.card,.panel,.section,.form-card,.modal,.dialog,.profile-card,.item-card,.product-card,
+.request-card,.chat-card,.chat-window,.browse-card,.myitems-card,.myitem-card,
+.profile-detail,.chat-layout,.chat-sidebar,.chat-main,.borrow-request-box,
+.list-card,.form-section,.listing-card,.signup-box,.login-container{
+  background:var(--bb-surface)!important;
+  color:var(--bb-text)!important;
+  border-color:var(--bb-border)!important;
+  box-shadow:var(--bb-shadow);
+}
+.auth-page,.signup-page,.get-started-page,.home-page,.browse-page,.myitems-page,
+.profile-page,.chat-page,.item-details-page,.list-page,.list-item-page{
+  background:var(--bb-bg)!important;
+  color:var(--bb-text)!important;
+}
+.auth-brand,.signup-box,.login-container{border-color:var(--bb-border)!important}
+.brand-content h1 span,.welcome-tag,.login-heading p,.signup-subtitle,
+.signup-text,.security-note,.brand-footer{color:var(--bb-muted)!important}
+.feature-icon,.logo-symbol,.gs-badge,.gs-feature-icon{
+  background:var(--bb-surface-soft)!important;
+  color:var(--bb-primary)!important;
+  border-color:var(--bb-border)!important;
+}
+.theme-toggle-btn{
+  background:var(--bb-primary)!important;
+  color:#fff!important;
+  border-color:var(--bb-primary)!important;
+  box-shadow:0 8px 22px rgba(37,99,235,.22)!important;
+}
+.theme-toggle-btn:hover{background:var(--bb-primary-hover)!important}
+.global-home-back{
+  background:var(--bb-surface)!important;
+  color:var(--bb-primary)!important;
+  border-color:var(--bb-border)!important;
+}
+html.dark .home-page .action-card:first-child,
+html.dark .home-page .action-card:nth-child(2){
+  background:var(--bb-surface-soft)!important;
+}
+html.dark .chat-message.outgoing{
+  background:var(--bb-primary)!important;
+  color:#fff!important;
+}
