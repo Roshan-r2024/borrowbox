@@ -128,10 +128,10 @@ function Profile() {
     setError("");
     setProfileImage(file);
 
-    const previewUrl =
-      URL.createObjectURL(file);
-
-    setImagePreview(previewUrl);
+    const reader = new FileReader();
+    reader.onload = () => setImagePreview(String(reader.result || ""));
+    reader.onerror = () => setError("Unable to read this image.");
+    reader.readAsDataURL(file);
   };
 
 
