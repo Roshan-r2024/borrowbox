@@ -698,3 +698,39 @@ html.dark .signin-button{background:var(--bb-primary);color:#fff}
 html.dark .signin-button:hover{background:var(--bb-primary-hover)}
 html.dark .mobile-logo .brand-logo{background:var(--bb-gradient);color:#fff}
 
+
+/* College email validation + aligned desktop sign-in controls */
+.login-message{
+  width:100%;
+  box-sizing:border-box;
+}
+.signin-button{
+  width:100%;
+  min-width:0;
+  margin:4px 0 0;
+  box-sizing:border-box;
+}
+.signup-text{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  flex-wrap:wrap;
+}
+.signup-text button{
+  margin-left:0;
+}
+@media (min-width:1000px){
+  .login-container{
+    width:min(520px,100%);
+    max-width:520px;
+  }
+  .login-container form{
+    width:100%;
+  }
+  .signin-button{
+    height:54px;
+    border-radius:12px;
+  }
+}
