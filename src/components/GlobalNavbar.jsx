@@ -38,7 +38,7 @@ export default function GlobalNavbar(){
    <div className="bb-global-nav-inner">
      <button className="bb-global-brand" onClick={()=>navigate("/home")} aria-label="Borrow Box Home">
        <span className="bb-global-logo">◇</span>
-       <span className="bb-global-brand-copy"><strong>Borrow Box</strong><small>Campus sharing</small></span>
+       <span className="bb-global-brand-copy"><strong>Borrow Box</strong><small>Community marketplace</small></span>
      </button>
      <nav className="bb-global-links" aria-label="Main navigation">
        {links.map(x=><button key={x.path} className={active?.path===x.path?"active":""} onClick={()=>navigate(x.path)} aria-current={active?.path===x.path?"page":undefined}>
