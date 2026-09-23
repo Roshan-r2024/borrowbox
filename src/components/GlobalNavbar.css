@@ -18,3 +18,7 @@
   color:var(--bb-primary,#2563EB)!important;
 }
 .bb-global-links button.active svg{color:var(--bb-primary,#2563EB)!important}
+
+
+/* Common theme control — available on every Borrow Box page */
+.global-theme-button{position:fixed;top:14px;right:18px;z-index:5000;width:42px;height:42px;border:1px solid rgba(255,255,255,.85);border-radius:50%;background:var(--bb-primary,#2563EB);color:#fff;display:grid;place-items:center;padding:0;font-size:20px;line-height:1;cursor:pointer;box-shadow:0 7px 20px rgba(37,99,235,.25);transition:transform .15s ease,background .15s ease,box-shadow .15s ease}.global-theme-button:hover{background:var(--bb-primary-hover,#1D4ED8);transform:translateY(-1px);box-shadow:0 10px 24px rgba(37,99,235,.3)}.global-theme-button:focus-visible{outline:2px solid #fff;outline-offset:3px}@media(max-width:760px){.global-theme-button{top:11px;right:10px;width:40px;height:40px;font-size:18px}}@media(max-width:420px){.global-theme-button{width:38px;height:38px;font-size:17px;top:10px;right:8px}}
