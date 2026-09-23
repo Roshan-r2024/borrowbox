@@ -62,3 +62,95 @@ html.dark .gs-navbar{background:rgba(13,25,41,.94);border-color:var(--bb-border)
 html.dark .gs-purpose{background:var(--bb-surface-soft);border-color:var(--bb-border)}
 html.dark .gs-hero-visual:after{background:radial-gradient(circle,#0d2d2a 0%,#101b2d 52%,transparent 73%)}
 
+
+/* Final Get Started button alignment */
+.gs-nav-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:10px;
+  margin-left:auto;
+}
+.gs-login-top,.gs-signup-top{
+  height:44px;
+  min-width:92px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 18px;
+  margin:0;
+  line-height:1;
+  box-sizing:border-box;
+}
+.gs-theme-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin:0;
+  padding:0;
+}
+.gs-buttons{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:14px;
+  width:100%;
+  margin-top:30px;
+}
+.gs-primary,.gs-secondary{
+  height:52px;
+  min-height:52px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+  margin:0;
+  padding:0 24px;
+  box-sizing:border-box;
+  line-height:1;
+}
+.gs-primary span{
+  display:inline-flex;
+  align-items:center;
+  margin-left:10px;
+  line-height:1;
+}
+.gs-purpose{
+  align-items:center;
+}
+.gs-purpose-button{
+  flex:0 0 auto;
+  height:52px;
+  min-height:52px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin:0;
+}
+@media(max-width:900px){
+  .gs-buttons{justify-content:center}
+  .gs-purpose-button{width:100%;flex:1 1 auto}
+}
+@media(max-width:620px){
+  .gs-buttons{
+    width:100%;
+    flex-direction:column;
+    align-items:stretch;
+    gap:10px;
+  }
+  .gs-primary,.gs-secondary{
+    width:100%;
+    height:54px;
+    min-height:54px;
+  }
+  .gs-purpose-button{
+    width:100%;
+    height:54px;
+    min-height:54px;
+  }
+  .gs-nav-actions{gap:7px}
+  .gs-signup-top{
+    min-width:84px;
+    height:40px;
+  }
+}
