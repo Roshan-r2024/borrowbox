@@ -668,3 +668,33 @@ html.dark .login-message { background:#182235; border-color:#3a4d69; color:#dbe7
 html.dark .signin-button { background:#f8fafc; color:#111827; }
 html.dark .signin-button:hover { background:#ffffff; }
 html.dark .mobile-logo .brand-logo { background:#f8fafc; color:#111827; }
+
+
+/* Final shared Borrow Box theme */
+.auth-page{background:var(--bb-bg);color:var(--bb-text)}
+.auth-brand{background:var(--bb-surface);border-color:var(--bb-border)}
+.auth-brand::after{border-color:var(--bb-border)}
+.brand-logo{background:var(--bb-gradient)}
+.brand-content h1,.login-heading h2{color:var(--bb-text)}
+.brand-content h1 span{color:var(--bb-primary)}
+.brand-content>p,.login-heading p,.feature small,.brand-footer,.signup-text,.security-note{color:var(--bb-muted)}
+.feature-icon{background:var(--bb-surface-soft);border-color:var(--bb-border)}
+.feature strong,.field label{color:var(--bb-text)}
+.auth-form-section{background:var(--bb-bg)}
+.welcome-tag,.password-label button,.show-password{color:var(--bb-primary)}
+.input-wrapper input{background:var(--bb-surface);border-color:var(--bb-border);color:var(--bb-text)}
+.input-wrapper input:focus{border-color:var(--bb-primary);box-shadow:0 0 0 3px rgba(16,167,123,.13)}
+.input-wrapper input::placeholder{color:var(--bb-muted)}
+.login-message{background:var(--bb-surface-soft);border-color:var(--bb-border);color:var(--bb-text)}
+.signin-button{background:var(--bb-primary);color:#fff}
+.signin-button:hover{background:var(--bb-primary-hover)}
+.signup-text button{color:var(--bb-primary)}
+html.dark .auth-page,html.dark .auth-form-section{background:var(--bb-bg);color:var(--bb-text)}
+html.dark .auth-brand{background:var(--bb-surface);border-color:var(--bb-border)}
+html.dark .feature-icon{background:var(--bb-surface-soft);border-color:var(--bb-border)}
+html.dark .input-wrapper input{background:var(--bb-surface);border-color:var(--bb-border);color:var(--bb-text)}
+html.dark .input-wrapper input:focus{border-color:var(--bb-primary);box-shadow:0 0 0 3px rgba(54,211,159,.15)}
+html.dark .signin-button{background:var(--bb-primary);color:#fff}
+html.dark .signin-button:hover{background:var(--bb-primary-hover)}
+html.dark .mobile-logo .brand-logo{background:var(--bb-gradient);color:#fff}
+
