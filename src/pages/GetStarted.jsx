@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import heroImage from "../assets/hero.png";
+import lightHero from "../assets/borrow-box-hero-light.svg";
+import darkHero from "../assets/borrow-box-hero-dark.svg";
 import "./GetStarted.css";
 
 function GetStarted() {
@@ -49,14 +50,6 @@ function GetStarted() {
         </nav>
 
         <div className="gs-nav-actions">
-          <button
-            className="gs-theme-toggle"
-            onClick={toggleTheme}
-            aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
-            title={dark ? "Light mode" : "Dark mode"}
-          >
-            {dark ? "☀" : "☾"}
-          </button>
           <button className="gs-login-top" onClick={() => navigate("/login")}>
             Log in
           </button>
@@ -76,9 +69,7 @@ function GetStarted() {
               <span>just a Borrow away.</span>
             </h1>
             <p>
-              Borrow Box is a community marketplace that makes it simple to
-              find useful items, share what you own, rent for a while, or sell
-              things you no longer need.
+              Borrow Box is a marketplace for everyone — buy, sell, rent, borrow and share useful items in one simple place.
             </p>
 
             <div className="gs-buttons">
@@ -103,7 +94,7 @@ function GetStarted() {
           <div className="gs-hero-visual">
             <div className="gs-visual-glow" />
             <img
-              src={heroImage}
+              src={dark ? darkHero : lightHero}
               alt="Borrow Box — borrow, rent, buy, sell and share items"
               className="gs-hero-image"
             />
