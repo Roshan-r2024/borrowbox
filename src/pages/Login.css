@@ -734,3 +734,29 @@ html.dark .mobile-logo .brand-logo{background:var(--bb-gradient);color:#fff}
     border-radius:12px;
   }
 }
+
+/* Larger, clearer login typography */
+.login-heading h2{font-size:38px;line-height:1.18}
+.login-heading p{font-size:16px;line-height:1.6}
+.welcome-tag{font-size:14px}
+.field label{font-size:15px}
+.input-wrapper input{font-size:16px;height:56px}
+.input-icon{font-size:14px}
+.show-password{font-size:13px}
+.login-message{font-size:14px;line-height:1.55}
+.signin-button{font-size:16px;height:56px}
+.signin-button span{font-size:20px}
+.signup-text{font-size:15px}
+.signup-text button{font-size:15px}
+.security-note{font-size:12px}
+.brand-content>p{font-size:17px}
+.feature strong{font-size:15px}
+.feature small{font-size:13px}
+.brand-footer{font-size:13px}
+@media (max-width:480px){
+  .login-heading h2{font-size:31px}
+  .login-heading p{font-size:14px}
+  .field label{font-size:14px}
+  .input-wrapper input{font-size:16px;height:54px}
+  .signin-button{font-size:16px;height:54px}
+}
