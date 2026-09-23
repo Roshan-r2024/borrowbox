@@ -13,7 +13,7 @@ const links=[
 
 function getInitialTheme(){
  const saved=localStorage.getItem("color-theme");
- return saved==="dark"||(!("color-theme" in localStorage)&&window.matchMedia("(prefers-color-scheme: dark)").matches);
+ return saved==="dark"||(!saved&&window.matchMedia("(prefers-color-scheme: dark)").matches);
 }
 
 export default function GlobalNavbar(){
@@ -45,7 +45,7 @@ export default function GlobalNavbar(){
          <BBIcon name={x.icon} size={18}/><span>{x.label}</span>
        </button>)}
      </nav>
-
+     <button className="bb-global-theme" type="button" onClick={toggleTheme} aria-label={dark?"Switch to light theme":"Switch to dark theme"} title={dark?"Light mode":"Dark mode"}><span aria-hidden="true">{dark?"☀":"☾"}</span></button>
    </div>
  </header>;
 }
