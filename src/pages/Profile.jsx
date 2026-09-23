@@ -71,48 +71,24 @@ function Profile() {
     try {
       setLoading(true);
       setError("");
-
-      const response = await fetch(
-        `${API_URL}/api/auth/profile/${encodeURIComponent(email)}`
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError(
-          data.message || "Unable to load profile."
-        );
-        setLoading(false);
+      const storedUsers = JSON.parse(localStorage.getItem("borrowBoxUsers") || "[]");
+      const storedUser = JSON.parse(localStorage.getItem("borrowBoxUser") || "null");
+      const localUser = storedUsers.find(
+        (u) => String(u.email).toLowerCase() === String(email).toLowerCase()
+      ) || storedUser;
+      if (!localUser || !localUser.email) {
+        localStorage.removeItem("borrowBoxUser");
+        navigate("/login", { replace: true });
         return;
       }
-
-      setUser(data.user);
-
-      setNickname(data.user.nickname || "");
-      setPhone(data.user.phone || "");
-
-      if (data.user.profilePicture) {
-        setImagePreview(
-          data.user.profilePicture.startsWith("http")
-            ? data.user.profilePicture
-            : `${API_URL}${data.user.profilePicture}`
-        );
-      } else {
-        setImagePreview("");
-      }
-
-      localStorage.setItem(
-        "borrowBoxUser",
-        JSON.stringify(data.user)
-      );
-
+      setUser(localUser);
+      setNickname(localUser.nickname || localUser.name || "");
+      setPhone(localUser.phone || "");
+      setImagePreview(localUser.profilePicture || "");
+      localStorage.setItem("borrowBoxUser", JSON.stringify(localUser));
     } catch (err) {
       console.error("Profile loading error:", err);
-
-      setError(
-        "Cannot connect to Borrow Box server. Make sure the backend is running."
-      );
-
+      setError("Unable to load your local profile.");
     } finally {
       setLoading(false);
     }
@@ -220,70 +196,24 @@ function Profile() {
     setSaving(true);
 
     try {
-      const formData = new FormData();
-
-      formData.append(
-        "email",
-        user.email
+      const updatedUser = {
+        ...user,
+        nickname: nickname.trim(),
+        name: user.name || nickname.trim(),
+        phone: phone.trim(),
+        profilePicture: imagePreview || user.profilePicture || ""
+      };
+      const storedUsers = JSON.parse(localStorage.getItem("borrowBoxUsers") || "[]");
+      const updatedUsers = storedUsers.map((u) =>
+        String(u.email).toLowerCase() === String(user.email).toLowerCase()
+          ? { ...u, ...updatedUser }
+          : u
       );
-
-      formData.append(
-        "nickname",
-        nickname.trim()
-      );
-
-      formData.append(
-        "phone",
-        phone.trim()
-      );
-
-      if (profileImage) {
-        formData.append(
-          "profilePicture",
-          profileImage
-        );
-      }
-
-      const response = await fetch(
-        `${API_URL}/api/auth/profile`,
-        {
-          method: "PUT",
-          body: formData,
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError(
-          data.message ||
-            "Unable to update profile."
-        );
-        setSaving(false);
-        return;
-      }
-
-      setUser(data.user);
-
-      localStorage.setItem(
-        "borrowBoxUser",
-        JSON.stringify(data.user)
-      );
-
-      if (data.user.profilePicture) {
-        setImagePreview(
-          data.user.profilePicture.startsWith("http")
-            ? data.user.profilePicture
-            : `${API_URL}${data.user.profilePicture}`
-        );
-      }
-
+      localStorage.setItem("borrowBoxUsers", JSON.stringify(updatedUsers));
+      localStorage.setItem("borrowBoxUser", JSON.stringify(updatedUser));
+      setUser(updatedUser);
       setProfileImage(null);
-
-      setMessage(
-        "Profile updated successfully."
-      );
-
+      setMessage("Profile updated successfully.");
       setEditOpen(false);
 
     } catch (err) {
@@ -356,45 +286,25 @@ function Profile() {
     setChangingPassword(true);
 
     try {
-      const response = await fetch(
-        `${API_URL}/api/auth/change-password`,
-        {
-          method: "PUT",
-
-          headers: {
-            "Content-Type":
-              "application/json",
-          },
-
-          body: JSON.stringify({
-            email: user.email,
-            currentPassword,
-            newPassword,
-          }),
-        }
+      const storedUsers = JSON.parse(localStorage.getItem("borrowBoxUsers") || "[]");
+      const account = storedUsers.find(
+        (u) => String(u.email).toLowerCase() === String(user.email).toLowerCase()
       );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError(
-          data.message ||
-            "Unable to change password."
-        );
-
-        setChangingPassword(false);
+      if (!account || account.password !== currentPassword) {
+        setError("Current password is incorrect.");
         return;
       }
-
+      const updatedUsers = storedUsers.map((u) =>
+        String(u.email).toLowerCase() === String(user.email).toLowerCase()
+          ? { ...u, password: newPassword }
+          : u
+      );
+      localStorage.setItem("borrowBoxUsers", JSON.stringify(updatedUsers));
       setCurrentPassword("");
       setNewPassword("");
       setConfirmNewPassword("");
-
       setPasswordOpen(false);
-
-      setMessage(
-        "Password changed successfully."
-      );
+      setMessage("Password changed successfully.");
 
     } catch (err) {
       console.error(
@@ -603,12 +513,10 @@ function Profile() {
             <div className="profile-name">
 
               <h2>
-                {user.nickname}
+                {user.nickname || user.name || "User"}
               </h2>
 
-              <p>
-                VIT Student
-              </p>
+              <p>Borrow Box Member</p>
 
             </div>
 
@@ -693,9 +601,7 @@ function Profile() {
                 Account Type
               </span>
 
-              <strong>
-                VIT Student
-              </strong>
+              <strong>Borrow Box Member</strong>
 
             </div>
 
