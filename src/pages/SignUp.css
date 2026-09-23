@@ -479,3 +479,8 @@ html.dark .logo-symbol{background:var(--bb-gradient);color:#fff}
 .password-input-wrap .show-password::after,.confirm-password-wrap .confirm-show-password::after{display:none!important}
 .password-input-wrap .suggest-password{position:static!important;display:block!important;width:max-content!important;margin:8px 0 0!important;min-height:36px!important}
 @media(max-width:560px){.password-input-wrap input,.confirm-password-wrap input{height:48px!important;padding-right:48px!important}.password-input-wrap .show-password,.confirm-password-wrap .confirm-show-password{right:5px!important}.password-input-wrap .suggest-password{width:100%!important}}
+
+
+/* Single Show/Hide control: Create Password only */
+.confirm-password-wrap{position:relative!important}
+.confirm-password-wrap .confirm-show-password{display:none!important}
