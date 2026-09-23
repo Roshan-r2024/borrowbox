@@ -760,3 +760,47 @@ html.dark .mobile-logo .brand-logo{background:var(--bb-gradient);color:#fff}
   .input-wrapper input{font-size:16px;height:54px}
   .signin-button{font-size:16px;height:54px}
 }
+
+/* Final button alignment */
+.login-container form{width:100%}
+.login-container .signin-button{
+  display:flex;
+  width:100%;
+  max-width:none;
+  min-height:56px;
+  margin:8px 0 0;
+  padding:0 20px;
+  align-items:center;
+  justify-content:center;
+  box-sizing:border-box;
+}
+.login-container .show-password{
+  top:50%;
+  right:16px;
+  transform:translateY(-50%);
+  margin:0;
+  padding:6px 4px;
+  line-height:1;
+}
+.login-container .signup-text{
+  width:100%;
+  min-height:24px;
+  margin:24px 0 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  text-align:center;
+}
+.login-container .signup-text button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin:0;
+  padding:2px 0;
+  line-height:1.4;
+}
+@media (max-width:480px){
+  .login-container .signin-button{min-height:54px;margin-top:6px}
+  .login-container .signup-text{margin-top:20px}
+}
