@@ -36,3 +36,29 @@ html.dark .gs-hero-image{filter:drop-shadow(0 25px 40px rgba(0,0,0,.42)) brightn
 html.dark .gs-hero{background:radial-gradient(circle at 78% 48%,rgba(54,211,159,.09),transparent 34%)}
 html.dark .gs-hero-visual:after{background:radial-gradient(circle,#10352f 0%,#0b1828 52%,transparent 73%)}
 html.dark .gs-feature{background:#101b2d;border-color:#29415b}
+
+
+/* Final shared Borrow Box theme */
+.get-started-page{--gs-bg:var(--bb-bg);--gs-surface:var(--bb-surface);--gs-surface-soft:var(--bb-surface-soft);--gs-text:var(--bb-text);--gs-muted:var(--bb-muted);--gs-primary:var(--bb-primary);--gs-primary-hover:var(--bb-primary-hover);--gs-border:var(--bb-border);--gs-shadow:var(--bb-shadow);background:var(--bb-bg);color:var(--bb-text)}
+.gs-navbar{background:rgba(255,255,255,.92);border-color:var(--bb-border)}
+.gs-logo{background:var(--bb-gradient)}
+.gs-nav-links a{color:var(--bb-muted)}.gs-nav-links a:hover{color:var(--bb-primary)}
+.gs-theme-toggle,.gs-login-top{background:var(--bb-surface);color:var(--bb-text);border-color:var(--bb-border)}
+.gs-theme-toggle:hover,.gs-login-top:hover{border-color:var(--bb-primary);color:var(--bb-primary)}
+.gs-signup-top,.gs-primary{background:var(--bb-primary)}.gs-signup-top:hover,.gs-primary:hover{background:var(--bb-primary-hover)}
+.gs-badge{background:var(--bb-surface-soft);color:var(--bb-primary);border-color:var(--bb-border)}
+.gs-hero h1,.gs-section-heading h2,.gs-purpose h2,.gs-feature h3,.gs-step h3{color:var(--bb-text)}
+.gs-hero h1 span,.gs-section-heading>span,.gs-purpose>div>span{color:var(--bb-primary)}
+.gs-hero-content>p,.gs-section-heading p,.gs-feature p,.gs-step p,.gs-trust-row,.gs-floating-card small,.gs-purpose p{color:var(--bb-muted)}
+.gs-secondary{background:var(--bb-surface);color:var(--bb-text);border-color:var(--bb-border)}
+.gs-secondary:hover{border-color:var(--bb-primary);color:var(--bb-primary)}
+.gs-feature,.gs-step,.gs-floating-card,.gs-footer{background:var(--bb-surface);border-color:var(--bb-border);color:var(--bb-text)}
+.gs-feature-icon{background:var(--bb-surface-soft)}
+.gs-step>b{background:var(--bb-primary)}
+.gs-purpose{background:var(--bb-surface-soft);border-color:var(--bb-border)}
+.gs-purpose p{color:var(--bb-muted)}
+.gs-footer strong{color:var(--bb-text)}
+html.dark .gs-navbar{background:rgba(13,25,41,.94);border-color:var(--bb-border)}
+html.dark .gs-purpose{background:var(--bb-surface-soft);border-color:var(--bb-border)}
+html.dark .gs-hero-visual:after{background:radial-gradient(circle,#0d2d2a 0%,#101b2d 52%,transparent 73%)}
+
