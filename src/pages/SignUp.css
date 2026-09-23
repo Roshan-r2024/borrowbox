@@ -440,3 +440,11 @@ html.dark .logo-symbol{background:var(--bb-gradient);color:#fff}
 .password-input-wrap .show-password::after{content:"";width:5px;height:5px;border:2px solid currentColor;border-radius:50%;position:absolute}
 .password-input-wrap .show-password:hover{text-decoration:none;opacity:.8}
 @media(max-width:560px){.password-input-wrap .show-password{right:87px}}
+
+
+/* Reliable visible eye toggle */
+.password-input-wrap .show-password{position:absolute!important;right:142px!important;top:50%!important;transform:translateY(-50%)!important;width:36px!important;height:36px!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:center!important;border:0!important;background:transparent!important;color:var(--bb-primary)!important;font-size:0!important;z-index:20!important;cursor:pointer!important;visibility:visible!important;opacity:1!important}
+.password-input-wrap .show-password::before{content:"👁"!important;font-size:18px!important;line-height:1!important;display:block!important;transform:none!important;border:0!important;width:auto!important;height:auto!important;position:static!important}
+.password-input-wrap .show-password:hover{opacity:.75!important;text-decoration:none!important}
+.password-input-wrap .suggest-password{z-index:19!important}
+@media(max-width:560px){.password-input-wrap .show-password{right:78px!important}}
