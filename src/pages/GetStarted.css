@@ -480,3 +480,36 @@ html.dark .gs-hero-image{
     min-height:250px;
   }
 }
+
+/* Project illustration wrapper */
+.gs-project-illustration{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:min(100%,660px);
+  min-height:360px;
+}
+.gs-project-illustration .gs-hero-image{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  width:100%!important;
+  max-width:660px!important;
+  height:auto!important;
+  min-height:0!important;
+  object-fit:contain!important;
+}
+@media(max-width:900px){
+  .gs-project-illustration{
+    width:min(100%,620px);
+    min-height:320px;
+  }
+}
+@media(max-width:620px){
+  .gs-project-illustration{
+    width:100%;
+    min-height:250px;
+  }
+}
