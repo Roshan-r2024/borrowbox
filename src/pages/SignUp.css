@@ -384,3 +384,31 @@ html.dark .login-message { background:#182235; border-color:#3a4d69; color:#dbe7
 html.dark .signin-button { background:#f8fafc; color:#111827; }
 html.dark .signin-button:hover { background:#ffffff; }
 html.dark .mobile-logo .brand-logo { background:#f8fafc; color:#111827; }
+
+
+/* Final shared Borrow Box theme */
+.signup-page{background:var(--bb-bg);color:var(--bb-text)}
+.signup-box{background:var(--bb-surface);border-color:var(--bb-border);box-shadow:var(--bb-shadow)}
+.signup-logo,.signup-box h1,.signup-box label,.login-link{color:var(--bb-text)}
+.logo-symbol{background:var(--bb-gradient);color:#fff}
+.signup-subtitle,.login-text,.field-hint{color:var(--bb-muted)}
+.signup-box input,.signup-box select,.signup-box textarea{background:var(--bb-surface);color:var(--bb-text);border-color:var(--bb-border)}
+.signup-box input::placeholder,.signup-box textarea::placeholder{color:var(--bb-muted)}
+.signup-box input:focus,.signup-box select:focus,.signup-box textarea:focus{border-color:var(--bb-primary);box-shadow:0 0 0 3px rgba(16,167,123,.13)}
+.suggest-password{background:var(--bb-surface-soft);border-color:var(--bb-border);color:var(--bb-text)}
+.suggest-password:hover:not(:disabled){background:var(--bb-surface-soft)}
+.password-strength{background:var(--bb-surface-soft);border-color:var(--bb-border)}
+.strength-label,.strength-rules{color:var(--bb-muted)}
+.strength-rules span.valid,.strength-label.strong strong{color:var(--bb-primary)}
+.signup-submit{background:var(--bb-primary);color:#fff}
+.signup-submit:hover:not(:disabled){background:var(--bb-primary-hover);box-shadow:0 8px 22px rgba(16,167,123,.18)}
+.signup-message{background:var(--bb-surface-soft);border-color:var(--bb-border);color:var(--bb-text)}
+.login-link{color:var(--bb-primary)}
+html.dark .signup-page{background:var(--bb-bg);color:var(--bb-text)}
+html.dark .signup-box{background:var(--bb-surface);border-color:var(--bb-border);box-shadow:var(--bb-shadow)}
+html.dark .signup-box input,html.dark .signup-box select,html.dark .signup-box textarea{background:var(--bb-surface);border-color:var(--bb-border);color:var(--bb-text);-webkit-text-fill-color:var(--bb-text)}
+html.dark .password-strength,html.dark .signup-message,html.dark .suggest-password{background:var(--bb-surface-soft);border-color:var(--bb-border);color:var(--bb-text)}
+html.dark .signup-submit{background:var(--bb-primary);color:#fff}
+html.dark .signup-submit:hover:not(:disabled){background:var(--bb-primary-hover)}
+html.dark .logo-symbol{background:var(--bb-gradient);color:#fff}
+
