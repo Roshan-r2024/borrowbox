@@ -373,3 +373,53 @@ html.dark .gs-hero-visual:after{background:radial-gradient(circle,#0d2d2a 0%,#10
     font-size:16px;
   }
 }
+
+/* Slightly larger final Get Started typography */
+.gs-navbar{font-size:16px}
+.gs-nav-links a{font-size:16px}
+.gs-login-top,.gs-signup-top{font-size:17px}
+.gs-brand-copy strong{font-size:21px}
+.gs-brand-copy small{font-size:13px}
+.gs-hero h1{
+  font-size:clamp(38px,4.4vw,52px);
+  line-height:1.06;
+}
+.gs-hero-content>p{
+  font-size:18px;
+  line-height:1.7;
+}
+.gs-badge{font-size:13px}
+.gs-primary,.gs-secondary{font-size:17px}
+.gs-trust-row{font-size:14px}
+.gs-floating-card strong{font-size:15px}
+.gs-floating-card small{font-size:13px}
+.gs-section-heading>span,.gs-purpose>div>span{font-size:13px}
+.gs-section-heading h2,.gs-purpose h2{
+  font-size:32px;
+  line-height:1.2;
+}
+.gs-section-heading p{
+  font-size:17px;
+  line-height:1.65;
+}
+.gs-feature h3,.gs-step h3{
+  font-size:22px;
+}
+.gs-feature p,.gs-step p{
+  font-size:17px;
+  line-height:1.65;
+}
+.gs-step>b{font-size:14px}
+.gs-purpose p{
+  font-size:17px;
+  line-height:1.65;
+}
+.gs-footer{font-size:14px}
+@media(max-width:620px){
+  .gs-hero h1{font-size:39px}
+  .gs-hero-content>p{font-size:17px}
+  .gs-section-heading h2,.gs-purpose h2{font-size:29px}
+  .gs-section-heading p,.gs-feature p,.gs-step p,.gs-purpose p{font-size:16px}
+  .gs-feature h3,.gs-step h3{font-size:21px}
+  .gs-primary,.gs-secondary{font-size:17px}
+}
