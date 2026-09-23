@@ -438,3 +438,96 @@ html.dark .chat-message.outgoing{
   background:var(--bb-primary)!important;
   color:#fff!important;
 }
+
+
+/* =========================================================
+   DESKTOP FIXED LAYOUT
+   Keep desktop pages centered at a stable width while
+   preserving the existing mobile responsive layout.
+========================================================= */
+@media (min-width: 1000px){
+  html,body,#root{min-width:1000px;}
+
+  .home-page,
+  .browse-page,
+  .myitems-page,
+  .profile-page,
+  .chat-page,
+  .item-details-page,
+  .list-page,
+  .list-item-page{
+    width:100%;
+    min-width:1000px;
+    box-sizing:border-box;
+  }
+
+  .home-main,
+  .browse-container,
+  .myitems-container,
+  .profile-main,
+  .chat-page,
+  .item-details-page > main,
+  .list-page > main,
+  .list-item-page > main{
+    width:min(1200px, calc(100% - 48px));
+    max-width:1200px;
+    margin-left:auto;
+    margin-right:auto;
+    box-sizing:border-box;
+  }
+
+  .home-main{
+    width:min(1280px, calc(100% - 48px));
+    max-width:1280px;
+  }
+
+  .profile-main,
+  .browse-container,
+  .myitems-container{
+    padding-left:0;
+    padding-right:0;
+  }
+
+  .bb-global-nav-inner{
+    width:min(1280px, calc(100% - 48px));
+    max-width:1280px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .auth-page{
+    min-width:1000px;
+  }
+
+  .signup-page{
+    min-width:1000px;
+  }
+
+  .signup-box{
+    width:min(920px, calc(100% - 48px));
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .gs-hero,
+  .gs-section,
+  .gs-how-section,
+  .gs-purpose,
+  .gs-footer{
+    max-width:1280px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  /* Prevent desktop cards/grids from growing unpredictably */
+  .browse-grid,
+  .myitems-grid,
+  .home-products-grid{
+    width:100%;
+  }
+}
+
+/* Keep the website naturally responsive below desktop. */
+@media (max-width:999px){
+  html,body,#root{min-width:0;}
+}
