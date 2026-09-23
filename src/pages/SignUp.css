@@ -448,3 +448,11 @@ html.dark .logo-symbol{background:var(--bb-gradient);color:#fff}
 .password-input-wrap .show-password:hover{opacity:.75!important;text-decoration:none!important}
 .password-input-wrap .suggest-password{z-index:19!important}
 @media(max-width:560px){.password-input-wrap .show-password{right:78px!important}}
+
+
+/* Keep password actions clean: eye inside field, suggestion below */
+.password-input-wrap{display:block!important;position:relative!important}
+.password-input-wrap input{padding-right:58px!important}
+.password-input-wrap .show-password{right:10px!important}
+.password-input-wrap .suggest-password{position:static!important;display:block!important;width:max-content!important;max-width:100%!important;margin-top:8px!important;min-height:36px!important;padding:7px 12px!important}
+@media(max-width:560px){.password-input-wrap input{padding-right:50px!important}.password-input-wrap .show-password{right:7px!important}.password-input-wrap .suggest-password{width:100%!important}}
