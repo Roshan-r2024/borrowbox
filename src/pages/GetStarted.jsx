@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import lightHero from "../assets/borrow-box-hero-light.svg";
 import darkHero from "../assets/borrow-box-hero-dark.svg";
-import fallbackHero from "../assets/hero.png";
 import "./GetStarted.css";
 
 function GetStarted() {
@@ -94,15 +93,14 @@ function GetStarted() {
 
           <div className="gs-hero-visual">
             <div className="gs-visual-glow" />
-            <img
-              src={dark ? darkHero : lightHero}
-              alt="Borrow Box — borrow, rent, buy, sell and share items"
-              className="gs-hero-image"
-              onError={(event) => {
-                event.currentTarget.onerror = null;
-                event.currentTarget.src = fallbackHero;
-              }}
-            />
+            <picture className="gs-project-illustration">
+              <source srcSet={dark ? darkHero : lightHero} type="image/svg+xml" />
+              <img
+                src={dark ? darkHero : lightHero}
+                alt="Borrow Box project illustration showing borrowing, renting, buying, selling and sharing"
+                className="gs-hero-image"
+              />
+            </picture>
             <div className="gs-floating-card gs-float-one">
               <span>📦</span>
               <div><strong>Borrow</strong><small>When you need it</small></div>
