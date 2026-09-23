@@ -469,3 +469,13 @@ html.dark .logo-symbol{background:var(--bb-gradient);color:#fff}
 .remember-password input[type="checkbox"]{width:17px!important;height:17px!important;margin:0!important;padding:0!important;accent-color:var(--bb-primary)!important;cursor:pointer!important;box-shadow:none!important}
 .remember-password span{line-height:1.2}
 @media(max-width:560px){.password-input-wrap input{padding-right:52px!important}.password-input-wrap .show-password{right:7px!important}.password-input-wrap .suggest-password{width:100%!important}.remember-password{margin-top:14px!important}}
+
+
+/* FINAL FIX — independent eye buttons inside both password inputs */
+.password-input-wrap,.confirm-password-wrap{position:relative!important;display:block!important;width:100%!important}
+.password-input-wrap input,.confirm-password-wrap input{display:block!important;width:100%!important;height:48px!important;padding:0 52px 0 14px!important}
+.password-input-wrap .show-password,.confirm-password-wrap .confirm-show-password{position:absolute!important;right:8px!important;top:50%!important;transform:translateY(-50%)!important;width:36px!important;height:36px!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;color:var(--bb-primary)!important;display:flex!important;align-items:center!important;justify-content:center!important;z-index:50!important;cursor:pointer!important;font-size:0!important;line-height:1!important}
+.password-input-wrap .show-password::before,.confirm-password-wrap .confirm-show-password::before{content:"👁"!important;font-size:18px!important;line-height:1!important;display:block!important;position:static!important;width:auto!important;height:auto!important;border:0!important;transform:none!important}
+.password-input-wrap .show-password::after,.confirm-password-wrap .confirm-show-password::after{display:none!important}
+.password-input-wrap .suggest-password{position:static!important;display:block!important;width:max-content!important;margin:8px 0 0!important;min-height:36px!important}
+@media(max-width:560px){.password-input-wrap input,.confirm-password-wrap input{height:48px!important;padding-right:48px!important}.password-input-wrap .show-password,.confirm-password-wrap .confirm-show-password{right:5px!important}.password-input-wrap .suggest-password{width:100%!important}}
