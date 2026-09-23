@@ -531,3 +531,377 @@ html.dark .chat-message.outgoing{
 @media (max-width:999px){
   html,body,#root{min-width:0;}
 }
+
+
+/* =========================================================
+   DESKTOP MASTER LAYOUT — ALL BORROW BOX PAGES
+   Stable desktop canvas, centered content, consistent gutters,
+   and no stretched/narrow page bodies. Mobile rules remain
+   unchanged below 999px.
+========================================================= */
+@media (min-width:1000px){
+  :root{
+    --bb-desktop-max:1280px;
+    --bb-desktop-content:1200px;
+    --bb-desktop-gutter:32px;
+    --bb-desktop-radius:18px;
+  }
+
+  html,body,#root{
+    width:100%;
+    min-width:1000px;
+    overflow-x:hidden;
+  }
+
+  /* Every application page gets the same desktop canvas. */
+  .home-page,
+  .browse-page,
+  .myitems-page,
+  .profile-page,
+  .chat-page,
+  .item-details-page,
+  .list-page,
+  .list-item-page,
+  .borrow-page,
+  .seller-history-page,
+  .auth-page,
+  .signup-page{
+    width:100%;
+    min-width:1000px;
+    min-height:calc(100vh - 70px);
+    box-sizing:border-box;
+  }
+
+  /* Shared centered desktop content rails. */
+  .home-main,
+  .browse-container,
+  .myitems-container,
+  .profile-main,
+  .chat-layout,
+  .item-details-page > main,
+  .list-page > main,
+  .list-item-page > main,
+  .borrow-container,
+  .seller-history-main{
+    width:min(var(--bb-desktop-content),calc(100% - 2 * var(--bb-desktop-gutter)));
+    max-width:var(--bb-desktop-content);
+    margin-left:auto!important;
+    margin-right:auto!important;
+    box-sizing:border-box;
+  }
+
+  /* Home gets a slightly wider marketplace canvas. */
+  .home-main{
+    width:min(var(--bb-desktop-max),calc(100% - 2 * var(--bb-desktop-gutter)));
+    max-width:var(--bb-desktop-max);
+  }
+
+  /* Main navigation stays aligned with page content. */
+  .bb-global-nav-inner{
+    width:min(var(--bb-desktop-max),calc(100% - 2 * var(--bb-desktop-gutter)));
+    max-width:var(--bb-desktop-max);
+    margin:0 auto;
+    padding-left:0;
+    padding-right:0;
+  }
+
+  /* Do not let grids collapse into a narrow central column. */
+  .home-products-grid,
+  .browse-grid,
+  .myitems-grid,
+  .buyer-grid{
+    width:100%;
+    box-sizing:border-box;
+  }
+
+  /* Marketplace/product grids use the available desktop width. */
+  .browse-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:24px;
+  }
+
+  .home-products-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:22px;
+  }
+
+  .myitems-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:22px;
+  }
+
+  .buyer-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:24px;
+  }
+
+  /* Desktop hero sections fill the page instead of hugging one side. */
+  .home-page .hero-section{
+    width:100%;
+    min-height:360px;
+    box-sizing:border-box;
+  }
+
+  .home-page .hero-left{
+    max-width:680px;
+  }
+
+  /* Item details: balanced media + information columns. */
+  .item-details-page > main{
+    padding-top:32px;
+    padding-bottom:48px;
+  }
+
+  .item-details-page .details-layout{
+    width:100%;
+    display:grid;
+    grid-template-columns:minmax(420px,1.05fr) minmax(420px,.95fr);
+    gap:42px;
+    align-items:start;
+  }
+
+  /* Borrow request: two-column desktop workspace. */
+  .borrow-page{
+    padding-top:0;
+  }
+
+  .borrow-header,
+  .seller-history-header{
+    min-height:70px;
+    box-sizing:border-box;
+    padding-left:max(24px,calc((100% - var(--bb-desktop-max))/2));
+    padding-right:max(24px,calc((100% - var(--bb-desktop-max))/2));
+  }
+
+  .borrow-container,
+  .seller-history-main{
+    padding-top:38px;
+    padding-bottom:56px;
+  }
+
+  .borrow-layout{
+    width:100%;
+    display:grid;
+    grid-template-columns:minmax(360px,.8fr) minmax(520px,1.2fr);
+    gap:28px;
+    align-items:start;
+  }
+
+  .borrow-item,
+  .borrow-form,
+  .seller-history-empty,
+  .buyer-card{
+    min-width:0;
+  }
+
+  /* Seller history cards occupy the full desktop rail. */
+  .seller-history-main{
+    width:min(var(--bb-desktop-content),calc(100% - 64px));
+    max-width:var(--bb-desktop-content);
+  }
+
+  /* Auth: use the desktop canvas rather than a narrow mobile-style form. */
+  .auth-page{
+    display:grid;
+    grid-template-columns:minmax(460px,1fr) minmax(520px,1fr);
+    min-height:100vh;
+    padding-top:0!important;
+  }
+
+  .auth-brand{
+    min-height:100vh;
+    box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:64px clamp(44px,6vw,100px);
+  }
+
+  .auth-form-section{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:48px 48px;
+    box-sizing:border-box;
+  }
+
+  .login-container{
+    width:min(520px,100%);
+    max-width:520px;
+  }
+
+  /* Signup gets a readable, wide desktop form. */
+  .signup-page{
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:54px 32px 70px;
+    box-sizing:border-box;
+  }
+
+  .signup-box{
+    width:min(920px,100%);
+    max-width:920px;
+    margin:0 auto;
+  }
+
+  .signup-grid{
+    width:100%;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    column-gap:22px;
+    row-gap:18px;
+  }
+
+  .signup-field-full{
+    grid-column:1 / -1;
+  }
+
+  /* Get Started: full desktop landing composition. */
+  .get-started-page{
+    width:100%;
+    min-width:1000px;
+    box-sizing:border-box;
+  }
+
+  .get-started-page .gs-navbar{
+    width:min(var(--bb-desktop-max),calc(100% - 64px));
+    max-width:var(--bb-desktop-max);
+    margin:0 auto;
+  }
+
+  .get-started-page main{
+    width:100%;
+  }
+
+  .get-started-page .gs-hero,
+  .get-started-page .gs-section,
+  .get-started-page .gs-how-section,
+  .get-started-page .gs-purpose,
+  .get-started-page .gs-footer{
+    width:min(var(--bb-desktop-max),calc(100% - 64px));
+    max-width:var(--bb-desktop-max);
+    margin-left:auto;
+    margin-right:auto;
+    box-sizing:border-box;
+  }
+
+  .get-started-page .gs-hero{
+    min-height:560px;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(460px,.9fr);
+    gap:54px;
+    align-items:center;
+  }
+
+  .get-started-page .gs-hero-content{
+    max-width:680px;
+  }
+
+  .get-started-page .gs-hero-visual{
+    min-height:500px;
+  }
+
+  .get-started-page .gs-feature-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:22px;
+  }
+
+  .get-started-page .gs-steps{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:22px;
+  }
+
+  .get-started-page .gs-purpose{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:40px;
+  }
+
+  /* Chat should use the entire desktop rail. */
+  .chat-page{
+    padding-top:70px!important;
+  }
+
+  .chat-layout{
+    min-height:calc(100vh - 110px);
+    display:grid;
+    grid-template-columns:340px minmax(0,1fr);
+    overflow:hidden;
+  }
+
+  .chat-sidebar{
+    min-width:0;
+  }
+
+  .chat-main{
+    min-width:0;
+  }
+
+  /* Profile and My Items use stable card widths on desktop. */
+  .profile-main,
+  .myitems-container{
+    padding-top:34px;
+    padding-bottom:56px;
+  }
+
+  .profile-page .profile-card{
+    width:100%;
+  }
+
+  /* Keep all desktop controls comfortably clickable. */
+  .home-page button,
+  .browse-page button,
+  .myitems-page button,
+  .profile-page button,
+  .chat-page button,
+  .item-details-page button,
+  .list-page button,
+  .list-item-page button,
+  .borrow-page button,
+  .seller-history-page button{
+    min-height:40px;
+  }
+
+  /* Prevent oversized images from pushing desktop cards out of alignment. */
+  .browse-card img,
+  .myitem-card img,
+  .home-product-card img,
+  .buyer-product img{
+    max-width:100%;
+    object-fit:cover;
+  }
+}
+
+/* Tablet/mobile keeps the existing responsive layouts. */
+@media (max-width:999px){
+  html,body,#root{
+    min-width:0;
+    width:100%;
+    overflow-x:hidden;
+  }
+
+  .browse-grid,
+  .home-products-grid,
+  .myitems-grid,
+  .buyer-grid{
+    grid-template-columns:1fr;
+  }
+
+  .item-details-page .details-layout,
+  .borrow-layout,
+  .auth-page,
+  .chat-layout{
+    display:block;
+  }
+
+  .signup-grid{
+    grid-template-columns:1fr;
+  }
+
+  .signup-field-full{
+    grid-column:auto;
+  }
+}
