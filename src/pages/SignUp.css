@@ -412,3 +412,12 @@ html.dark .signup-submit{background:var(--bb-primary);color:#fff}
 html.dark .signup-submit:hover:not(:disabled){background:var(--bb-primary-hover)}
 html.dark .logo-symbol{background:var(--bb-gradient);color:#fff}
 
+
+
+/* Create password visibility control */
+.password-input-wrap{position:relative;display:flex;align-items:center}
+.password-input-wrap input{width:100%;padding-right:185px!important}
+.password-input-wrap .show-password{position:absolute;right:142px;top:50%;transform:translateY(-50%);z-index:3;border:0;background:transparent;color:var(--bb-primary);font:inherit;font-size:12px;font-weight:800;cursor:pointer;padding:6px 5px}
+.password-input-wrap .show-password:hover{text-decoration:underline}
+.password-input-wrap .suggest-password{position:absolute;right:8px;top:50%;transform:translateY(-50%);z-index:3}
+@media(max-width:560px){.password-input-wrap input{padding-right:120px!important}.password-input-wrap .show-password{right:82px}.password-input-wrap .suggest-password{right:6px;font-size:10px;padding:6px 4px}}
