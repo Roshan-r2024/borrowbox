@@ -423,3 +423,60 @@ html.dark .gs-hero-visual:after{background:radial-gradient(circle,#0d2d2a 0%,#10
   .gs-feature h3,.gs-step h3{font-size:21px}
   .gs-primary,.gs-secondary{font-size:17px}
 }
+
+/* Get Started hero image visibility */
+.gs-hero-visual{
+  min-height:540px;
+  position:relative;
+  display:grid;
+  place-items:center;
+  overflow:visible;
+}
+.gs-hero-image{
+  display:block;
+  visibility:visible;
+  opacity:1;
+  width:min(100%,660px);
+  max-width:660px;
+  height:auto;
+  min-height:360px;
+  object-fit:contain;
+  object-position:center;
+  position:relative;
+  z-index:2;
+}
+.gs-visual-glow{
+  z-index:0;
+}
+.gs-hero-visual:after{
+  z-index:0;
+  pointer-events:none;
+}
+.gs-floating-card{
+  z-index:4;
+}
+html.dark .gs-hero-image{
+  opacity:1;
+  visibility:visible;
+}
+@media(max-width:900px){
+  .gs-hero-visual{
+    min-height:460px;
+    margin-top:8px;
+  }
+  .gs-hero-image{
+    width:min(100%,620px);
+    min-height:320px;
+  }
+}
+@media(max-width:620px){
+  .gs-hero-visual{
+    min-height:350px;
+    margin-top:5px;
+  }
+  .gs-hero-image{
+    width:100%;
+    max-width:520px;
+    min-height:250px;
+  }
+}
