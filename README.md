@@ -1,16 +1,42 @@
-# React + Vite
+# Borrow Box
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Borrow Box is a responsive public marketplace where people can list items for permanent sale or for rent.
 
-Currently, two official plugins are available:
+## Technology
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- HTML5, CSS3, Bootstrap-friendly responsive styling, jQuery, and JavaScript frontend
+- Node.js and Express backend
+- MongoDB with Mongoose for accounts, listings, borrow requests, chats, and notifications
 
-## React Compiler
+The frontend is a **static HTML/CSS/JavaScript app**. It does not use React, JSX, Vite, or a React build step.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Run locally
 
-## Expanding the Oxlint configuration
+1. Install Node.js (LTS) and MongoDB, or configure a MongoDB connection string.
+2. From the project root, install backend dependencies:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+   `npm install`
+
+3. Create `server/.env` locally (do not commit it) and set:
+
+   `MONGO_URI=your_mongodb_connection_string`
+
+4. Start the app:
+
+   `npm start`
+
+5. Open `http://localhost:5000`.
+
+The Express server serves the pages from `public/`. Demo listings are available in the frontend if the API/database is unavailable.
+
+## Main features
+
+- Get Started, login, and signup
+- Browse listings and view item details
+- List an item for sale or rent
+- Track your own listings and profile
+- Borrow/rental requests, chat, and seller history
+- Light/dark theme
+- Responsive layout for desktop and mobile
+
+Never commit `server/.env`, credentials, or database connection strings.
