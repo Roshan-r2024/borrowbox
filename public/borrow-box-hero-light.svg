@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 560" role="img" aria-labelledby="title desc">
+<title id="title">Borrow Box community sharing illustration</title><desc id="desc">Two people sharing useful items with a phone, laptop, backpack, books, camera and headphones.</desc>
+<defs>
+ <linearGradient id="mint" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#22d3a3"/><stop offset="1" stop-color="#07866b"/></linearGradient>
+ <linearGradient id="mintBg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f1fffa"/><stop offset="1" stop-color="#d7f5eb"/></linearGradient>
+ <linearGradient id="blue" x1="0" y1="0" x2="0.8" y2="1"><stop stop-color="#315a88"/><stop offset="1" stop-color="#172d4c"/></linearGradient>
+ <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#183b4d" flood-opacity=".16"/></filter>
+</defs>
+<path d="M58 318C64 206 152 118 263 120c66-67 194-69 264 9 90-7 160 66 166 161 40 48 8 114-40 137H115C57 412 28 366 58 318Z" fill="url(#mintBg)"/>
+<ellipse cx="388" cy="482" rx="320" ry="35" fill="#d5f4e9"/>
+<g fill="#51cba2" opacity=".8"><path d="M64 414c-8-40 1-70 25-91 5 32 1 57-25 91Z"/><path d="M82 428c2-41 20-65 47-76-6 30-21 54-47 76Z"/><path d="M693 413c-7-34 3-62 26-83 3 30-3 54-26 83Z"/><path d="M676 432c5-34 22-58 49-72-8 29-24 52-49 72Z"/></g>
+<!-- Phone at the centre -->
+<g filter="url(#shadow)">
+ <rect x="291" y="82" width="176" height="357" rx="31" fill="#12243b"/>
+ <rect x="301" y="93" width="156" height="335" rx="23" fill="#fbfffe"/>
+ <rect x="346" y="103" width="65" height="7" rx="4" fill="#d2e1e4"/>
+ <path d="M379 153 415 174v42l-36 21-36-21v-42Z" fill="url(#mint)"/>
+ <path d="M379 153v42l36 21m-72-42 36 21 36-21" fill="none" stroke="#e5fff7" stroke-width="3"/>
+ <text x="379" y="271" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="800" fill="#102a43">Borrow Box</text>
+ <path d="M359 290h40" stroke="#12ab82" stroke-width="3" stroke-linecap="round"/>
+ <text x="379" y="315" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#087f68">Share today.</text>
+ <text x="379" y="332" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#087f68">Use tomorrow.</text>
+ <rect x="328" y="365" width="102" height="27" rx="13.5" fill="#e2f8f0"/>
+ <text x="379" y="382" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="800" fill="#087f68">FOR EVERYONE</text>
+</g>
+<!-- Person on the left -->
+<g>
+ <path d="M119 352c24-24 67-28 101-4l36 49c-13 22-43 26-72 14l-43-25Z" fill="#17395f"/>
+ <path d="M162 390c24-9 47 2 63 20l24 25c7 9 0 19-12 17l-43-11-40-27Z" fill="#284d77"/>
+ <path d="M142 426c17-8 32-5 46 3l13 12c2 9-7 14-21 12l-36-4c-13-2-15-15-2-23Z" fill="#f6fbfa"/>
+ <path d="M206 429c13-5 24 1 34 8l9 9c2 6-5 10-15 7l-25-6c-10-3-11-13-3-18Z" fill="#f6fbfa"/>
+ <path d="M151 246c16-22 52-29 78-10 17 13 27 43 30 80l-17 35c-26 13-64 11-89-8l-13-56Z" fill="url(#mint)"/>
+ <path d="M164 259c-19 15-21 36-13 58l17 30c6 8 17 4 14-7l-13-33 16-20Z" fill="#0a946f"/>
+ <path d="M220 258c15 13 21 30 19 50l-9 30c-3 10 9 15 15 6l15-30c9-27 0-50-21-69Z" fill="#98613f"/>
+ <path d="M184 222v28c10 13 27 14 38 0v-29Z" fill="#aa6d4c"/>
+ <ellipse cx="203" cy="204" rx="33" ry="38" fill="#bd805d"/>
+ <path d="M170 205c-5-28 8-52 34-54 19-1 34 12 35 34-11-2-17-10-21-19-13 15-29 21-47 20Z" fill="#13253b"/>
+ <path d="M175 188c-7 16-8 31-4 44-10-7-13-21-11-33 2-22 19-42 40-46-13 8-20 19-25 35Z" fill="#13253b"/>
+ <path d="M189 205h7m17 0h7" stroke="#173348" stroke-width="3" stroke-linecap="round"/>
+ <path d="M194 222c7 7 15 7 22 0" stroke="#874833" stroke-width="3" stroke-linecap="round" fill="none"/>
+ <path d="M177 257c9 8 17 12 27 12s18-4 27-12" stroke="#d1fff0" stroke-width="3" fill="none" stroke-linecap="round"/>
+ <path d="M183 274l21 17 21-17" stroke="#d1fff0" stroke-width="2.5" fill="none"/>
+</g>
+<!-- Laptop and backpack -->
+<g filter="url(#shadow)">
+ <path d="M72 316 180 300l22 76-113 8Z" fill="#243c57"/>
+ <path d="M81 322 174 309l17 61-91 7Z" fill="#dceaf4"/>
+ <circle cx="135" cy="342" r="5" fill="#fff"/>
+ <path d="M62 383 202 371l-13 12-117 11Z" fill="#93a9bc"/>
+ <path d="M221 365c0-12 11-21 25-21h26c14 0 23 12 23 27v66c-14 16-54 17-72 0Z" fill="#1c456b"/>
+ <path d="M239 360c0-12 8-20 19-20 12 0 20 8 20 20" fill="none" stroke="#32719a" stroke-width="7"/>
+ <rect x="246" y="386" width="23" height="27" rx="5" fill="#123552" stroke="#3476a0" stroke-width="2"/>
+</g>
+<!-- Person on the right -->
+<g>
+ <path d="M485 355c27-20 64-11 82 13l27 40c-12 20-38 25-65 13l-43-29Z" fill="url(#blue)"/>
+ <path d="M526 393c25-6 42 6 56 22l18 19c5 8-2 16-13 13l-39-10-30-25Z" fill="#315a83"/>
+ <path d="M560 430c15-6 26 0 36 8l7 11c1 7-7 10-16 6l-24-7c-9-3-11-12-3-18Z" fill="#f5faf8"/>
+ <path d="M488 246c16-20 49-27 72-9 18 15 27 46 27 81l-16 39c-24 14-61 10-82-9l-13-53Z" fill="#f3a928"/>
+ <path d="M500 260c-16 11-19 29-12 48l19 29c5 8 16 5 13-6l-13-31 14-20Z" fill="#d98f23"/>
+ <path d="M542 261c13 11 19 25 18 43l-7 22c-3 9 8 13 14 5l13-24c8-24 0-43-19-59Z" fill="#c1835c"/>
+ <path d="M520 224v28c9 11 24 12 35 0v-28Z" fill="#d99870"/>
+ <ellipse cx="537" cy="204" rx="31" ry="37" fill="#e9b18a"/>
+ <path d="M506 207c-7-25 3-48 25-55 20-7 39 7 40 31-11 1-20-8-25-18-8 15-21 23-40 23Z" fill="#17243a"/>
+ <path d="M509 189c-10 24-6 47 9 59-17-7-23-25-21-41 1-23 15-42 37-47-13 6-20 15-25 29Z" fill="#17243a"/>
+ <path d="M524 205h6m18 0h6" stroke="#173348" stroke-width="3" stroke-linecap="round"/>
+ <path d="M528 222c7 7 15 7 22 0" stroke="#a3654e" stroke-width="3" stroke-linecap="round" fill="none"/>
+ <path d="M515 253c10 8 18 11 29 11s19-3 28-11" stroke="#ffe7a8" stroke-width="3" fill="none" stroke-linecap="round"/>
+</g>
+<!-- Her phone -->
+<g transform="rotate(-13 574 277)">
+ <rect x="562" y="246" width="25" height="48" rx="5" fill="#14253c"/>
+ <rect x="565" y="250" width="19" height="38" rx="3" fill="#f5fffc"/>
+ <circle cx="574.5" cy="291" r="1.8" fill="#10a77b"/>
+</g>
+<!-- Books, camera and headphones -->
+<g filter="url(#shadow)">
+ <path d="M411 404h95l9 19h-95Z" fill="#0b9979"/><path d="M410 394h95l7 10h-95Z" fill="#f9cf58"/><path d="M416 383h85l5 11h-91Z" fill="#fffaf0"/><path d="M423 373h80l-1 10h-80Z" fill="#eb6b55"/><path d="M426 369h78" stroke="#2d8c78" stroke-width="3"/>
+ <rect x="386" y="421" width="54" height="37" rx="8" fill="#163149"/><rect x="393" y="414" width="19" height="9" rx="3" fill="#244e6d"/><circle cx="413" cy="440" r="12" fill="#8aa3b7"/><circle cx="413" cy="440" r="7" fill="#12243b"/><circle cx="430" cy="431" r="3" fill="#f8d265"/>
+ <path d="M526 402c0-23 16-39 36-39s36 16 36 39" stroke="#d7e9ed" stroke-width="10" fill="none"/><rect x="520" y="396" width="16" height="34" rx="7" fill="#d7e9ed"/><rect x="586" y="396" width="16" height="34" rx="7" fill="#d7e9ed"/>
+</g>
+<g font-family="Arial,sans-serif" font-weight="700"><text x="612" y="119" font-size="21" fill="#069b77" font-style="italic" transform="rotate(-8 612 119)">Share with</text><text x="625" y="144" font-size="21" fill="#069b77" font-style="italic" transform="rotate(-8 625 144)">everyone</text><path d="M606 154c22-9 51-13 80-18" stroke="#0ab48a" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M683 166c-9-8-19-2-14 8 3 5 9 9 14 13 5-4 12-10 14-15 2-9-8-13-14-6Z" fill="none" stroke="#0ab48a" stroke-width="2.5"/></g>
+</svg>
