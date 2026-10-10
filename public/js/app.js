@@ -44,11 +44,12 @@ function setTheme(next){
  $(".theme-toggle").text(mode==="dark"?"☀ Light":"☾ Dark").attr("aria-pressed",String(mode==="dark"));
 }
 function bindThemeToggle(){
+ const initial=document.documentElement.dataset.theme||(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
  $(".theme-toggle").off("click").on("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));
- setTheme(document.documentElement.dataset.theme||"light");
+ setTheme(initial);
 }
 function bbBrand(){
- return '<a class="bb-brand" href="/" aria-label="Borrow Box home"><span class="bb-brand-icon">◇</span><span class="bb-brand-name">Borrow <b>Box</b><small>Share · Rent · Buy</small></span></a>';
+ return '<a class="bb-brand" href="/" aria-label="Borrow Box home"><span class="bb-brand-icon" aria-hidden="true"><svg viewBox="0 0 40 40" role="presentation"><path d="M20 1 38 10.5 20 21 2 10.5Z" fill="#35ddb0"/><path d="M2 10.5 20 21v18L2 29.5Z" fill="#07866b"/><path d="M38 10.5 20 21v18l18-9.5Z" fill="#13b98f"/><path d="M20 1v20m-18-10.5 18 10.5 18-10.5" fill="none" stroke="#eafff8" stroke-width="1.7"/></svg></span><span class="bb-brand-name">Borrow <b>Box</b><small>Share · Rent · Buy</small></span></a>';
 }
 function authHeader(){
  return '<header class="auth-topbar"><div class="container auth-topbar-inner">'+bbBrand()+'<div class="auth-top-actions"><a href="/">Home</a><button type="button" class="theme-toggle" id="theme">☾ Dark</button></div></div></header>';
