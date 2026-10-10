@@ -34,15 +34,145 @@ async function getItems(){try{const d=await api("/items");return d.items?.length
 function renderCards(items,target="#items"){const box=$(target);if(!items.length){box.html('<div class="empty">No items found.</div>');return}box.html(items.map(itemCard).join(""))}
 function getLocation(){return new Promise((resolve,reject)=>{if(!navigator.geolocation)return reject(new Error("Location is not supported by this browser."));navigator.geolocation.getCurrentPosition(p=>resolve({latitude:p.coords.latitude,longitude:p.coords.longitude}),e=>reject(new Error("Please allow location access so the request can be submitted.")),{enableHighAccuracy:true,timeout:10000})})}
 
-async function getStarted(){
- $("#app").html('<main class="container hero"><section><span class="pill">A public buy & rent marketplace</span><h1>Borrow what you need. Sell what you no longer use.</h1><p>Borrow Box connects people who want to buy, rent or share useful products. Browse listings, contact sellers, request rentals and manage your own items in one simple place.</p><div class="actions"><a class="btn primary" href="/signup.html">Get Started</a><a class="btn secondary" href="/browse.html">Explore listings</a><button class="btn secondary" id="theme">◐ Theme</button></div><div class="grid section"><div class="card feature"><h3>Buy or Rent</h3><p class="muted">Choose permanent sale or a rental period for each listing.</p></div><div class="card feature"><h3>Chat privately</h3><p class="muted">Message sellers from a product without exposing private contact details.</p></div><div class="card feature"><h3>Track requests</h3><p class="muted">Manage approvals, returns, payments and notifications.</p></div></div></section><section><img src="/borrow-box-hero.svg" alt="Borrow Box marketplace illustration"></section></main><footer class="footer">Borrow Box · HTML + CSS + JavaScript/jQuery + Node.js + MongoDB</footer>');$("#theme").on("click",()=>{const next=document.documentElement.dataset.theme==="dark"?"light":"dark";document.documentElement.dataset.theme=next;localStorage.setItem("color-theme",next)})}
+async 
+function setTheme(next){
+ const mode=next==="dark"?"dark":"light";
+ document.documentElement.dataset.theme=mode;
+ try{localStorage.setItem("color-theme",mode)}catch(e){}
+ const src=mode==="dark"?"/borrow-box-hero-dark.svg":"/borrow-box-hero-light.svg";
+ $(".themeable-hero").attr("src",src);
+ $(".theme-toggle").text(mode==="dark"?"☀ Light":"☾ Dark").attr("aria-pressed",String(mode==="dark"));
+}
+function bindThemeToggle(){
+ $(".theme-toggle").off("click").on("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));
+ setTheme(document.documentElement.dataset.theme||"light");
+}
+function bbBrand(){
+ return '<a class="bb-brand" href="/" aria-label="Borrow Box home"><span class="bb-brand-icon">◇</span><span class="bb-brand-name">Borrow <b>Box</b><small>Share · Rent · Buy</small></span></a>';
+}
+function authHeader(){
+ return '<header class="auth-topbar"><div class="container auth-topbar-inner">'+bbBrand()+'<div class="auth-top-actions"><a href="/">Home</a><button type="button" class="theme-toggle" id="theme">☾ Dark</button></div></div></header>';
+}
+function heroAsset(className,alt){
+ const src=document.documentElement.dataset.theme==="dark"?"/borrow-box-hero-dark.svg":"/borrow-box-hero-light.svg";
+ return '<img class="'+className+' themeable-hero" src="'+src+'" alt="'+esc(alt)+'">';
+}
+function bindPasswordToggles(){
+ $(".password-toggle").off("click").on("click",function(){
+   const field=$("#"+$(this).data("target"));
+   const reveal=field.attr("type")==="password";
+   field.attr("type",reveal?"text":"password");
+   $(this).text(reveal?"Hide":"Show").attr("aria-label",reveal?"Hide password":"Show password");
+ });
+}
+
+function getStarted(){
+ $("#app").html(
+ '<main class="landing-page" id="home">'+
+   '<header class="landing-header"><div class="container landing-nav">'+
+     bbBrand()+
+     '<nav class="landing-links" aria-label="Main navigation"><a class="active" href="#home">Home</a><a href="#features">Features</a><a href="#how-it-works">How It Works</a></nav>'+
+     '<div class="landing-nav-actions"><button type="button" class="theme-toggle" id="theme">☾ Dark</button><a class="nav-login" href="/login.html">Login</a><a class="nav-signup" href="/signup.html">Sign Up</a></div>'+
+   '</div></header>'+
+   '<section class="container landing-hero">'+
+     '<div class="landing-copy"><span class="landing-eyebrow">Share&nbsp; · &nbsp;Rent&nbsp; · &nbsp;Buy</span>'+
+       '<h1>Everything You Need,<br>Just a <span>Borrow Away</span></h1>'+
+       '<p>Borrow Box is a community marketplace where everyone can borrow, rent, buy, or sell useful items. Save money, reuse more, and help each other!</p>'+
+       '<div class="landing-actions"><a class="landing-primary" href="/signup.html">Get Started <span>→</span></a><a class="landing-secondary" href="#how-it-works">Learn More</a></div>'+
+       '<div class="landing-trust"><span>✓ Easy to use</span><span>✓ Community sharing</span><span>✓ Made for everyone</span></div>'+
+     '</div>'+
+     '<div class="landing-art-wrap">'+heroAsset("landing-art","Two people sharing useful items with the Borrow Box app")+'</div>'+
+   '</section>'+
+   '<section class="container landing-features" id="features"><div class="landing-section-heading"><span>WHY CHOOSE BORROW BOX?</span><h2>Smart Features for Everyday Life</h2></div>'+
+     '<div class="landing-feature-grid">'+
+       '<article class="landing-feature"><span class="feature-icon green">◇</span><h3>Borrow &amp; Rent</h3><p>Get what you need for a day, a week, or longer.</p></article>'+
+       '<article class="landing-feature"><span class="feature-icon purple">◇</span><h3>Buy &amp; Sell</h3><p>Sell items you no longer use or find useful deals.</p></article>'+
+       '<article class="landing-feature"><span class="feature-icon blue">♧</span><h3>Community Sharing</h3><p>Connect with people and make useful items easier to access.</p></article>'+
+       '<article class="landing-feature"><span class="feature-icon coral">♻</span><h3>Save Money &amp; Waste Less</h3><p>Reuse more, spend less, and give items another life.</p></article>'+
+       '<article class="landing-feature"><span class="feature-icon amber">▯</span><h3>Easy &amp; Convenient</h3><p>Browse listings and manage exchanges in one place.</p></article>'+
+     '</div>'+
+   '</section>'+
+   '<section class="container landing-cta" id="how-it-works"><div class="landing-cta-art" aria-hidden="true">⌁</div><div class="landing-cta-copy"><h2>Ready to start sharing?</h2><p>Join the Borrow Box community. List an item, find something useful, and make more of what you already have.</p></div><a class="landing-primary" href="/signup.html">Get Started <span>→</span></a></section>'+
+   '<footer class="landing-footer"><strong>Borrow Box</strong><span>Share more. Waste less.</span></footer>'+
+ '</main>');
+ bindThemeToggle();
+}
 function login(){
- shell("Welcome back",'<div class="card form-card"><p class="muted">Sign in to your Borrow Box account.</p><div id="formMsg"></div><form id="loginForm"><div class="field"><label>Email</label><input id="email" type="email" required autocomplete="email"></div><div class="field"><label>Password</label><input id="password" type="password" required autocomplete="current-password"></div><div class="actions"><button class="btn primary" type="submit">Login</button><a class="btn secondary" href="/signup.html">Create account</a></div></form></div>');
- $("#loginForm").on("submit",async function(e){e.preventDefault();$("#formMsg").html("");try{const d=await api("/auth/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:$("#email").val(),password:$("#password").val()})});saveUser(d.user);go("/home.html")}catch(err){$("#formMsg").html('<div class="msg error">'+esc(err.message)+'</div>')}})
+ $("#app").html(authHeader()+
+ '<main class="container auth-layout">'+
+   '<section class="auth-visual-panel">'+
+     '<div class="auth-visual-copy"><span class="landing-eyebrow">SHARE · RENT · BUY</span><h1>Borrow what you <span>need.</span></h1><p>Borrow Box makes it simple for everyone to discover, borrow, rent and sell useful items in their community.</p></div>'+
+     heroAsset("auth-hero-image","Borrow Box sharing illustration")+
+     '<div class="auth-benefits"><div><span>⌕</span><strong>Find useful items</strong><small>Discover listings quickly.</small></div><div><span>↻</span><strong>Borrow or rent</strong><small>Choose what fits your needs.</small></div><div><span>◇</span><strong>Sell your items</strong><small>Give useful things another life.</small></div></div>'+
+     '<small class="auth-note">Borrow Box · Share more. Waste less.</small>'+
+   '</section>'+
+   '<section class="auth-form-panel"><span class="auth-kicker">WELCOME BACK</span><h2>Sign in to Borrow Box</h2><p class="auth-form-intro">Access your account and continue sharing.</p><div id="formMsg"></div>'+
+     '<form id="loginForm" class="auth-form">'+
+       '<div class="field"><label for="email">Email address</label><input id="email" type="email" placeholder="you@example.com" required autocomplete="email"></div>'+
+       '<div class="field"><label for="password">Password</label><div class="auth-password-wrap"><input id="password" type="password" placeholder="Enter your password" required autocomplete="current-password"><button type="button" class="password-toggle" data-target="password" aria-label="Show password">Show</button></div></div>'+
+       '<div class="auth-meta"><span class="hint">Use the email address linked to your account.</span></div>'+
+       '<button class="auth-submit" type="submit">Login <span>→</span></button>'+
+     '</form>'+
+     '<p class="auth-switch">Don’t have an account? <a href="/signup.html">Sign Up</a></p>'+
+   '</section>'+
+ '</main><footer class="auth-footer">Borrow Box <span>·</span> A community marketplace for everyone.</footer>');
+ bindThemeToggle();
+ bindPasswordToggles();
+ $("#loginForm").on("submit",async function(e){
+   e.preventDefault();$("#formMsg").html("");
+   try{
+     const d=await api("/auth/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:$("#email").val().trim(),password:$("#password").val()})});
+     saveUser(d.user);go("/home.html");
+   }catch(err){$("#formMsg").html('<div class="msg error">'+esc(err.message)+'</div>')}
+ });
 }
 function signup(){
- shell("Create your Borrow Box account",'<div class="card form-card"><p class="muted">Anyone can join. No nickname or OTP is required.</p><div id="formMsg"></div><form id="signupForm"><div class="form-grid"><div class="field"><label>Full name</label><input id="name" required></div><div class="field"><label>Phone number</label><input id="phone" inputmode="numeric" maxlength="10" required></div><div class="field"><label>Email ID</label><input id="email" type="email" required></div><div class="field"><label>Gender</label><select id="gender" required><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option><option>Prefer not to say</option></select></div><div class="field full"><label>Address</label><textarea id="address" required></textarea></div><div class="field"><label>Pincode</label><input id="pincode" inputmode="numeric" maxlength="6" required></div><div class="field"><label>State</label><input id="state" required></div><div class="field full"><label>Create password</label><input id="password" type="password" minlength="8" required><span class="hint">8+ characters with uppercase, lowercase, number and special character.</span></div></div><div class="actions"><button class="btn primary" type="submit">Sign Up</button><a class="btn secondary" href="/login.html">Already have an account?</a></div></form></div>');
- $("#signupForm").on("submit",async function(e){e.preventDefault();const email=$("#email").val().trim();const pass=$("#password").val();const phone=$("#phone").val().trim();const pin=$("#pincode").val().trim();const strong=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z0-9]).{8,}$/;if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/.test(email))return $("#formMsg").html('<div class="msg error">Please enter a valid email address.</div>');if(!/^\\d{10}$/.test(phone))return $("#formMsg").html('<div class="msg error">Phone number must contain exactly 10 digits.</div>');if(!/^\\d{6}$/.test(pin))return $("#formMsg").html('<div class="msg error">Pincode must contain exactly 6 digits.</div>');if(!strong.test(pass))return $("#formMsg").html('<div class="msg error">Password needs 8+ characters with uppercase, lowercase, number and special character.</div>');const payload={name:$("#name").val().trim(),email,password:pass,phone,gender:$("#gender").val(),address:$("#address").val().trim(),pincode:pin,state:$("#state").val().trim()};try{const d=await api("/auth/signup",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});saveUser(d.user);go("/home.html")}catch(err){$("#formMsg").html('<div class="msg error">'+esc(err.message)+'</div>')}})
+ $("#app").html(authHeader()+
+ '<main class="container auth-layout signup-layout">'+
+   '<section class="auth-visual-panel signup-visual-panel">'+
+     '<div class="auth-visual-copy"><span class="landing-eyebrow">A COMMUNITY THAT SHARES</span><h1>Join the Borrow Box <span>community.</span></h1><p>Create your account and start sharing useful items. Borrow what you need, sell what you no longer use, and help reduce waste.</p></div>'+
+     heroAsset("auth-hero-image","Borrow Box community illustration")+
+     '<div class="auth-benefits"><div><span>✦</span><strong>More Access</strong><small>Get what you need.</small></div><div><span>♧</span><strong>Build Community</strong><small>Help and support.</small></div><div><span>♻</span><strong>Less Waste</strong><small>A greener tomorrow.</small></div></div>'+
+     '<small class="auth-note">Anyone can join. No OTP is required.</small>'+
+   '</section>'+
+   '<section class="auth-form-panel signup-form-panel"><span class="auth-kicker">CREATE ACCOUNT</span><h2>Sign up to Borrow Box</h2><p class="auth-form-intro">Fill in your details to get started.</p><div id="formMsg"></div>'+
+     '<form id="signupForm" class="auth-form">'+
+       '<div class="form-grid">'+
+         '<div class="field"><label for="name">Full name</label><input id="name" placeholder="Enter your full name" required autocomplete="name"></div>'+
+         '<div class="field"><label for="phone">Phone number</label><input id="phone" type="tel" inputmode="numeric" maxlength="10" placeholder="10-digit phone number" required autocomplete="tel"></div>'+
+         '<div class="field"><label for="gender">Gender</label><select id="gender" required><option value="">Select gender</option><option>Male</option><option>Female</option><option>Other</option><option>Prefer not to say</option></select></div>'+
+         '<div class="field"><label for="email">Email ID</label><input id="email" type="email" placeholder="you@example.com" required autocomplete="email"></div>'+
+         '<div class="field full"><label for="address">Address</label><textarea id="address" rows="2" placeholder="Enter your complete address" required></textarea></div>'+
+         '<div class="field"><label for="pincode">Pincode</label><input id="pincode" inputmode="numeric" maxlength="6" placeholder="6-digit pincode" required autocomplete="postal-code"></div>'+
+         '<div class="field"><label for="state">State</label><input id="state" placeholder="Enter your state" required autocomplete="address-level1"></div>'+
+         '<div class="field full"><label for="password">Create password</label><div class="auth-password-wrap"><input id="password" type="password" placeholder="Create a strong password" minlength="8" required autocomplete="new-password"><button type="button" class="password-toggle" data-target="password" aria-label="Show password">Show</button></div><span class="hint password-hint">Use 8+ characters with uppercase, lowercase, number and special character.</span></div>'+
+       '</div>'+
+       '<button class="auth-submit" type="submit">Create Account <span>→</span></button>'+
+     '</form>'+
+     '<p class="auth-switch">Already have an account? <a href="/login.html">Sign In</a></p>'+
+   '</section>'+
+ '</main><footer class="auth-footer">Borrow Box <span>·</span> A community marketplace for everyone.</footer>');
+ bindThemeToggle();
+ bindPasswordToggles();
+ $("#phone").on("input",function(){$(this).val($(this).val().replace(/\D/g,"").slice(0,10))});
+ $("#pincode").on("input",function(){$(this).val($(this).val().replace(/\D/g,"").slice(0,6))});
+ $("#signupForm").on("submit",async function(e){
+   e.preventDefault();
+   const email=$("#email").val().trim().toLowerCase();
+   const pass=$("#password").val();
+   const phone=$("#phone").val().trim();
+   const pin=$("#pincode").val().trim();
+   const strong=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+   if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))return $("#formMsg").html('<div class="msg error">Please enter a valid email address.</div>');
+   if(!/^\d{10}$/.test(phone))return $("#formMsg").html('<div class="msg error">Phone number must contain exactly 10 digits.</div>');
+   if(!/^\d{6}$/.test(pin))return $("#formMsg").html('<div class="msg error">Pincode must contain exactly 6 digits.</div>');
+   if(!strong.test(pass))return $("#formMsg").html('<div class="msg error">Password needs 8+ characters with uppercase, lowercase, number and special character.</div>');
+   const payload={name:$("#name").val().trim(),email,password:pass,phone,gender:$("#gender").val(),address:$("#address").val().trim(),pincode:pin,state:$("#state").val().trim()};
+   try{
+     const d=await api("/auth/signup",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+     saveUser(d.user);go("/home.html");
+   }catch(err){$("#formMsg").html('<div class="msg error">'+esc(err.message)+'</div>')}
+ });
 }
 async function home(){
  const u=user();if(!u)return go("/login.html");
