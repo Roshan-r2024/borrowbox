@@ -640,3 +640,49 @@ h3, h4, h5, h6 { line-height: 1.35; }
   }
 }
 /* ===== END GLOBAL READABLE TEXT ===== */
+
+
+/* ===== NAVIGATION TEXT SIZE: 14px–18px ===== */
+nav a,
+nav button,
+.nav a,
+.nav button,
+.navbar a,
+.navbar button,
+.topbar a,
+.topbar button,
+header nav a,
+header nav button,
+.landing-nav a,
+.landing-nav button,
+.landing-links a,
+.landing-nav-actions a,
+.landing-nav-actions button,
+.global-navbar a,
+.global-navbar button {
+  font-size: clamp(14px, 1.1vw, 18px);
+  line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+  nav a,
+  nav button,
+  .nav a,
+  .nav button,
+  .navbar a,
+  .navbar button,
+  .topbar a,
+  .topbar button,
+  header nav a,
+  header nav button,
+  .landing-nav a,
+  .landing-nav button,
+  .landing-links a,
+  .landing-nav-actions a,
+  .landing-nav-actions button,
+  .global-navbar a,
+  .global-navbar button {
+    font-size: 14px;
+  }
+}
+/* ===== END NAVIGATION TEXT SIZE ===== */
