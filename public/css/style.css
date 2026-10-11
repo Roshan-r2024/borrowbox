@@ -714,3 +714,152 @@ canvas {
   }
 }
 /* ===== END SITE-WIDE FONT SIZE RANGE ===== */
+
+
+/* ===== FONT-AWARE CARD, FORM AND HIGHLIGHT LAYOUT REFINEMENT ===== */
+/* Give cards enough room for the site-wide 14px–18px typography. */
+.card,
+.landing-feature,
+.auth-form-panel,
+.auth-visual-panel,
+.landing-cta {
+  border-radius: 20px;
+}
+.card {
+  padding: 24px;
+}
+.landing-feature {
+  min-height: 205px;
+  padding: 22px 18px;
+}
+.landing-feature h3 {
+  font-size: clamp(15px, 1vw + 12px, 18px) !important;
+  line-height: 1.35;
+  margin-bottom: 11px;
+}
+.landing-feature p {
+  font-size: clamp(14px, .5vw + 12px, 16px) !important;
+  line-height: 1.55;
+}
+.landing-section-heading {
+  margin-bottom: 32px;
+}
+.landing-section-heading h2 {
+  line-height: 1.25;
+  margin-top: 12px;
+}
+.landing-cta {
+  padding: 24px 34px;
+  gap: 28px;
+}
+.landing-cta h2 {
+  font-size: clamp(16px, .8vw + 13px, 18px) !important;
+  line-height: 1.35;
+}
+.landing-cta p {
+  font-size: 14px !important;
+  line-height: 1.55;
+}
+.item-body {
+  padding: 18px;
+}
+.item-body h3,
+.item h3 {
+  font-size: clamp(15px, .8vw + 12px, 18px) !important;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+.item-body .price,
+.price {
+  font-size: clamp(17px, 1vw + 14px, 22px) !important;
+  line-height: 1.25;
+}
+.item img,
+.card.item > img {
+  height: clamp(165px, 17vw, 225px);
+}
+.pill,
+.badge,
+.tag,
+.chip {
+  padding: 6px 11px;
+  border: 1px solid var(--line);
+  font-weight: 750;
+}
+.field input,
+.field select,
+.field textarea,
+.toolbar input,
+.toolbar select {
+  min-height: 46px;
+  padding: 12px 14px;
+}
+.auth-form-panel .field label {
+  font-size: 14px !important;
+  line-height: 1.4;
+}
+.auth-form-panel .field input,
+.auth-form-panel .field select,
+.auth-form-panel .field textarea {
+  font-size: 14px !important;
+  min-height: 46px;
+  padding: 12px 14px;
+}
+.auth-form-panel .field textarea {
+  min-height: 80px;
+}
+.auth-form-panel {
+  padding: 36px;
+}
+.auth-form-panel h2 {
+  line-height: 1.2;
+}
+.landing-eyebrow,
+.auth-kicker {
+  padding: 8px 13px;
+  font-size: 14px !important;
+  letter-spacing: .4px;
+}
+.landing-links a.active:after,
+.landing-nav a.active:after,
+nav a.active:after {
+  height: 4px;
+  bottom: -3px;
+  border-radius: 4px;
+  box-shadow: 0 2px 0 rgba(7,159,123,.14);
+}
+.landing-copy h1 span,
+.auth-visual-copy h1 span {
+  text-decoration-line: underline;
+  text-decoration-color: var(--brand);
+  text-decoration-thickness: 5px;
+  text-underline-offset: 7px;
+  text-decoration-skip-ink: none;
+}
+.landing-feature:hover,
+.card:hover {
+  border-color: var(--brand);
+  box-shadow: 0 18px 42px rgba(7,159,123,.12);
+}
+@media (max-width: 900px) {
+  .card { padding: 20px; }
+  .landing-feature-grid { gap: 14px; }
+  .landing-feature { min-height: 185px; }
+  .auth-form-panel { padding: 28px; }
+}
+@media (max-width: 600px) {
+  .card { padding: 17px; }
+  .landing-feature-grid { gap: 12px; }
+  .landing-feature { min-height: 170px; padding: 16px 12px; }
+  .landing-cta { padding: 20px 17px; gap: 14px; }
+  .item-body { padding: 12px; }
+  .item img,
+  .card.item > img { height: 155px; }
+  .auth-form-panel { padding: 22px 18px; }
+  .landing-copy h1 span,
+  .auth-visual-copy h1 span {
+    text-decoration-thickness: 3px;
+    text-underline-offset: 5px;
+  }
+}
+/* ===== END FONT-AWARE LAYOUT REFINEMENT ===== */
