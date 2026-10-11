@@ -122,7 +122,9 @@ function login(){
    e.preventDefault();$("#formMsg").html("");
    try{
      const d=await api("/auth/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:$("#email").val().trim(),password:$("#password").val()})});
-     saveUser(d.user);go("/home.html");
+     if(!d.user||!d.user.email)throw new Error("Login succeeded but account details were not returned. Please try again.");
+     saveUser({...d.user,name:d.user.name||d.user.nickname||""});
+     window.location.replace("/home.html");
    }catch(err){$("#formMsg").html('<div class="msg error">'+esc(err.message)+'</div>')}
  });
 }
@@ -170,7 +172,9 @@ function signup(){
    const payload={name:$("#name").val().trim(),email,password:pass,phone,gender:$("#gender").val(),address:$("#address").val().trim(),pincode:pin,state:$("#state").val().trim()};
    try{
      const d=await api("/auth/signup",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
-     saveUser(d.user);go("/home.html");
+     if(!d.user||!d.user.email)throw new Error("Account created but account details were not returned. Please try again.");
+     saveUser({...d.user,name:d.user.name||d.user.nickname||""});
+     window.location.replace("/home.html");
    }catch(err){$("#formMsg").html('<div class="msg error">'+esc(err.message)+'</div>')}
  });
 }
