@@ -525,3 +525,118 @@ input[type="reset"] {
   }
 }
 /* ===== END BUTTON TYPOGRAPHY ===== */
+
+
+/* ===== GLOBAL READABLE TEXT: MEDIUM SIZE ===== */
+html {
+  font-size: 16px;
+}
+
+body {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+p,
+li,
+label,
+legend,
+small,
+figcaption,
+caption,
+.helper-text,
+.help-text,
+.form-text,
+.field-hint,
+.error-message,
+.success-message,
+.empty-state,
+.notice,
+.alert,
+.badge,
+.tag,
+.chip,
+.item-meta,
+.item-description,
+.item-body p,
+.item-body .description,
+.seller-info,
+.profile-info,
+.request-details,
+.chat-message,
+.notification-item,
+.footer-links a,
+footer p {
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+input,
+select,
+textarea {
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+label,
+legend {
+  font-weight: 500;
+}
+
+small,
+.small,
+.text-small,
+.muted.small,
+.helper-text,
+.help-text,
+.form-text,
+.field-hint {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+h1 { line-height: 1.2; }
+h2 { line-height: 1.25; }
+h3, h4, h5, h6 { line-height: 1.35; }
+
+@media (max-width: 600px) {
+  body { font-size: 15px; }
+  p,
+  li,
+  label,
+  legend,
+  small,
+  figcaption,
+  caption,
+  .helper-text,
+  .help-text,
+  .form-text,
+  .field-hint,
+  .error-message,
+  .success-message,
+  .empty-state,
+  .notice,
+  .alert,
+  .badge,
+  .tag,
+  .chip,
+  .item-meta,
+  .item-description,
+  .item-body p,
+  .item-body .description,
+  .seller-info,
+  .profile-info,
+  .request-details,
+  .chat-message,
+  .notification-item,
+  .footer-links a,
+  footer p {
+    font-size: 14px;
+  }
+  input,
+  select,
+  textarea {
+    font-size: 15px;
+  }
+}
+/* ===== END GLOBAL READABLE TEXT ===== */
