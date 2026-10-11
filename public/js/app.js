@@ -34,7 +34,6 @@ async function getItems(){try{const d=await api("/items");return d.items?.length
 function renderCards(items,target="#items"){const box=$(target);if(!items.length){box.html('<div class="empty">No items found.</div>');return}box.html(items.map(itemCard).join(""))}
 function getLocation(){return new Promise((resolve,reject)=>{if(!navigator.geolocation)return reject(new Error("Location is not supported by this browser."));navigator.geolocation.getCurrentPosition(p=>resolve({latitude:p.coords.latitude,longitude:p.coords.longitude}),e=>reject(new Error("Please allow location access so the request can be submitted.")),{enableHighAccuracy:true,timeout:10000})})}
 
-async 
 function setTheme(next){
  const mode=next==="dark"?"dark":"light";
  document.documentElement.dataset.theme=mode;
@@ -49,7 +48,7 @@ function bindThemeToggle(){
  setTheme(initial);
 }
 function bbBrand(){
- return '<a class="bb-brand" href="/" aria-label="Borrow Box home"><span class="bb-brand-icon" aria-hidden="true"><svg viewBox="0 0 40 40" role="presentation"><path d="M20 1 38 10.5 20 21 2 10.5Z" fill="#35ddb0"/><path d="M2 10.5 20 21v18L2 29.5Z" fill="#07866b"/><path d="M38 10.5 20 21v18l18-9.5Z" fill="#13b98f"/><path d="M20 1v20m-18-10.5 18 10.5 18-10.5" fill="none" stroke="#eafff8" stroke-width="1.7"/></svg></span><span class="bb-brand-name">Borrow <b>Box</b><small>Share · Rent · Buy</small></span></a>';
+ return '<a class="bb-brand" href="/" aria-label="Borrow Box home"><span class="bb-brand-icon" aria-hidden="true"><svg viewBox="0 0 40 40" role="presentation"><path d="M20 1 38 10.5 20 21 2 10.5Z" fill="#93c5fd"/><path d="M2 10.5 20 21v18L2 29.5Z" fill="#1d4ed8"/><path d="M38 10.5 20 21v18l18-9.5Z" fill="#2563eb"/><path d="M20 1v20m-18-10.5 18 10.5 18-10.5" fill="none" stroke="#eff6ff" stroke-width="1.7"/></svg></span><span class="bb-brand-name">Borrow <b>Box</b><small>Share · Rent · Buy</small></span></a>';
 }
 function authHeader(){
  return '<header class="auth-topbar"><div class="container auth-topbar-inner">'+bbBrand()+'<div class="auth-top-actions"><a href="/">Home</a><button type="button" class="theme-toggle" id="theme">☾ Dark</button></div></div></header>';
