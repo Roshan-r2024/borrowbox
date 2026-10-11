@@ -449,3 +449,79 @@ body { background: var(--bg); color: var(--text); }
   .landing-links { gap: 10px; }
   .landing-links a { font-size: 11px; }
 }
+
+
+/* ===== BUTTON TYPOGRAPHY: COMFORTABLE MEDIUM SIZE ===== */
+button,
+.btn,
+a.btn,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+.landing-primary,
+.landing-secondary,
+.auth-submit,
+.nav-login,
+.nav-signup,
+.theme-toggle,
+.landing-header button,
+.topbar button {
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+button,
+.btn,
+a.btn,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  padding: 10px 16px;
+}
+
+.landing-primary,
+.landing-secondary,
+.auth-submit {
+  font-size: 16px;
+  padding: 12px 19px;
+}
+
+.landing-nav-actions .nav-login,
+.landing-nav-actions .nav-signup,
+.landing-nav-actions .theme-toggle {
+  font-size: 14px;
+  padding: 9px 13px;
+}
+
+.item-body .btn.primary {
+  font-size: 15px;
+  padding: 11px 14px;
+}
+
+@media (max-width: 600px) {
+  button,
+  .btn,
+  a.btn,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"] {
+    font-size: 14px;
+    padding: 10px 13px;
+  }
+
+  .landing-primary,
+  .landing-secondary,
+  .auth-submit {
+    font-size: 15px;
+    padding: 12px 16px;
+  }
+
+  .landing-nav-actions .nav-login,
+  .landing-nav-actions .nav-signup,
+  .landing-nav-actions .theme-toggle {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+}
+/* ===== END BUTTON TYPOGRAPHY ===== */
