@@ -16,7 +16,7 @@ const borrowRequestSchema = new mongoose.Schema({
   landmark: { type: String, default: "", trim: true },
   location: { latitude: { type: Number }, longitude: { type: Number } },
   urgency: { type: String, enum: ["Normal", "Urgent"], default: "Normal" },
-  status: { type: String, enum: ["Pending", "Approved", "Rejected", "Returned"], default: "Pending" },
+  status: { type: String, enum: ["Pending", "Approved", "Rejected", "Returned", "Cancelled"], default: "Pending" },
   paymentMethod: { type: String, enum: ["UPI", "Cash", ""], default: "" },
   paymentStatus: { type: String, enum: ["Unpaid", "Paid"], default: "Unpaid" },
   paidAt: { type: Date },
