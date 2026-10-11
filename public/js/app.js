@@ -29,7 +29,34 @@ function bindCommon(){
  $("#logout").on("click",logout);
  $("#theme").on("click",()=>{const next=document.documentElement.dataset.theme==="dark"?"light":"dark";document.documentElement.dataset.theme=next;localStorage.setItem("color-theme",next)});
 }
-function itemCard(i){const id=encodeURIComponent(i._id||"");return '<article class="card item"><img src="'+esc(i.imageUrl||"/borrow-box-hero.svg")+'" onerror="this.src=&quot;/borrow-box-hero.svg&quot;" alt="'+esc(i.title)+'"><div class="item-body"><span class="pill">'+esc((i.listingType||"rent").toUpperCase())+'</span><h3>'+esc(i.title)+'</h3><div class="muted">'+esc(i.category||"Other")+' · '+esc(i.condition||"")+'</div><div class="price">₹'+Number(i.price||0).toLocaleString("en-IN")+' <small class="muted">'+(i.listingType==="rent"?"/ day":"one-time")+'</small></div><div class="muted">Seller: '+esc(i.owner||"Seller")+'</div><div class="actions"><a class="btn primary" href="/item-details.html?id='+id+'">View details</a></div></div></article>'}
+
+function productImage(item){
+ const title=String(item?.title||item?.name||"").toLowerCase();
+ const category=String(item?.category||"").toLowerCase();
+ const raw=item?.imageUrl||item?.imageURL||item?.imagePath||item?.image||item?.photo||item?.thumbnail||(Array.isArray(item?.images)?item.images[0]:"")||(Array.isArray(item?.photos)?item.photos[0]:"");
+ const uploaded=typeof raw==="string"?raw:(raw&&typeof raw==="object"?(raw.url||raw.path||raw.src||""):"");
+ if(uploaded && /^(https?:\/\/|\/)/i.test(uploaded)) return uploaded;
+ const photos=[
+  [/calculator|scientific calculator/,"https://images.unsplash.com/photo-1587145820266-a5951ee6f620?auto=format&fit=crop&w=900&q=85"],
+  [/headphone|earbud|earphone/,"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=85"],
+  [/laptop stand|laptop riser|laptop/,"https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=900&q=85"],
+  [/keyboard/,"https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=900&q=85"],
+  [/lamp|light/,"https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=85"],
+  [/backpack|bag/,"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85"],
+  [/football|soccer/,"https://images.unsplash.com/photo-1614632537423-1e6c2e7e0e9a?auto=format&fit=crop&w=900&q=85"],
+  [/badminton|racket/,"https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=900&q=85"],
+  [/book|textbook|novel|dsa|engineering mathematics/,"https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=900&q=85"],
+  [/notes|notebook|paper|journal/,"https://images.unsplash.com/photo-1455390582262-044c057f2156?auto=format&fit=crop&w=900&q=85"]
+ ];
+ const match=photos.find(([pattern])=>pattern.test(title));
+ if(match)return match[1];
+ if(category.includes("book")||category.includes("note"))return "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=900&q=85";
+ if(category.includes("electronic")||category.includes("tech"))return "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=85";
+ if(category.includes("sport"))return "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=900&q=85";
+ return "https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=900&q=85";
+}
+
+function itemCard(i){const id=encodeURIComponent(i._id||"");return '<article class="card item"><img src="'+esc(productImage(i))+'" onerror="this.src=&quot;/borrow-box-hero.svg&quot;" alt="'+esc(i.title)+'"><div class="item-body"><span class="pill">'+esc((i.listingType||"rent").toUpperCase())+'</span><h3>'+esc(i.title)+'</h3><div class="muted">'+esc(i.category||"Other")+' · '+esc(i.condition||"")+'</div><div class="price">₹'+Number(i.price||0).toLocaleString("en-IN")+' <small class="muted">'+(i.listingType==="rent"?"/ day":"one-time")+'</small></div><div class="muted">Seller: '+esc(i.owner||"Seller")+'</div><div class="actions"><a class="btn primary" href="/item-details.html?id='+id+'">View details</a></div></div></article>'}
 async function getItems(){try{const d=await api("/items");return d.items?.length?d.items:DEMO_ITEMS}catch(e){return DEMO_ITEMS}}
 function renderCards(items,target="#items"){const box=$(target);if(!items.length){box.html('<div class="empty">No items found.</div>');return}box.html(items.map(itemCard).join(""))}
 function getLocation(){return new Promise((resolve,reject)=>{if(!navigator.geolocation)return reject(new Error("Location is not supported by this browser."));navigator.geolocation.getCurrentPosition(p=>resolve({latitude:p.coords.latitude,longitude:p.coords.longitude}),e=>reject(new Error("Please allow location access so the request can be submitted.")),{enableHighAccuracy:true,timeout:10000})})}
@@ -219,7 +246,7 @@ async function itemDetails(){
  const id=new URLSearchParams(location.search).get("id");if(!id)return go("/browse.html");let item=null;try{item=(await api("/items/"+encodeURIComponent(id))).item}catch(e){item=DEMO_ITEMS.find(x=>x._id===id)}if(!item)return shell("Item not found",'<div class="empty">This listing could not be found.</div>');
  shell(item.title,'<div id="detail"></div>');
  const u=user();const own=u&&String(u.email).toLowerCase()===String(item.ownerEmail||"").toLowerCase();
- $("#detail").html('<div class="detail"><div><img src="'+esc(item.imageUrl||"/borrow-box-hero.svg")+'" onerror="this.src=&quot;/borrow-box-hero.svg&quot;" alt="'+esc(item.title)+'"></div><div class="card"><span class="pill">'+esc((item.listingType||"rent").toUpperCase())+'</span><h2>'+esc(item.title)+'</h2><div class="price">₹'+Number(item.price||0).toLocaleString("en-IN")+' '+(item.listingType==="rent"?'<small class="muted">/ day</small>':'')+'</div><p class="muted">'+esc(item.description)+'</p><div class="kv"><strong>Category</strong><span>'+esc(item.category)+'</span><strong>Condition</strong><span>'+esc(item.condition)+'</span><strong>Availability</strong><span>'+esc(item.availability)+'</span><strong>Seller</strong><span>'+esc(item.owner||"Seller")+'</span></div><div class="actions">'+(own?'<a class="btn secondary" href="/my-items.html">Manage my item</a>':u?'<button class="btn primary" id="requestBtn">'+(item.listingType==="sale"?"Request purchase":"Request to borrow")+'</button><button class="btn secondary" id="chatBtn">Chat with seller</button>':'<a class="btn primary" href="/login.html">Login to request</a>')+'</div><div id="requestBox"></div></div></div>');
+ $("#detail").html('<div class="detail"><div><img src="'+esc(productImage(item))+'" onerror="this.src=&quot;/borrow-box-hero.svg&quot;" alt="'+esc(item.title)+'"></div><div class="card"><span class="pill">'+esc((item.listingType||"rent").toUpperCase())+'</span><h2>'+esc(item.title)+'</h2><div class="price">₹'+Number(item.price||0).toLocaleString("en-IN")+' '+(item.listingType==="rent"?'<small class="muted">/ day</small>':'')+'</div><p class="muted">'+esc(item.description)+'</p><div class="kv"><strong>Category</strong><span>'+esc(item.category)+'</span><strong>Condition</strong><span>'+esc(item.condition)+'</span><strong>Availability</strong><span>'+esc(item.availability)+'</span><strong>Seller</strong><span>'+esc(item.owner||"Seller")+'</span></div><div class="actions">'+(own?'<a class="btn secondary" href="/my-items.html">Manage my item</a>':u?'<button class="btn primary" id="requestBtn">'+(item.listingType==="sale"?"Request purchase":"Request to borrow")+'</button><button class="btn secondary" id="chatBtn">Chat with seller</button>':'<a class="btn primary" href="/login.html">Login to request</a>')+'</div><div id="requestBox"></div></div></div>');
  if(u&&!own){$("#chatBtn").on("click",async()=>{try{const d=await api("/chats",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:u.email,itemId:item._id})});go("/chat.html?id="+encodeURIComponent(d._id))}catch(e){toast(e.message,true)}});$("#requestBtn").on("click",()=>requestForm(item))}
 }
 function requestForm(item){
