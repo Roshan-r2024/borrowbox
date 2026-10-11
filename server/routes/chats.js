@@ -26,20 +26,20 @@ router.post("/",async(req,res)=>{
   }
   if(!item)return res.status(404).json({message:"Product not found."});
   if(!buyerEmail||!sellerEmail)return res.status(422).json({message:"Buyer or seller account details are missing for this listing."});
-  let chat=order?await Chat.findOne({order:order._id}):await Chat.findOne({buyerEmail,sellerEmail,item:item._id});
+  // Demo seed listings use placeholder seller emails and have no real seller account.
+  // Do not create a one-sided conversation that nobody can receive.
+  const sellerAccount=await User.findOne({email:sellerEmail}).select("email").lean();
+  if(!sellerAccount)return res.status(409).json({message:"This sample listing has no registered seller account yet. Chat works on items listed by real Borrow Box users."});
+  // Keep one conversation per buyer + seller + item. This also lets a chat started
+  // from an order reuse the existing product conversation instead of hitting the
+  // unique buyerEmail/sellerEmail/item index and returning a database error.
+  const conversationFilter={buyerEmail,sellerEmail,item:item._id};
+  let chat=await Chat.findOne(conversationFilter);
   if(!chat){
-   try { chat=await Chat.create({order:order?._id||null,item:item._id,itemTitle:item.title,buyerEmail,buyerName,sellerEmail,sellerName,messages:[]}); }
-   catch(createError){
-    if(createError.code===11000){
-     chat=order?await Chat.findOne({order:order._id}):await Chat.findOne({buyerEmail,sellerEmail,item:item._id});
-     // Older local databases may retain a unique index from a previous Chat schema.
-     // If the duplicate does not match this exact conversation, remove the stale index
-     // and retry once so a new product chat can be created.
-     if(!chat && !order){
-      try { await Chat.collection.dropIndex("buyerEmail_1_sellerEmail_1_item_1"); } catch(indexError) { if(indexError.codeName!=="IndexNotFound" && indexError.code!==27) console.error("CHAT INDEX CLEANUP ERROR:",indexError.message); }
-      chat=await Chat.create({item:item._id,itemTitle:item.title,buyerEmail,buyerName,sellerEmail,sellerName,messages:[]});
-     }
-    }
+   try {
+    chat=await Chat.create({order:order?._id||null,item:item._id,itemTitle:item.title,buyerEmail,buyerName,sellerEmail,sellerName,messages:[]});
+   } catch(createError) {
+    if(createError.code===11000)chat=await Chat.findOne(conversationFilter);
     if(!chat)throw createError;
    }
   }
