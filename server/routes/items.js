@@ -42,5 +42,25 @@ router.put("/:id", (req,res) => upload.single("image")(req,res,async uploadError
   return res.json({message:"Item updated successfully.",item:await enrichItem(item)});
  }catch(error){console.error("UPDATE ITEM ERROR:",error);return res.status(500).json({message:"Unable to update item."});}
 }));
+// Dedicated JSON endpoint for pausing/resuming a listing. This avoids multipart-form parsing for a simple status change.
+router.patch("/:id/status",async(req,res)=>{
+ try{
+  if(!databaseReady(res))return;
+  const id=String(req.params.id||"");
+  if(!mongoose.isValidObjectId(id))return res.status(400).json({message:"Invalid item ID. Refresh My Items and try again."});
+  const email=String(req.body?.ownerEmail||"").trim().toLowerCase();
+  const status=String(req.body?.status||"");
+  if(!email)return res.status(400).json({message:"Your account email is required to manage this item."});
+  if(!["Available","Unavailable"].includes(status))return res.status(400).json({message:"Choose Available or Unavailable."});
+  const item=await Item.findById(id);
+  if(!item)return res.status(404).json({message:"Item not found. Refresh My Items and try again."});
+  if(String(item.ownerEmail||"").trim().toLowerCase()!==email)return res.status(403).json({message:"You can only manage items listed by your account."});
+  if(item.status==="Borrowed")return res.status(409).json({message:"This item is currently borrowed. You can change its listing status after it is returned."});
+  if(item.status==="Sold")return res.status(409).json({message:"This item has already been sold and cannot be paused or reopened."});
+  item.status=status;
+  await item.save();
+  return res.json({message:status==="Unavailable"?"Listing paused. It is now hidden from Browse.":"Listing is available again and visible in Browse.",item:await enrichItem(item)});
+ }catch(error){console.error("CHANGE ITEM STATUS ERROR:",error);return res.status(500).json({message:"Unable to change listing status. Please try again."});}
+});
 router.delete("/:id",async(req,res)=>{try{if(!databaseReady(res))return;const {ownerEmail}=req.body||{};if(!ownerEmail)return res.status(400).json({message:"Seller email is required."});const item=await Item.findById(req.params.id);if(!item)return res.status(404).json({message:"Item not found."});if(String(item.ownerEmail||"").toLowerCase()!==String(ownerEmail).trim().toLowerCase())return res.status(403).json({message:"You can only delete your own item."});if(item.status==="Borrowed")return res.status(409).json({message:"A borrowed item cannot be deleted until it is returned."});const imagePath=item.imageUrl?.startsWith("/uploads/")?path.join(__dirname,"..",item.imageUrl):null;await Item.findByIdAndDelete(req.params.id);if(imagePath)fs.unlink(imagePath,()=>{});res.json({message:"Item deleted successfully."});}catch(error){console.error("DELETE ITEM ERROR:",error);res.status(500).json({message:"Unable to delete item."});}});
 module.exports=router;
