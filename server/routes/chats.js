@@ -30,7 +30,16 @@ router.post("/",async(req,res)=>{
   if(!chat){
    try { chat=await Chat.create({order:order?._id||null,item:item._id,itemTitle:item.title,buyerEmail,buyerName,sellerEmail,sellerName,messages:[]}); }
    catch(createError){
-    if(createError.code===11000)chat=order?await Chat.findOne({order:order._id}):await Chat.findOne({buyerEmail,sellerEmail,item:item._id});
+    if(createError.code===11000){
+     chat=order?await Chat.findOne({order:order._id}):await Chat.findOne({buyerEmail,sellerEmail,item:item._id});
+     // Older local databases may retain a unique index from a previous Chat schema.
+     // If the duplicate does not match this exact conversation, remove the stale index
+     // and retry once so a new product chat can be created.
+     if(!chat && !order){
+      try { await Chat.collection.dropIndex("buyerEmail_1_sellerEmail_1_item_1"); } catch(indexError) { if(indexError.codeName!=="IndexNotFound" && indexError.code!==27) console.error("CHAT INDEX CLEANUP ERROR:",indexError.message); }
+      chat=await Chat.create({item:item._id,itemTitle:item.title,buyerEmail,buyerName,sellerEmail,sellerName,messages:[]});
+     }
+    }
     if(!chat)throw createError;
    }
   }
