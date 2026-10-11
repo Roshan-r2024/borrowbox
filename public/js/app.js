@@ -176,8 +176,31 @@ function signup(){
 }
 async function home(){
  const u=user();if(!u)return go("/login.html");
- shell("Hello, "+(u.nickname||u.name||"there"),'<p class="muted">Find something useful, list an item, or manage your current requests.</p><div class="actions"><a class="btn primary" href="/browse.html">Browse items</a><a class="btn secondary" href="/list-item.html">List an item</a></div><section class="section"><div class="items" id="items"></div></section>');
- const items=await getItems();renderCards(items.slice(0,8));
+ const displayName=esc(u.nickname||u.name||"there");
+ $("#app").html(nav()+
+ '<main class="home-page">'+
+   '<section class="home-hero container">'+
+     '<div class="home-hero-copy">'+
+       '<span class="home-eyebrow"><span class="home-eyebrow-dot"></span> YOUR COMMUNITY MARKETPLACE</span>'+
+       '<h1>Good things are <span>closer than you think.</span></h1>'+
+       '<p>Welcome back, '+displayName+'! Find useful things to rent or buy, or give your own items a new home.</p>'+
+       '<div class="home-hero-actions"><a class="btn primary home-main-btn" href="/browse.html">Explore items <span>→</span></a><a class="btn secondary home-secondary-btn" href="/list-item.html">＋ List an item</a></div>'+
+       '<div class="home-trust-row"><span>✓ Easy to browse</span><span>✓ Buy or rent</span><span>✓ For everyone</span></div>'+
+     '</div>'+
+     '<div class="home-hero-art"><div class="home-art-glow"></div>'+heroAsset("home-hero-image","Borrow Box community sharing illustration")+'<div class="home-float-card home-float-top"><span class="home-float-icon">↗</span><span><strong>Find more value</strong><small>Buy less, share more</small></span></div><div class="home-float-card home-float-bottom"><span class="home-float-icon">✓</span><span><strong>Ready when you are</strong><small>Discover useful finds</small></span></div></div>'+
+   '</section>'+
+   '<section class="home-category-section"><div class="container"><div class="home-section-heading"><div><span class="home-section-kicker">FIND YOUR NEXT USEFUL THING</span><h2>Explore categories</h2></div><a class="home-text-link" href="/browse.html">View all items <span>→</span></a></div>'+
+     '<div class="home-category-grid">'+
+       '<a class="home-category-card" href="/browse.html"><span class="home-category-icon home-icon-blue">⌘</span><strong>Electronics</strong><small>Gadgets & accessories</small><span class="home-category-arrow">↗</span></a>'+
+       '<a class="home-category-card" href="/browse.html"><span class="home-category-icon home-icon-purple">▤</span><strong>Books & Notes</strong><small>Learn something new</small><span class="home-category-arrow">↗</span></a>'+
+       '<a class="home-category-card" href="/browse.html"><span class="home-category-icon home-icon-green">⚽</span><strong>Sports</strong><small>Gear up and play</small><span class="home-category-arrow">↗</span></a>'+
+       '<a class="home-category-card" href="/browse.html"><span class="home-category-icon home-icon-orange">⌂</span><strong>Everyday items</strong><small>Useful things for life</small><span class="home-category-arrow">↗</span></a>'+
+     '</div></div></section>'+
+   '<section class="container home-featured-section"><div class="home-section-heading"><div><span class="home-section-kicker">HANDPICKED FOR YOU</span><h2>Featured items</h2><p>Discover something useful for your next project, outing, or everyday need.</p></div><a class="home-text-link" href="/browse.html">Browse marketplace <span>→</span></a></div><div class="items home-items-grid" id="homeItems"></div></section>'+
+   '<section class="container home-sell-banner"><div class="home-sell-icon">＋</div><div class="home-sell-copy"><span class="home-section-kicker">HAVE SOMETHING TO SHARE?</span><h2>Turn unused items into useful finds.</h2><p>List it for sale or rent and help someone find exactly what they need.</p></div><a class="btn primary home-main-btn" href="/list-item.html">List your item <span>→</span></a></section>'+
+ '</main><footer class="footer home-footer">Borrow Box · Buy, rent and share useful things.</footer>');
+ bindCommon();
+ const items=await getItems();renderCards(items.slice(0,8),"#homeItems");
 }
 async function browse(){
  shell("Browse Borrow Box",'<div class="toolbar"><input id="search" placeholder="Search products..."><select id="category"><option value="">All categories</option><option>Books</option><option>Electronics</option><option>Notes</option><option>Sports</option><option>Others</option></select><select id="type"><option value="">Buy or rent</option><option value="sale">Sale</option><option value="rent">Rent</option></select></div><div id="items" class="items"></div>');
