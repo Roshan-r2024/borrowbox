@@ -1097,3 +1097,7 @@ nav a.active:after {
 .chat-seller-btn{white-space:nowrap}
 .chat-seller-btn:disabled{opacity:.65;cursor:wait}
 @media(max-width:760px){.chat-layout{grid-template-columns:1fr;min-height:0}.chat-layout>.card{padding:15px}.chat-layout>.card:first-child{max-height:270px;overflow:auto}.messages{min-height:220px;max-height:48vh}.chat-compose{gap:7px}.chat-compose input{padding:10px}.chat-compose .btn{padding:10px 12px}.chat-seller-btn{font-size:13px;padding:9px 10px}}
+
+/* Manage Items controls */
+.manage-item-panel{border-top:1px solid var(--line);margin-top:16px;padding-top:14px}.manage-item-status{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px}.manage-item-status strong{border-radius:999px;background:var(--soft);padding:4px 10px;font-size:12px}.manage-item-actions{margin-top:12px;gap:8px}.manage-item-actions .btn{padding:9px 12px;font-size:13px}.manage-item-editor{margin-top:24px;scroll-margin-top:90px}.manage-item-editor-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:18px}.manage-item-editor-head h2{margin:0}.manage-item-editor .form-grid{margin-top:12px}.manage-item-editor textarea{min-height:110px}
+@media(max-width:640px){.manage-item-actions .btn{flex:1 1 42%}.manage-item-editor-head{align-items:center}.manage-item-editor-head h2{font-size:23px}}
