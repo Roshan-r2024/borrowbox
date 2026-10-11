@@ -262,18 +262,66 @@ async function profile(){
  $("#profileForm").on("submit",async e=>{e.preventDefault();const fd=new FormData();fd.append("email",u.email);fd.append("nickname",$("#nickname").val());fd.append("phone",$("#phone").val());if($("#profilePicture")[0].files[0])fd.append("profilePicture",$("#profilePicture")[0].files[0]);try{const d=await api("/auth/profile",{method:"PUT",body:fd});saveUser(d.user);toast(d.message)}catch(err){$("#formMsg").html('<div class="msg error">'+esc(err.message)+'</div>')}})
 }
 async function myItems(){
- const u=user();if(!u)return go("/login.html");shell("My Items",'<div class="actions"><a class="btn primary" href="/list-item.html">+ List new item</a></div><div id="myItems" class="items"></div><section class="section"><h2>My requests</h2><div id="requests"></div></section>');const items=await getItems();renderCards(items.filter(i=>String(i.ownerEmail||"").toLowerCase()===String(u.email).toLowerCase()),"#myItems");try{const d=await api("/borrow-requests/borrower/"+encodeURIComponent(u.email));const owner=await api("/borrow-requests/owner/"+encodeURIComponent(u.email));const rows=[...(d.requests||[]).map(x=>({...x,role:"Buyer/Borrower"})),...(owner.requests||[]).map(x=>({...x,role:"Seller"}))];$("#requests").html(rows.length?'<table class="table"><thead><tr><th>Item</th><th>Role</th><th>Type</th><th>Status</th><th>Action</th></tr></thead><tbody>'+rows.map(r=>'<tr><td>'+esc(r.itemTitle)+'</td><td>'+r.role+'</td><td>'+esc(r.requestType)+'</td><td>'+esc(r.status)+'</td><td>'+(r.role==="Seller"&&r.status==="Pending"?'<button class="btn primary approve" data-id="'+r._id+'">Approve</button> <button class="btn danger reject" data-id="'+r._id+'">Reject</button>':r.role==="Buyer/Borrower"&&r.status==="Pending"?'<button class="btn danger cancel-request" data-id="'+r._id+'">Cancel Request</button>':r.role==="Buyer/Borrower"&&r.status==="Approved"&&r.requestType==="Borrow"?'<button class="btn secondary return" data-id="'+r._id+'">Mark returned</button>':'')+'</td></tr>').join("")+'</tbody></table>':'<div class="empty">No requests yet.</div>');$(".approve,.reject,.return,.cancel-request").on("click",async function(){const id=$(this).data("id");const a=$(this).hasClass("approve")?"approve":$(this).hasClass("reject")?"reject":$(this).hasClass("cancel-request")?"cancel":"return";if(a==="cancel"&&!window.confirm("Cancel this request? This action cannot be undone."))return;const options={method:"PUT"};if(a==="cancel"){options.headers={"Content-Type":"application/json"};options.body=JSON.stringify({email:u.email})}try{toast((await api("/borrow-requests/"+id+"/"+a,options)).message);setTimeout(myItems,500)}catch(e){toast(e.message,true)}})}catch(e){$("#requests").html('<div class="msg error">'+esc(e.message)+'</div>')}}
+ const u=user();if(!u)return go("/login.html");shell("My Items",'<div class="actions"><a class="btn primary" href="/list-item.html">+ List new item</a></div><div id="myItems" class="items"></div><section class="section"><h2>My requests</h2><div id="requests"></div></section>');const items=await getItems();renderCards(items.filter(i=>String(i.ownerEmail||"").toLowerCase()===String(u.email).toLowerCase()),"#myItems");try{const d=await api("/borrow-requests/borrower/"+encodeURIComponent(u.email));const owner=await api("/borrow-requests/owner/"+encodeURIComponent(u.email));const rows=[...(d.requests||[]).map(x=>({...x,role:"Buyer/Borrower"})),...(owner.requests||[]).map(x=>({...x,role:"Seller"}))];$("#requests").html(rows.length?'<table class="table"><thead><tr><th>Item</th><th>Role</th><th>Type</th><th>Status</th><th>Action</th></tr></thead><tbody>'+rows.map(r=>'<tr><td>'+esc(r.itemTitle)+'</td><td>'+r.role+'</td><td>'+esc(r.requestType)+'</td><td>'+esc(r.status)+'</td><td>'+(r.role==="Seller"&&r.status==="Pending"?'<button class="btn primary approve" data-id="'+r._id+'">Approve</button> <button class="btn danger reject" data-id="'+r._id+'">Reject</button>':r.role==="Buyer/Borrower"&&r.status==="Pending"?'<button class="btn danger cancel-request" data-id="'+r._id+'">Cancel Request</button>':r.role==="Buyer/Borrower"&&r.status==="Approved"&&r.requestType==="Borrow"?'<button class="btn secondary return" data-id="'+r._id+'">Mark returned</button>':'')+'</td></tr>').join("")+'</tbody></table>':'<div class="empty">No requests yet.</div>');$(".approve,.reject,.return,.cancel-request").on("click",async function(){const button=$(this),id=String(button.attr("data-id")||"");const a=button.hasClass("approve")?"approve":button.hasClass("reject")?"reject":button.hasClass("cancel-request")?"cancel":"return";if(a==="cancel"&&!window.confirm("Cancel this request? This action cannot be undone."))return;if(!/^[a-f0-9]{24}$/i.test(id)){toast("This request has an invalid ID. Refresh the page and try again.",true);return}const options={method:"PUT"};if(a==="cancel"){options.headers={"Content-Type":"application/json"};options.body=JSON.stringify({email:u.email})}button.prop("disabled",true).text(a==="cancel"?"Cancelling…":"Please wait…");try{toast((await api("/borrow-requests/"+encodeURIComponent(id)+"/"+a,options)).message);await myItems()}catch(e){toast(e.message,true);button.prop("disabled",false).text(a==="cancel"?"Cancel Request":a==="approve"?"Approve":a==="reject"?"Reject":"Mark returned")}})}catch(e){$("#requests").html('<div class="msg error">'+esc(e.message)+'</div>')}}
 async function history(){
  const u=user();if(!u)return go("/login.html");shell("Seller History",'<div id="history"></div>');try{const d=await api("/borrow-requests/owner/"+encodeURIComponent(u.email));const rows=d.requests||[];$("#history").html(rows.length?'<table class="table"><thead><tr><th>Item</th><th>Buyer</th><th>Type</th><th>Status</th><th>Dates</th></tr></thead><tbody>'+rows.map(r=>'<tr><td>'+esc(r.itemTitle)+'</td><td>'+esc(r.borrower)+'</td><td>'+esc(r.requestType)+'</td><td>'+esc(r.status)+'</td><td>'+(r.startDate?new Date(r.startDate).toLocaleDateString("en-IN")+" → "+new Date(r.endDate).toLocaleDateString("en-IN"):"Permanent sale")+'</td></tr>').join("")+'</tbody></table>':'<div class="empty">No seller transactions yet.</div>')}catch(e){$("#history").html('<div class="msg error">'+esc(e.message)+'</div>')}}
 async function chat(){
- const u=user();if(!u)return go("/login.html");shell("Chat",'<div class="chat-layout"><aside class="card"><h3>Conversations</h3><div id="chatList" class="chat-list"></div></aside><section class="card"><div id="chatHeader" class="empty">Select a conversation.</div><div id="messages" class="messages hidden"></div><form id="chatForm" class="chat-compose hidden"><input id="chatText" placeholder="Write a message..." maxlength="2000"><button class="btn primary">Send</button></form></section></div>');
- let chats=[];try{const result=await api("/chats/user/"+encodeURIComponent(u.email));chats=Array.isArray(result)?result:(result.chats||result.items||[])}catch(e){$("#chatList").html('<div class="msg error">'+esc(e.message||"Could not load conversations.")+'</div>')}
- if(!chats.length){$("#chatList").html('<div class="chat-empty"><div class="chat-empty-icon">✉</div><h4>No conversations yet</h4><p>Open any product and choose <strong>Chat with seller</strong> to ask a question or discuss a listing.</p><a class="btn primary" href="/browse.html">Browse items</a></div>');return}
- $("#chatList").html(chats.map(c=>'<button type="button" class="chat-row" data-id="'+esc(c._id||c.id||"")+'"><span class="chat-avatar">'+esc(String(c.otherName||c.sellerName||c.buyerName||"U").trim().charAt(0).toUpperCase())+'</span><span class="chat-row-copy"><strong>'+esc(c.otherName||c.sellerName||c.buyerName||"Seller")+'</strong><span class="muted">'+esc(c.itemTitle||"Product chat")+'</span></span><span class="chat-row-arrow">›</span></button>').join(""));
- async function openChat(id){$(".chat-row").removeClass("active");$('.chat-row[data-id="'+id+'"]').addClass("active");try{const c=await api("/chats/"+id+"?email="+encodeURIComponent(u.email));$("#chatHeader").html('<div class="chat-conversation-heading"><span class="chat-avatar large">'+esc(String(u.email.toLowerCase()===String(c.buyerEmail||"").toLowerCase()?c.sellerName||"S":c.buyerName||"B").trim().charAt(0).toUpperCase())+'</span><div><h3>'+esc(u.email.toLowerCase()===String(c.buyerEmail||"").toLowerCase()?c.sellerName||"Seller":c.buyerName||"Buyer")+'</h3><div class="muted">'+esc(c.itemTitle||"Borrow Box item")+'</div></div></div>');$("#messages").removeClass("hidden").html((c.messages||[]).map(m=>'<div class="bubble-wrap '+(String(m.senderEmail||"").toLowerCase()===u.email.toLowerCase()?"mine":"")+'"><div class="bubble">'+esc(m.text||m.message||"")+'</div></div>').join("")||'<div class="chat-empty-message">This is the start of your conversation. Say hello!</div>');$("#chatForm").removeClass("hidden").data("id",id);$("#messages").scrollTop($("#messages")[0].scrollHeight)}catch(e){toast(e.message,true)}}
- $(".chat-row").on("click",function(){openChat($(this).data("id"))});$("#chatForm").on("submit",async function(e){e.preventDefault();const id=$(this).data("id"),message=$("#chatText").val().trim();if(!message)return;const send=$(this).find("button[type=submit],button:not([type])").first();send.prop("disabled",true).text("Sending…");try{await api("/chats/"+id+"/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:u.email,text:message})});$("#chatText").val("");await openChat(id)}catch(e){toast(e.message,true)}finally{send.prop("disabled",false).text("Send")}});const initial=new URLSearchParams(location.search).get("id");openChat(initial||chats[0]._id)
+ const u=user();
+ if(!u)return go("/login.html");
+ shell("Chat",'<div class="chat-layout"><aside class="card"><h3>Conversations</h3><div id="chatList" class="chat-list"><div class="muted">Loading conversations…</div></div></aside><section class="card"><div id="chatHeader" class="empty">Select a conversation.</div><div id="messages" class="messages hidden" aria-live="polite"></div><form id="chatForm" class="chat-compose hidden"><input id="chatText" placeholder="Write a message..." maxlength="2000" autocomplete="off"><button class="btn primary" type="submit">Send</button></form></section></div>');
+ let chats=[],activeChatId=new URLSearchParams(location.search).get("id")||"",loadingMessages=false;
+ function renderChatList(){
+  if(!chats.length){$("#chatList").html('<div class="chat-empty"><div class="chat-empty-icon">✉</div><h4>No conversations yet</h4><p>Open an item listed by a registered seller and choose <strong>Chat with seller</strong>.</p><a class="btn primary" href="/browse.html">Browse items</a></div>');return}
+  $("#chatList").html(chats.map(c=>'<button type="button" class="chat-row '+(String(c._id||c.id)===String(activeChatId)?"active":"")+'" data-id="'+esc(c._id||c.id||"")+'"><span class="chat-avatar">'+esc(String(c.otherName||c.sellerName||c.buyerName||"U").trim().charAt(0).toUpperCase())+'</span><span class="chat-row-copy"><strong>'+esc(c.otherName||c.sellerName||c.buyerName||"Seller")+'</strong><span class="muted">'+esc(c.itemTitle||"Product chat")+'</span></span><span class="chat-row-arrow">›</span></button>').join(""));
+  $(".chat-row").off("click").on("click",function(){openChat(String($(this).data("id")||""))});
+ }
+ async function loadChats(){
+  try{
+   const result=await api("/chats/user/"+encodeURIComponent(u.email));
+   chats=Array.isArray(result)?result:(result.chats||result.items||[]);
+   renderChatList();
+   if(!activeChatId&&chats.length)activeChatId=String(chats[0]._id||chats[0].id||"");
+   if(activeChatId)await openChat(activeChatId,true);
+  }catch(e){$("#chatList").html('<div class="msg error">'+esc(e.message||"Could not load conversations.")+'</div>')}
+ }
+ async function openChat(id,quiet=false){
+  if(!id||loadingMessages)return;
+  activeChatId=String(id);
+  loadingMessages=true;
+  $(".chat-row").removeClass("active");
+  $('.chat-row[data-id="'+activeChatId+'"]').addClass("active");
+  try{
+   const c=await api("/chats/"+encodeURIComponent(activeChatId)+"?email="+encodeURIComponent(u.email));
+   const isBuyer=String(u.email).toLowerCase()===String(c.buyerEmail||"").toLowerCase();
+   const otherName=isBuyer?(c.sellerName||"Seller"):(c.buyerName||"Buyer");
+   $("#chatHeader").html('<div class="chat-conversation-heading"><span class="chat-avatar large">'+esc(String(otherName).trim().charAt(0).toUpperCase())+'</span><div><h3>'+esc(otherName)+'</h3><div class="muted">'+esc(c.itemTitle||"Borrow Box item")+'</div></div></div>');
+   $("#messages").removeClass("hidden").html((c.messages||[]).map(m=>'<div class="bubble-wrap '+(String(m.senderEmail||"").toLowerCase()===u.email.toLowerCase()?"mine":"")+'"><div class="bubble">'+esc(m.text||m.message||"")+'</div></div>').join("")||'<div class="chat-empty-message">This is the start of your conversation. Say hello!</div>');
+   $("#chatForm").removeClass("hidden").data("id",activeChatId);
+   $("#messages").scrollTop($("#messages")[0].scrollHeight);
+  }catch(e){
+   if(!quiet)toast(e.message||"Could not open this conversation.",true);
+   if(!$("#messages").children().length)$("#chatHeader").html('<div class="msg error">'+esc(e.message||"Could not open this conversation.")+'</div>');
+  }finally{loadingMessages=false}
+ }
+ $("#chatForm").off("submit").on("submit",async function(e){
+  e.preventDefault();
+  const id=String($(this).data("id")||activeChatId||""),message=$("#chatText").val().trim();
+  if(!id){toast("Open a conversation before sending a message.",true);return}
+  if(!message)return;
+  const send=$(this).find("button").first();
+  send.prop("disabled",true).text("Sending…");
+  try{
+   await api("/chats/"+encodeURIComponent(id)+"/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:u.email,text:message})});
+   $("#chatText").val("");
+   await openChat(id,true);
+  }catch(e){toast(e.message||"Message could not be sent.",true)}
+  finally{send.prop("disabled",false).text("Send")}
+ });
+ await loadChats();
+ if(activeChatId&&!chats.some(c=>String(c._id||c.id)===activeChatId))await openChat(activeChatId,true);
+ // Poll for new conversations and messages so the other participant sees updates without a manual refresh.
+ window.setInterval(()=>{if(!document.hidden)loadChats()},5000);
 }
-
 $(function(){
  const saved=localStorage.getItem("color-theme");if(saved)document.documentElement.dataset.theme=saved;
  const page=document.body.dataset.page;
