@@ -105,7 +105,7 @@ function authHeader(){
 }
 function heroAsset(className,alt){
  const photos={
-  "landing-art":"/images/borrow-box-explainer.svg",
+  "landing-art":"/images/community-sharing-photo.jpg",
   "auth-hero-image-login":"https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1100&q=88",
   "auth-hero-image-signup":"https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1100&q=88"
  };
