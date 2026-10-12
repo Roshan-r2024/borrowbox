@@ -104,7 +104,13 @@ function authHeader(){
  return '<header class="auth-topbar"><div class="container auth-topbar-inner">'+bbBrand()+'<div class="auth-top-actions"><a href="/">Home</a><button type="button" class="theme-toggle" id="theme">☾ Dark</button></div></div></header>';
 }
 function heroAsset(className,alt){
- const src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1400&q=88";
+ const photos={
+  "landing-art":"https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1400&q=88",
+  "auth-hero-image-login":"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1100&q=88",
+  "auth-hero-image-signup":"https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1100&q=88"
+ };
+ const key=className==="landing-art"?"landing-art":(document.body.dataset.page==="signup"?"auth-hero-image-signup":"auth-hero-image-login");
+ const src=photos[key];
  return '<img class="'+className+' realistic-community-photo" src="'+src+'" alt="'+esc(alt)+'" loading="eager" decoding="async">';
 }
 function bindPasswordToggles(){
@@ -152,7 +158,7 @@ function login(){
  '<main class="container auth-layout">'+
    '<section class="auth-visual-panel">'+
      '<div class="auth-visual-copy"><span class="landing-eyebrow">SHARE · RENT · BUY</span><h1>Borrow what you <span>need.</span></h1><p>Borrow Box makes it simple for everyone to discover, borrow, rent and sell useful items in their community.</p></div>'+
-     heroAsset("auth-hero-image","Borrow Box sharing illustration")+
+     heroAsset("auth-hero-image","A person using a laptop to access Borrow Box")+
      '<div class="auth-benefits"><div><span>⌕</span><strong>Find useful items</strong><small>Discover listings quickly.</small></div><div><span>↻</span><strong>Borrow or rent</strong><small>Choose what fits your needs.</small></div><div><span>◇</span><strong>Sell your items</strong><small>Give useful things another life.</small></div></div>'+
      '<small class="auth-note">Borrow Box · Share more. Waste less.</small>'+
    '</section>'+
@@ -183,7 +189,7 @@ function signup(){
  '<main class="container auth-layout signup-layout">'+
    '<section class="auth-visual-panel signup-visual-panel">'+
      '<div class="auth-visual-copy"><span class="landing-eyebrow">A COMMUNITY THAT SHARES</span><h1>Join the Borrow Box <span>community.</span></h1><p>Create your account and start sharing useful items. Borrow what you need, sell what you no longer use, and help reduce waste.</p></div>'+
-     heroAsset("auth-hero-image","Borrow Box community illustration")+
+     heroAsset("auth-hero-image","Friends building a community by sharing and connecting")+
      '<div class="auth-benefits"><div><span>✦</span><strong>More Access</strong><small>Get what you need.</small></div><div><span>♧</span><strong>Build Community</strong><small>Help and support.</small></div><div><span>♻</span><strong>Less Waste</strong><small>A greener tomorrow.</small></div></div>'+
      '<small class="auth-note">Anyone can join. No OTP is required.</small>'+
    '</section>'+
