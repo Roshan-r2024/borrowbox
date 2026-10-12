@@ -1142,3 +1142,48 @@ nav a.active:after {
   }
 }
 /* ===== END GET STARTED PAGE REFINEMENT ===== */
+
+
+/* FORCE visible Get Started sizing (cache-busted stylesheet revision) */
+.landing-page .landing-copy h1 {
+  font-size: clamp(50px, 5.8vw, 70px) !important;
+  line-height: 1.02 !important;
+  letter-spacing: -2.4px !important;
+  max-width: 820px !important;
+}
+.landing-page .bb-brand-icon {
+  width: 58px !important;
+  height: 58px !important;
+  flex-basis: 58px !important;
+}
+.landing-page .bb-brand-name {
+  font-size: 23px !important;
+}
+.landing-page .bb-brand-name small {
+  font-size: 11px !important;
+}
+.landing-page .bb-brand { gap: 13px !important; }
+@media (max-width: 800px) {
+  .landing-page .landing-copy h1 {
+    font-size: clamp(43px, 9.5vw, 57px) !important;
+    line-height: 1.05 !important;
+  }
+  .landing-page .bb-brand-icon {
+    width: 48px !important;
+    height: 48px !important;
+    flex-basis: 48px !important;
+  }
+  .landing-page .bb-brand-name { font-size: 20px !important; }
+}
+@media (max-width: 600px) {
+  .landing-page .landing-copy h1 {
+    font-size: clamp(38px, 10vw, 48px) !important;
+    letter-spacing: -1.5px !important;
+  }
+  .landing-page .bb-brand-icon {
+    width: 42px !important;
+    height: 42px !important;
+    flex-basis: 42px !important;
+  }
+  .landing-page .bb-brand-name { font-size: 18px !important; }
+}
