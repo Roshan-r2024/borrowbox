@@ -104,8 +104,8 @@ function authHeader(){
  return '<header class="auth-topbar"><div class="container auth-topbar-inner">'+bbBrand()+'<div class="auth-top-actions"><a href="/">Home</a><button type="button" class="theme-toggle" id="theme">☾ Dark</button></div></div></header>';
 }
 function heroAsset(className,alt){
- const src=document.documentElement.dataset.theme==="dark"?"/borrow-box-hero-dark.svg":"/borrow-box-hero-light.svg";
- return '<img class="'+className+' themeable-hero" src="'+src+'" alt="'+esc(alt)+'">';
+ const src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1400&q=88";
+ return '<img class="'+className+' realistic-community-photo" src="'+src+'" alt="'+esc(alt)+'" loading="eager" decoding="async">';
 }
 function bindPasswordToggles(){
  $(".password-toggle").off("click").on("click",function(){
