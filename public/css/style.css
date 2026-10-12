@@ -1101,3 +1101,44 @@ nav a.active:after {
 /* Manage Items controls */
 .manage-item-panel{border-top:1px solid var(--line);margin-top:16px;padding-top:14px}.manage-item-status{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px}.manage-item-status strong{border-radius:999px;background:var(--soft);padding:4px 10px;font-size:12px}.manage-item-actions{margin-top:12px;gap:8px}.manage-item-actions .btn{padding:9px 12px;font-size:13px}.manage-item-editor{margin-top:24px;scroll-margin-top:90px}.manage-item-editor-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:18px}.manage-item-editor-head h2{margin:0}.manage-item-editor .form-grid{margin-top:12px}.manage-item-editor textarea{min-height:110px}
 @media(max-width:640px){.manage-item-actions .btn{flex:1 1 42%}.manage-item-editor-head{align-items:center}.manage-item-editor-head h2{font-size:23px}}
+
+
+/* ===== GET STARTED PAGE: stronger headline and roomier brand mark ===== */
+.landing-page .landing-copy h1 {
+  font-size: clamp(44px, 5.1vw, 60px);
+  line-height: 1.04;
+  letter-spacing: -2px;
+  max-width: 760px;
+}
+.landing-page .bb-brand-icon {
+  width: 48px;
+  height: 48px;
+  flex-basis: 48px;
+}
+.landing-page .bb-brand {
+  gap: 12px;
+}
+@media (max-width: 800px) {
+  .landing-page .landing-copy h1 {
+    font-size: clamp(40px, 8.8vw, 54px);
+    line-height: 1.06;
+    letter-spacing: -1.7px;
+  }
+  .landing-page .bb-brand-icon {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+  }
+}
+@media (max-width: 600px) {
+  .landing-page .landing-copy h1 {
+    font-size: clamp(37px, 9.5vw, 46px);
+    letter-spacing: -1.3px;
+  }
+  .landing-page .bb-brand-icon {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+  }
+}
+/* ===== END GET STARTED PAGE REFINEMENT ===== */
