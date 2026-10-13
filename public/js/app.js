@@ -294,8 +294,40 @@ async function history(){
 async function chat(){
  const u=user();
  if(!u)return go("/login.html");
- shell("Chat",'<div class="chat-layout"><aside class="card"><h3>Conversations</h3><div id="chatList" class="chat-list"><div class="muted">Loading conversations…</div></div></aside><section class="card"><div id="chatHeader" class="empty">Select a conversation.</div><div id="messages" class="messages hidden" aria-live="polite"></div><form id="chatForm" class="chat-compose hidden"><input id="chatText" placeholder="Write a message..." maxlength="2000" autocomplete="off"><button class="btn primary" type="submit">Send</button></form></section></div>');
+ shell("Chat",'<div class="chat-layout"><aside class="card chat-sidebar"><h3>Conversations</h3><div id="chatList" class="chat-list"><div class="muted">Loading conversations…</div></div></aside><section class="card chat-window"><div id="chatHeader" class="empty">Select a conversation.</div><div id="messages" class="messages hidden" aria-live="polite"></div><form id="chatForm" class="chat-compose hidden"><button id="shareLocation" class="btn secondary location-share-btn" type="button" title="Share your current location">📍 Share location</button><input id="chatText" placeholder="Write a message..." maxlength="2000" autocomplete="off"><button class="btn primary" type="submit">Send</button></form></section></div>');
  let chats=[],activeChatId=new URLSearchParams(location.search).get("id")||"",loadingMessages=false;
+ function formatMessageDate(value){
+  const d=value?new Date(value):null;
+  return d&&!Number.isNaN(d.getTime())?d:null;
+ }
+ function renderMessages(messages){
+  let lastDay="";
+  if(!messages.length)return '<div class="chat-empty-message">This is the start of your conversation. Say hello!</div>';
+  return messages.map(function(m){
+   const mine=String(m.senderEmail||"").toLowerCase()===String(u.email||"").toLowerCase();
+   const d=formatMessageDate(m.createdAt||m.timestamp||m.sentAt||m.date);
+   const dayKey=d?d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate():"unknown";
+   let separator="";
+   if(dayKey!==lastDay){
+    lastDay=dayKey;
+    separator='<div class="chat-day-divider"><span>'+esc(d?d.toLocaleDateString(undefined,{weekday:"long",day:"numeric",month:"long",year:"numeric"}):"Earlier messages")+'</span></div>';
+   }
+   const time=d?d.toLocaleTimeString(undefined,{hour:"numeric",minute:"2-digit"}):"";
+   const text=String(m.text||m.message||"");
+   const match=text.match(/\[\[BB_LOCATION:([-0-9.]+),\s*([-0-9.]+)\]\]/);
+   let body;
+   if(match){
+    const lat=Number(match[1]),lng=Number(match[2]);
+    if(Number.isFinite(lat)&&Number.isFinite(lng)&&Math.abs(lat)<=90&&Math.abs(lng)<=180){
+     const mapUrl="https://www.google.com/maps?q="+encodeURIComponent(lat+","+lng);
+     body='<a class="chat-location-card" href="'+mapUrl+'" target="_blank" rel="noopener noreferrer"><span class="chat-location-thumb">📍</span><span class="chat-location-copy"><strong>Shared live location</strong><small>'+lat.toFixed(5)+", "+lng.toFixed(5)+'</small><em>Open in Google Maps ↗</em></span></a>';
+    }else body='<div class="bubble">Location data unavailable</div>';
+   }else{
+    body='<div class="bubble">'+esc(text)+'</div>';
+   }
+   return separator+'<div class="bubble-wrap '+(mine?"mine":"")+'"><div class="bubble-stack">'+body+'<time class="chat-message-time" datetime="'+(d?d.toISOString():"")+'">'+esc(time)+'</time></div></div>';
+  }).join("");
+ }
  function renderChatList(){
   if(!chats.length){$("#chatList").html('<div class="chat-empty"><div class="chat-empty-icon">✉</div><h4>No conversations yet</h4><p>Open an item listed by a registered seller and choose <strong>Chat with seller</strong>.</p><a class="btn primary" href="/browse.html">Browse items</a></div>');return}
   $("#chatList").html(chats.map(c=>'<button type="button" class="chat-row '+(String(c._id||c.id)===String(activeChatId)?"active":"")+'" data-id="'+esc(c._id||c.id||"")+'"><span class="chat-avatar">'+esc(String(c.otherName||c.sellerName||c.buyerName||"U").trim().charAt(0).toUpperCase())+'</span><span class="chat-row-copy"><strong>'+esc(c.otherName||c.sellerName||c.buyerName||"Seller")+'</strong><span class="muted">'+esc(c.itemTitle||"Product chat")+'</span></span><span class="chat-row-arrow">›</span></button>').join(""));
@@ -321,7 +353,7 @@ async function chat(){
    const isBuyer=String(u.email).toLowerCase()===String(c.buyerEmail||"").toLowerCase();
    const otherName=isBuyer?(c.sellerName||"Seller"):(c.buyerName||"Buyer");
    $("#chatHeader").html('<div class="chat-conversation-heading"><span class="chat-avatar large">'+esc(String(otherName).trim().charAt(0).toUpperCase())+'</span><div><h3>'+esc(otherName)+'</h3><div class="muted">'+esc(c.itemTitle||"Borrow Box item")+'</div></div></div>');
-   $("#messages").removeClass("hidden").html((c.messages||[]).map(m=>'<div class="bubble-wrap '+(String(m.senderEmail||"").toLowerCase()===u.email.toLowerCase()?"mine":"")+'"><div class="bubble">'+esc(m.text||m.message||"")+'</div></div>').join("")||'<div class="chat-empty-message">This is the start of your conversation. Say hello!</div>');
+   $("#messages").removeClass("hidden").html(renderMessages(c.messages||[]));
    $("#chatForm").removeClass("hidden").data("id",activeChatId);
    $("#messages").scrollTop($("#messages")[0].scrollHeight);
   }catch(e){
@@ -329,12 +361,31 @@ async function chat(){
    if(!$("#messages").children().length)$("#chatHeader").html('<div class="msg error">'+esc(e.message||"Could not open this conversation.")+'</div>');
   }finally{loadingMessages=false}
  }
+ $("#shareLocation").off("click").on("click",function(){
+  const button=$(this);
+  if(!navigator.geolocation){toast("Location sharing is not supported by this browser.",true);return}
+  if(!activeChatId){toast("Open a conversation before sharing your location.",true);return}
+  button.prop("disabled",true).text("Finding location…");
+  navigator.geolocation.getCurrentPosition(async function(position){
+   const lat=position.coords.latitude,lng=position.coords.longitude;
+   const message="📍 Shared current location [[BB_LOCATION:"+lat.toFixed(6)+","+lng.toFixed(6)+"]]";
+   try{
+    await api("/chats/"+encodeURIComponent(activeChatId)+"/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:u.email,text:message})});
+    await openChat(activeChatId,true);
+    toast("Location shared. The map card opens in Google Maps.");
+   }catch(e){toast(e.message||"Location could not be sent.",true)}
+   finally{button.prop("disabled",false).text("📍 Share location")}
+  },function(error){
+   const message=error.code===1?"Location permission was denied. Allow location access in your browser and try again.":error.code===2?"Your current location is unavailable. Try again outdoors or check device location settings.":"Location request timed out. Please try again.";
+   toast(message,true);button.prop("disabled",false).text("📍 Share location");
+  },{enableHighAccuracy:true,timeout:15000,maximumAge:0});
+ });
  $("#chatForm").off("submit").on("submit",async function(e){
   e.preventDefault();
   const id=String($(this).data("id")||activeChatId||""),message=$("#chatText").val().trim();
   if(!id){toast("Open a conversation before sending a message.",true);return}
   if(!message)return;
-  const send=$(this).find("button").first();
+  const send=$(this).find('button[type="submit"]').first();
   send.prop("disabled",true).text("Sending…");
   try{
    await api("/chats/"+encodeURIComponent(id)+"/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:u.email,text:message})});
@@ -345,7 +396,6 @@ async function chat(){
  });
  await loadChats();
  if(activeChatId&&!chats.some(c=>String(c._id||c.id)===activeChatId))await openChat(activeChatId,true);
- // Poll for new conversations and messages so the other participant sees updates without a manual refresh.
  window.setInterval(()=>{if(!document.hidden)loadChats()},5000);
 }
 $(function(){
