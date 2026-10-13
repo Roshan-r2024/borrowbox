@@ -295,7 +295,7 @@ async function chat(){
  const u=user();
  if(!u)return go("/login.html");
  shell("Chat",'<div class="chat-layout"><aside class="card chat-sidebar"><h3>Conversations</h3><div id="chatList" class="chat-list"><div class="muted">Loading conversations…</div></div></aside><section class="card chat-window"><div id="chatHeader" class="empty">Select a conversation.</div><div id="messages" class="messages hidden" aria-live="polite"></div><form id="chatForm" class="chat-compose hidden"><button id="shareLocation" class="btn secondary location-share-btn" type="button" title="Share your current location">📍 Share location</button><input id="chatText" placeholder="Write a message..." maxlength="2000" autocomplete="off"><button class="btn primary" type="submit">Send</button></form></section></div>');
- let chats=[],activeChatId=new URLSearchParams(location.search).get("id")||"",loadingMessages=false;
+ let chats=[],activeChatId=new URLSearchParams(location.search).get("id")||"",loadingMessages=false,locationWatchId=null,locationTargetChatId="",lastLocationSentAt=0,locationSendInProgress=false;
  function formatMessageDate(value){
   const d=value?new Date(value):null;
   return d&&!Number.isNaN(d.getTime())?d:null;
@@ -342,8 +342,14 @@ async function chat(){
    if(activeChatId)await openChat(activeChatId,true);
   }catch(e){$("#chatList").html('<div class="msg error">'+esc(e.message||"Could not load conversations.")+'</div>')}
  }
+ function stopLiveLocation(){
+  if(locationWatchId!==null&&navigator.geolocation)navigator.geolocation.clearWatch(locationWatchId);
+  locationWatchId=null;locationTargetChatId="";locationSendInProgress=false;
+  $("#shareLocation").prop("disabled",false).text("📍 Share live location");
+ }
  async function openChat(id,quiet=false){
   if(!id||loadingMessages)return;
+  if(locationWatchId!==null&&locationTargetChatId&&locationTargetChatId!==String(id))stopLiveLocation();
   activeChatId=String(id);
   loadingMessages=true;
   $(".chat-row").removeClass("active");
@@ -363,23 +369,32 @@ async function chat(){
  }
  $("#shareLocation").off("click").on("click",function(){
   const button=$(this);
+  if(locationWatchId!==null){stopLiveLocation();toast("Live location sharing stopped.");return}
   if(!navigator.geolocation){toast("Location sharing is not supported by this browser.",true);return}
   if(!activeChatId){toast("Open a conversation before sharing your location.",true);return}
-  button.prop("disabled",true).text("Finding location…");
-  navigator.geolocation.getCurrentPosition(async function(position){
+  locationTargetChatId=String(activeChatId);lastLocationSentAt=0;
+  button.prop("disabled",false).text("Stop sharing");
+  toast("Live location sharing started. Updates are sent about every 15 seconds while sharing is on.");
+  const targetChatId=locationTargetChatId;
+  locationWatchId=navigator.geolocation.watchPosition(async function(position){
+   if(locationTargetChatId!==targetChatId||locationWatchId===null)return;
+   const now=Date.now();
+   if(locationSendInProgress||now-lastLocationSentAt<15000)return;
+   locationSendInProgress=true;lastLocationSentAt=now;
    const lat=position.coords.latitude,lng=position.coords.longitude;
-   const message="📍 Shared current location [[BB_LOCATION:"+lat.toFixed(6)+","+lng.toFixed(6)+"]]";
+   const message="📍 Live location update [[BB_LOCATION:"+lat.toFixed(6)+","+lng.toFixed(6)+"]]";
    try{
-    await api("/chats/"+encodeURIComponent(activeChatId)+"/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:u.email,text:message})});
-    await openChat(activeChatId,true);
-    toast("Location shared. The map card opens in Google Maps.");
-   }catch(e){toast(e.message||"Location could not be sent.",true)}
-   finally{button.prop("disabled",false).text("📍 Share location")}
+    await api("/chats/"+encodeURIComponent(targetChatId)+"/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:u.email,text:message})});
+    if(activeChatId===targetChatId)await openChat(targetChatId,true);
+   }catch(e){
+    toast(e.message||"Live location update could not be sent.",true);
+    stopLiveLocation();
+   }finally{locationSendInProgress=false}
   },function(error){
-   const message=error.code===1?"Location permission was denied. Allow location access in your browser and try again.":error.code===2?"Your current location is unavailable. Try again outdoors or check device location settings.":"Location request timed out. Please try again.";
-   toast(message,true);button.prop("disabled",false).text("📍 Share location");
-  },{enableHighAccuracy:true,timeout:15000,maximumAge:0});
- });
+   const message=error.code===1?"Location permission was denied. Allow location access in your browser and try again.":error.code===2?"Your current location is unavailable. Check device location settings.":"Location request timed out. Please try again.";
+   toast(message,true);stopLiveLocation();
+  },{enableHighAccuracy:true,timeout:20000,maximumAge:5000});
+ }); 
  $("#chatForm").off("submit").on("submit",async function(e){
   e.preventDefault();
   const id=String($(this).data("id")||activeChatId||""),message=$("#chatText").val().trim();
